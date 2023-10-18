@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-"Hi" 
+<<<<<<< sesac-ot
 =======
 aa"Hello" 
 "Hello" 
