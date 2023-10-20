@@ -1,0 +1,8 @@
+
+h2, h3 {text-align:center;}
+#캘린더1 {width: 300; border: 2px solid; height: 150;}
+#캘린더1 th:first-child, td:first-child {color: red;}
+#캘린더1 th:last-child, td:last-child {color: blue;}
+#캘린더1 th {padding: 10px; border: 2px dashed;background-color: aqua;}
+#캘린더1 td {padding: 10px; text-align: center; border: 1px solid #ff00ff;}
+body {font-family:'Times New Roman', Times, serif; padding: 10px;}
