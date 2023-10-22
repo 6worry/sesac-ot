@@ -1,0 +1,10 @@
+h1 {text-align:center;}
+#Dec {width: 100%; border: 3px solid; border-color: aqua; border-radius: 10px; font-size: 20px;}
+#Dec th:first-child, td:first-child {color: red; background-color: white;}
+#Dec th:last-child, td:last-child {color: blue; background-color: white;}
+#Dec th {padding: 10px; border: 2px dashed; color: black; background-color: aqua; border-radius: 10px;}
+#Dec td {padding: 10px; text-align: center; border: 1px solid #ff00ff; border-radius: 10px;}
+.흐리게 {opacity: 0.4;}
+.휴일 {color: red;}
+.이동 {font-size: 20px;}
+body {font-family:'Times New Roman', Times, serif; padding: 10px;}
