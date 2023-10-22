@@ -1,8 +1,8 @@
 h1 {text-align:center;}
-#Oct {width: 100%; border: 3px solid; border-color: aqua; border-radius: 10px; font-size: 20px;}
+#Oct {width: 100%; border: 3px solid; border-color: goldenrod; border-radius: 10px; font-size: 20px;}
 #Oct th:first-child, td:first-child {color: red; background-color: white;}
 #Oct th:last-child, td:last-child {color: blue; background-color: white;}
-#Oct th {padding: 10px; border: 2px dashed; color: black; background-color: aqua; border-radius: 10px;}
+#Oct th {padding: 10px; border: 2px dashed; color: black; background-color: goldenrod; border-radius: 10px;}
 #Oct td {padding: 10px; text-align: center; border: 1px solid #ff00ff; border-radius: 10px;}
 .흐리게 {opacity: 0.4;}
 .휴일 {color: red;}
