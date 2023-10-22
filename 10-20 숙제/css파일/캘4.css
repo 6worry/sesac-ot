@@ -1,8 +1,8 @@
 h1 {text-align:center;}
-#Apr {width: 100%; border: 3px solid; border-color: aqua; border-radius: 10px; font-size: 20px;}
+#Apr {width: 100%; border: 3px solid; border-color: yellow; border-radius: 10px; font-size: 20px;}
 #Apr th:first-child, td:first-child {color: red; background-color: white;}
 #Apr th:last-child, td:last-child {color: blue; background-color: white;}
-#Apr th {padding: 10px; border: 2px dashed; color: black; background-color: aqua; border-radius: 10px;}
+#Apr th {padding: 10px; border: 2px dashed; color: black; background-color: yellow; border-radius: 10px;}
 #Apr td {padding: 10px; text-align: center; border: 1px solid #ff00ff; border-radius: 10px;}
 .흐리게 {opacity: 0.4;}
 .휴일 {color: red;}

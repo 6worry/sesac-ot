@@ -1,8 +1,8 @@
 h1 {text-align:center;}
-#May {width: 100%; border: 3px solid; border-color: aqua; border-radius: 10px; font-size: 20px;}
+#May {width: 100%; border: 3px solid; border-color: yellow; border-radius: 10px; font-size: 20px;}
 #May th:first-child, td:first-child {color: red; background-color: white;}
 #May th:last-child, td:last-child {color: blue; background-color: white;}
-#May th {padding: 10px; border: 2px dashed; color: black; background-color: aqua; border-radius: 10px;}
+#May th {padding: 10px; border: 2px dashed; color: black; background-color: yellow; border-radius: 10px;}
 #May td {padding: 10px; text-align: center; border: 1px solid #ff00ff; border-radius: 10px;}
 .흐리게 {opacity: 0.4;}
 .휴일 {color: red;}
