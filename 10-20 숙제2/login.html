@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
 
+        </style>
     </head>
     <body>
-        <form>
-            <input type="text" name="q">
-            <input type="submit" value="검색">
-        </form>
-        <form method="get" action="https://www.naver.com">
-            <label>ID</label>&nbsp;
-            <input type="text" id="id" name="id"><br>
-            <label>PW</label>
-            <input type="password" id="pw" name="pw">
-            <input type="submit" value="로그인"><br>
-        </form>
-
+        <div id="검색창" role="banner">
+            <form>
+                <input type="text" name="q">
+                <input type="submit" value="검색">
+            </form>
+        </div>
+        <div id="로그인창">
+            <form method="get" action="https://www.naver.com">
+                <label>ID</label>&nbsp;
+                <input type="text" id="id" name="id"><br>
+                <label>PW</label>
+                <input type="password" id="pw" name="pw">
+                <input type="submit" value="로그인"><br>
+            </form>
+        </div>
     </body>
 </html>
