@@ -3,14 +3,15 @@
     <head>
         <style>
             * {box-sizing: border-box;}
-            #검색창 {background-color: greenyellow;  text-align: center; width: 100%; height: 70px; padding: 15px; text-align: center;}
+            #검색창 {background-color: greenyellow;  text-align: center; width: 100%; height: 70px; padding: 15px; border: 1px; border-radius: 10px; margin: 1px;}
             #로그인창 {float: left; width: 30%; height: 200px; border: 1px solid black; 
-               border-radius: 10px; padding: 15px; font-size: 20px;}
+            border-radius: 10px; padding: 15px; font-size: 20px; line-height: 100px;}
             #로그인-배너 {float: right; width: 70%; height: 200px; padding: 15px;}
-            input[type="text1"] {height: 40px;}
-            input[type="text2"] {height: 25px;}
-            input[type="password"] {height: 25px;}
-            .first {}
+            input[type="text1"] {height: 40px; vertical-align: middle;}
+            input[type="text2"] {text-align: left; height: 25px;}
+            input[type="password"] {text-align: left; height: 25px; font ;}
+            #하단 {border: 1px; padding: 20px;}
+            .ft .st .tt{ height: 300px;}
         </style>
     </head>
     <body>
@@ -31,12 +32,14 @@
         </div>
         <img id="로그인-배너" src="로그인 배너.jpg">
         <table id="하단">
-            <th>
-                <tr class="first"><img src="first.jpg" width="50px" height="50px"> 1</tr>
-                <tr class="second">2</tr>
-                <tr class="third">3</tr>
-                <tr class="fourth">4</tr>
-            </th>
+            <tr>
+                <td class="first"><img src="first.jpg" width="300px" height="300px"></td>
+                <td class="ft">이선균, 유흥업소 여실장 자택서 대마..피의자 전환</td>
+                <td class="second"><img src="second.jpg" width="300px" height="300px"></td>
+                <td class="st">'압구정 박스녀' 홍대에도 등장? '행위예술' 어디까지...</td>
+                <td class="third"><img src="third.jpg" width="300px" height="300px"></td>
+                <td class="tt"> 알몸 김치, 담배 배추에 이어 '오줌 맥주'... <br>중국산 먹거리 논란</td>
+            </tr>
         </table>
     </body>
 </html>
