@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            ul {list-style-type: none;}
+            ul#f1 > li::before {content: "x"; width: 10px; margin-right: 10px;}
+            .element::before {content: "╖"; color: red;}
+            .element::after {content: "^"; color: blue;}
+        </style> 
+    </head>
+    <body>
+        <div>
+            <ul id="f1">
+                <li class="element">아메</li>
+                <ul>
+                    <li>뜨아</li>
+                    <li>아아</li>
+                </ul>
+                <li class="element">카푸</li>
+                <li class="element">에스</li>
+            </ul>
+        </div>
+    </body>
+</html>

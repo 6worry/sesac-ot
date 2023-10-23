@@ -2,24 +2,41 @@
 <html>
     <head>
         <style>
-
+            * {box-sizing: border-box;}
+            #검색창 {background-color: greenyellow;  text-align: center; width: 100%; height: 70px; padding: 15px; text-align: center;}
+            #로그인창 {float: left; width: 30%; height: 200px; border: 1px solid black; 
+               border-radius: 10px; padding: 15px; font-size: 20px;}
+            #로그인-배너 {float: right; width: 70%; height: 200px; padding: 15px;}
+            input[type="text1"] {height: 40px;}
+            input[type="text2"] {height: 25px;}
+            input[type="password"] {height: 25px;}
+            .first {}
         </style>
     </head>
     <body>
         <div id="검색창" role="banner">
             <form>
-                <input type="text" name="q">
+                <input type="text1" name="q" size="50">
                 <input type="submit" value="검색">
             </form>
         </div>
         <div id="로그인창">
             <form method="get" action="https://www.naver.com">
                 <label>ID</label>&nbsp;
-                <input type="text" id="id" name="id" size="20"><br>
+                <input type="text2" id="id" name="id" size="20"><br>
                 <label>PW</label>
                 <input type="password" id="pw" name="pw" size="20">
                 <input type="submit" value="로그인"><br>
             </form>
         </div>
+        <img id="로그인-배너" src="로그인 배너.jpg">
+        <table id="하단">
+            <th>
+                <tr class="first"><img src="first.jpg" width="50px" height="50px"> 1</tr>
+                <tr class="second">2</tr>
+                <tr class="third">3</tr>
+                <tr class="fourth">4</tr>
+            </th>
+        </table>
     </body>
 </html>
