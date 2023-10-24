@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .box {width: 200px; height: 100px; background-color: red; animation-name: moveleft; animation-duration: 2s; animation-timing-function: ease; position: relative; animation-iteration-count: infinite; animation-direction: alternate;}
+            @keyframes moveleft {0% {left: 0;} 100% {left: 200px;}}
+            .text {color: black; animation-name: fadeout; animation-duration: 3s; animation-timing-function: linear; animation-iteration-count: 2; animation-delay: 1;}
+            @keyframes fadeout {0% {opacity: 1;} 100% {opacity: 0;}}
+            .circle {width: 200px; height: 100px; background-color: aqua; border-radius: 30%; animation-name: rotateAndScale; animation-duration: 3s; animation-timing-function: ease-in-out; animation-iteration-count: infinite;}
+            @keyframes rotateAndScale {0% {transform: rotate(0def) scale(1);} 50% {transform: rotate(180deg) scale(2.5);} 100% {transform: rotate(360deg) scale(1);}}
+            .image {width: 150px; height: 200px; animation-name: shake; animation-duration: 1.5s; animation-timing-function: linear; animation-iteration-count: infinite;}
+            @keyframes shake {0%{transform: translateX(0);} 25%{transform: translate(-20px) rotate(-15deg);} 75%{transform: translate(20px) rotate(15deg);} 100%{transform: translateX(0);}}
+        </style>
+    </head>
+    <body>
+        <div class="box"></div><br>
+        <p class="text">Fade out Animation</p><br>
+        <div class="circle"></div><br>
+        <img class="image" src="../10-20 숙제/1월.jpg">
+    </body>
+</html>
