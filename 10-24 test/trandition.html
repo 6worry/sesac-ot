@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .sqare {width: 100px; height: 100px; background-color: red; transition-property: width, height; transition-duration: 1.0s; transition-timing-function: ease-in;}
+            .sqare:hover {width: 200px; height: 200px;}
+            .button {color: black; transition-property: color; transition-duration: 1.0s; transition-timing-function: ease-out;}
+            .button:hover {color: aquamarine;}
+            .image {width: 100px; height: 100px; transition-property:transform; transition-duration: 2.0s; transition-timing-function: ease-out;}
+            .image:hover {transform: rotate(180deg);}
+            .gradient {background: linear-gradient(to right,red,green); transition-property: background-image; transition-duration: 2.0s; transition-timing-function: ease-in-out;}
+            .gradient:hover {background: linear-gradient(to right,green, blue);}
+
+        </style>
+    </head>
+    <body>
+        <div class="sqare"></div>
+        <button class="button">Hover me</button>
+        <img class="image" src="../10-20 숙제/1월.jpg" alt="1월"><br>
+        <div class="gradient">Hover me for gradient effect</div>
+    </body>
+</html>
