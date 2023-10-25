@@ -1,0 +1,16 @@
+html {background-color: skyblue;}
+h1 {text-align: center;}
+a {text-decoration: none;}
+
+.signup {border: 1px; border-radius: 10px; margin-top: 100px; margin-bottom: 10px; margin-left: 100px; margin-right:100px ; padding: 20px; overflow: auto; position: relative; background-color: rgba(0, 0, 0, 0.2);}
+
+.login {text-align: center; color: blue; font-size: 40px; border: 1px; border-radius: 100px; width: 70%; margin-top: 10px; margin-bottom: 10px; padding: 10px; display: block; margin: 0 auto;}
+label[for="chk"] {font-size: 25px;}
+.가운데 {text-align: center; height: 5px;}
+input {width: 50%; height: 50px;}
+input[name="email"] {border: 1px; border-radius: 100px; margin-bottom: 10px; width: 40%; display: block; margin: 0 auto;}
+input[name="pswd"] {border: 1px; border-radius: 100px; margin-bottom: 10px; width: 40%; display: block; margin: 0 auto;}
+input[placeholder]{ text-align: center; font-size: 20px; padding: 2px;}
+
+.login2 {float: left; width: 40%; border: 1px; border-radius: 100px; margin-top: 10px; margin-bottom: 10px; font-size: 30px; padding: 10px;}
+.login3 {float: right; width: 40%; border: 1px; border-radius: 100px; margin-top: 10px; margin-bottom: 10px; font-size: 30px; padding: 10px;}
