@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                * {background-color: rgb(108, 165, 23);}
+                h1 {text-align: center;}
+                /* .main {border: 1px solid black; margin: 100px; padding: 20px; width: 70%; height: 500px; } */
+                .signup {border: 1px solid blue; border-radius: 10px; margin-top: 100px; margin-bottom: 100px; margin-left: 100px; margin-right:100px ; padding: 20px; background-color:rgba(0, 0, 0, 0.3) ; position: relative;}
+                .login {text-align: center; color: azure; font-size: 30px; border: 1px solid yellow; border-radius: 100px; width: 100%; margin-top: 10px; margin-bottom: 10px; padding: 10px;}
+                input {width: 50%; height: 30px;}
+                .login2 {float: left; width: 40%; border: 1px solid yellow; border-radius: 100px; margin-top: 10px; margin-bottom: 10px; font-size: 30px;}
+                .login3 {float: right; width: 40%; border: 1px solid yellow; border-radius: 100px; margin-top: 10px; margin-bottom: 10px; font-size: 30px;}
+                
+                input[name="email"] {border: 1px solid red; border-radius: 100px; margin-bottom: 10px; }
+                input[name="pswd"] {border: 1px solid red; border-radius: 100px; margin-bottom: 10px;}
+                label[for="chk"] {font-size: 30px;}
+                </style>
+            <title>10-24 hw</title>
+        <!-- <link rel="stylesheet" type="text/css" href="style1.css"> -->
+        </head>
+    <body>
+        <div class="main">  	
+            <!-- <input type="checkbox" id="chk" aria-hidden="true"> -->
+                <div class="signup">
+                    <form>
+                        <h1>Login Here</h1>
+                        <label for="chk" aria-hidden="true">Username</label>
+                        <br>
+                        <input type="email" name="email" placeholder="Email or Phone" required="">
+                        <br>
+                        <label for="chk" aria-hidden="true">Password</label>
+                        <br>
+                        <input type="password" name="pswd" placeholder="Password" required="">
+                        <br>
+                        <button class="login">Log in</button><br>
+                        <form method="get" action="https://www.naver.com">
+                            <button class="login2"><a href="www.naver.com"></a>goole</button>
+                            <button class="login3"><a href="www.naver.com"></a>facebook</button>
+                        </form>
+                    </form>
+                    </div>
+
+                <!-- <div class="login">
+                    <form>
+                        <label for="chk" aria-hidden="true">Login</label>
+                        <input type="email" name="email" placeholder="Email" required="">
+                        <input type="password" name="pswd" placeholder="Password" required="">
+                        <button>Login</button>
+                    </form>
+                </div> -->
+        </div>
+    </body>
+</html>
