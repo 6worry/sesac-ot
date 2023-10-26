@@ -38,11 +38,12 @@
     </div>
     <script>
         function removeelement() {
-            // var textElement =document.querySelector("textelemnet"); 
-            // textElement.remove(textElement);
-            var textElemnet=document.querySelector("class");
-            textElemnet.remove(textElemnet);
-        }
+            var 결과값Div=document.querySelector(".결과값");
+            var child= 결과값Div.querySelectorAll("div");
+            if (child.length > 0) {
+            결과값Div.removeChild(child[child.length -1]);
+            }
+         }
         function number_inc() {
             
         }
