@@ -9,7 +9,31 @@
     <button onclick="changeredcolor()">RED</button>
     <button onclick="changebluecolor()">BLUE</button>
     <button onclick="changecolor()">색상토글</button>
+    <button onclick="addelement()">내용추가</button>
+    <button onclick="removeelement()">내용삭제</button>
+    <button onclick="myfunc()">내 버튼</button>
     <script>
+        function myfunc() {
+            // print();
+        // window:open();
+        console.log(screen.width, screen.height);
+        console.log(window.innerWidth, window.innerHeight);
+        window.history.back()
+
+        }
+        
+        function addelement() 
+        {
+            var div =document.createElement("div"); 
+            div.textContent="새로운 내용"; 
+            document.body.appendChild(div);
+        }
+        function removeelement() 
+        {
+            var textElement =document.querySelector("div"); 
+            textElement.remove(textElement);
+        }
+
         function changeredcolor() {var textElement = document.getElementById("my text"); textElement.style.color = "red";}
         function changebluecolor() {var textElement = document.getElementById("my text"); textElement.style.color = "blue";}
         function changecolor() {var textElement = document.getElementById("my text");  var currentcolor = textElement.style.color;
