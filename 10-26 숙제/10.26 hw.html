@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        button { text-align: center; font-size: 20px; width: 50px; height: 30px;}
+        #틀 {border: 1px solid black; width: 400px; height: 200px ; overflow: auto;}
+        button[name="결과값"] {text-align: right; font-size: 20px; width: 217px; height: 30px; background-color: white; border: 1px solid black; border-radius: 4px;}
+    </style>
+    <title>10.26 hw</title>
+</head>
+<body>
+    <div id="틀">
+    <button type="button" class="결과" name="결과값"></button>
+<br>
+    <button type="button" onclick="number_inc()">+</button>
+    <button type="button" onclick="number_dec()">-</button>
+    <button type="button" onclick="number_mul()">*</button>
+    <button type="button" onclick="number_div()">/</button>
+<br>
+    <button type="button" onclick="add7element()">7</button>
+    <button type="button" onclick="add8element()">8</button>
+    <button type="button" onclick="add9element()">9</button>
+    <button type="button" onclick="">=</button>
+<br>    
+    <button type="button" onclick="add4element()">4</button>
+    <button type="button" onclick="add5element()">5</button>
+    <button type="button" onclick="add6element()">6</button>
+    <button type="button" onclick="removeelement()">C</button>
+<br>
+    <button type="button" onclick="add1element()">1</button>
+    <button type="button" onclick="add2element()">2</button>
+    <button type="button" onclick="add3element()">3</button>
+    <button type="button" onclick="add0element()">0</button>
+    </div>
+    <script>
+        function removeelement() {
+            var textElement =document.querySelector("textelemnet"); 
+            textElement.remove(textElement);
+        }
+        function number_inc() {
+            
+        }
+        function number_dec() {
+            
+        }
+        function number_mul() {
+            
+        }
+        function number_div() {
+            
+        }
+        function add0element() {
+            var div =document.createElement("결과"); 
+            div.textContent="0"; 
+            document.body.appendChild(div);
+        }
+        function add1element() {
+            var div =document.createElement("div"); 
+            div.textContent="1"; 
+            document.body.appendChild(div);
+        }
+        function add2element() {
+            var div =document.createElement("div"); 
+            div.textContent="2"; 
+            document.body.appendChild(div);
+        }
+        function add3element() {
+            var div =document.createElement("div"); 
+            div.textContent="3"; 
+            document.body.appendChild(div);
+        }
+        function add4element() {
+            var div =document.createElement("div"); 
+            div.textContent="4"; 
+            document.body.appendChild(div);
+        }
+        function add5element() {
+            var div =document.createElement("div"); 
+            div.textContent="5"; 
+            document.body.appendChild(div);
+        }
+        function add6element() {
+            var div =document.createElement("div"); 
+            div.textContent="6"; 
+            document.body.appendChild(div);
+        }
+        function add7element() {
+            var div =document.createElement("div"); 
+            div.textContent="7"; 
+            document.body.appendChild(div);
+        }
+        function add8element() {
+            var div =document.createElement("div"); 
+            div.textContent="8"; 
+            document.body.appendChild(div);
+        }
+        function add9element() {
+            var div =document.createElement("div"); 
+            div.textContent="9"; 
+            document.body.appendChild(div);
+        }
+    </script>
+
+</body>
+</html>
