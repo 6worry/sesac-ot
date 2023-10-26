@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+    
+</head>
+<body>
+    <p id="my text">글자입력해라</p>
+    <button onclick="changeredcolor()">RED</button>
+    <button onclick="changebluecolor()">BLUE</button>
+    <button onclick="changecolor()">색상토글</button>
+    <script>
+        function changeredcolor() {var textElement = document.getElementById("my text"); textElement.style.color = "red";}
+        function changebluecolor() {var textElement = document.getElementById("my text"); textElement.style.color = "blue";}
+        function changecolor() {var textElement = document.getElementById("my text");  var currentcolor = textElement.style.color;
+        
+        if (currentcolor === "red") { textElement.style.color = "blue";}
+        else if (currentcolor === "blue") {textElement.style.color = "red"}
+
+    }
+    </script>
+</body>
+</html>
