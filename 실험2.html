@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        button { text-align: center; font-size: 20px; width: 50px; height: 30px; }
+        .결과값 { text-align: right; font-size: 25px; width: 217px; height: 40px; margin-bottom: 5px; background-color: white; border: 1px solid black; border-radius: 4px; display: flex; justify-content: flex-end; }
+    </style>
+    <title>10.26 hw</title>
+</head>
+<body>
+    <div id="틀">
+        <div class="결과값">
+        </div>
+        <button type="button" onclick="number_inc('+')">+</button>
+        <button type="button" onclick="number_dec('-')">-</button>
+        <button type="button" onclick="number_mul('*">*</button>
+        <button type="button" onclick="number_div('/')">/</button>
+        <br>
+        <button type="button" onclick="add7element('7')">7</button>
+        <button type="button" onclick="add8element('8')">8</button>
+        <button type="button" onclick="add9element('9')">9</button>
+        <button type="button" onclick="equlelement('=')">=</button>
+        <br>
+        <button type="button" onclick="add4element('4')">4</button>
+        <button type="button" onclick="add5element('5')">5</button>
+        <button type="button" onclick="add6element('6')">6</button>
+        <button type="button" onclick="removeelement('C')">C</button>
+        <br>
+        <button type="button" onclick="add1element('1')">1</button>
+        <button type="button" onclick="add2element('2')">2</button>
+        <button type="button" onclick="add3element('3')">3</button>
+        <button type="button" onclick="add0element('0')">0</button>
+    </div>
+    <script>
+        function removeelement(value) {
+            var 결과값Div = document.querySelector(".결과값");
+            var children = 결과값Div.querySelectorAll("div");
+            if (children.length > 0) {
+                결과값Div.removeChild(children[children.length - 1]);
+            }
+        }
+
+        function number_inc(operator) {
+            addOperator(operator);
+        }
+
+        function number_dec(operator) {
+            addOperator(operator);
+        }
+
+        function number_mul(operator) {
+            addOperator(operator);
+        }
+
+        function number_div(operator) {
+            addOperator(operator);
+        }
+
+        function addOperator(operator) {
+            var 결과값Div = document.querySelector(".결과값");
+            var div = document.createElement("div");
+            div.textContent = operator;
+            결과값Div.appendChild(div);
+        }
+
+        function equlelement() {
+            var 결과값Div = document.querySelector(".결과값");
+            var children = 결과값Div.querySelectorAll("div");
+            
+            var result = 0;
+            var operator = '+';
+            
+            for (var i = 0; i < children.length; i++) {
+                var child = children[i];
+                if (child.textContent === '+' || child.textContent === '-' || child.textContent === '*' || child.textContent === '/') {
+                    operator = child.textContent;
+                } else {
+                    var number = parseFloat(child.textContent);
+                    if (operator === '+') {
+                        result += number;
+                    } else if (operator === '-') {
+                        result -= number;
+                    } else if (operator === '*') {
+                        result *= number;
+                    } else if (operator === '/') {
+                        result /= number;
+                    }
+                }
+            }
+            
+            결과값Div.textContent = result;
+        }
+
+        function addElement(value) {
+            var 결과값Div = document.querySelector(".결과값");
+            var div = document.createElement("div");
+            div.textContent = value;
+            결과값Div.appendChild(div);
+        }
+
+        function add7element(value) {
+            addElement(value);
+        }
+
+        function add8element(value) {
+            addElement(value);
+        }
+
+        function add9element(value) {
+            addElement(value);
+        }
+
+        function add4element(value) {
+            addElement(value);
+        }
+
+        function add5element(value) {
+            addElement(value);
+        }
+
+       

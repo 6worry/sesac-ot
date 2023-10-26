@@ -24,7 +24,7 @@
     <button type="button" onclick="add7element()">7</button>
     <button type="button" onclick="add8element()">8</button>
     <button type="button" onclick="add9element()">9</button>
-    <button type="button" onclick="">=</button>
+    <button type="button" onclick="equlelement()">=</button>
 <br>    
     <button type="button" onclick="add4element()">4</button>
     <button type="button" onclick="add5element()">5</button>
@@ -45,16 +45,50 @@
             }
          }
         function number_inc() {
-            
+            var 결과값Div = document.querySelector(".결과값");
+            var children = 결과값Div.querySelectorAll("div");
+                if (children.length > 0) {
+                결과값Div.addChild(children[children.length - 1]);
+                }
+                if (children.length === 0) {
+                }
+                
         }
         function number_dec() {
-            
+            var 결과값Div = document.querySelector(".결과값");
+            var children = 결과값Div.querySelectorAll("div");
+                if (children.length > 0) {
+                결과값Div.removeChild(children[children.length - 1]);
+                }
+                if (children.length === 0) {
+                }
+
         }
         function number_mul() {
+            var 결과값Div = document.querySelector(".결과값");
+            var children = 결과값Div.querySelectorAll("div");
+                if (children.length > 0) {
+                결과값Div.multichild(children[children.length - 1]);
+                }
+                if (children.length === 0) {
+                }
             
         }
         function number_div() {
+            var 결과값Div = document.querySelector(".결과값");
+            var children = 결과값Div.querySelectorAll("div");
+                if (children.length > 0) {
+                결과값Div.divChild(children[children.length - 1]);
+                }
+                if (children.length === 0) {
+                }
             
+        }
+        function equlelement() {
+            
+
+
+        console.log(eval(result));
         }
         function add0element() {
             var text = "0";
@@ -127,6 +161,5 @@
             결과값Div.appendChild(div);
         }
     </script>
-
 </body>
 </html>
