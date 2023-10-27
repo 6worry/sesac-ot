@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>헬로우JS</h1>
+    <!-- <button onclick="sayhello()">Hello JS</button> -->
+    <select id="fruit" onchange="fruitdisplay()">
+        <option value="apple">사과</option>
+        <option value="banana">바나나</option>
+        <option value="orange">오렌지</option>
+    </select>
+    <script>
+        function fruitdisplay() {
+            var result = document.getElementById('fruit').value;
+            console.log(result);
+            switch (result) {
+                case "apple": document.write('사과사과 선택선택')
+                break;
+                case "banana": document.write('나나나나 선택선택')
+                break;
+                case "orange": document.write('오렝오렝 선택선택')
+                break;
+            }
+        }
+        // function sayhello() {
+        //     console.log('hello');
+        //     my_tag = document.createElement('p');
+        //     document.body.append('my tag');
+        //     // document.write('hello');
+        // }
+    </script>
+</body>
+</html>

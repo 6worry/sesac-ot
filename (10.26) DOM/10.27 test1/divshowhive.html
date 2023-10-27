@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Refresh Example</title>
+    <script>
+        window.onload = function() { //윈도우에 내 페이지가 로딩이 끝났을 때//
+            setTimeout(function() { //정해진 시간 이후에 안쪽의 함수를 실행//
+                location.reload(); //실행해야될 함수 = reload 해라//
+            }, 3000); //3000ms = 3초//
+        }
+    </script>
+</head>
+<body>
+    <button onclick="showhide()">버튼</button>
+    <div id="mydiv">
+        원하는 내용 작성
+    </div>
+    <script>
+        function showhide() {
+            divelement = document.getElementById('mydiv');
+            // divelement.style.display = "none";
+            if (divelement.style.display === "none") {
+                divelement.style.display = "block";
+            }
+            else {divelement.style.display = "none";
+            } 
+            
+        }
+    </script>
+</body>
+</html>
