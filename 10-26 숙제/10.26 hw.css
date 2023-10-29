@@ -1,0 +1,15 @@
+#틀 {
+    text-align: center; border: 1px; display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+        
+.계산기 {
+    font-size: 25px;
+}
+
+#결과값 {
+    border: 1px solid black; border-radius: 4px; background-color: white; margin-bottom: 5px; width: 217px; height: 40px; display: flex; justify-content: flex-end; text-align: center; font-size: 25px; overflow: hidden;
+}
+
+button {
+    text-align: center; font-size: 20px; width: 50px; height: 30px; margin-bottom: 5px;
+}

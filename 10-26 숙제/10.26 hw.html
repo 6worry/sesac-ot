@@ -3,168 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        #틀 {text-align: center; border: 1px; display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
-        .계산기 {font-size: 25px;}
-        .결과값 {border: 1px solid black; border-radius: 4px; background-color: white; margin-bottom: 5px; width: 217px; height: 40px; display: flex; justify-content: flex-end; text-align: center; font-size: 25px;}
-        button {text-align: center; font-size: 20px; width: 50px; height: 30px; margin-bottom: 5px;}
-    </style>
+
+    <link rel="stylesheet" href="./10.26 hw.css">
+    <script src="./10.26 hw.js"></script>
     <title>10.26 hw</title>
 </head>
 <body>
     <div id="틀">
         <div class="계산기">계 산 기</div>
-        <div class="결과값"></div>
-    <!-- <button type="button" class="결과" name="결과값" onclick="document.getElementsByClassName('label').innerHTML = 'class'"></button> -->
-
+        <div id="결과값"></div>
     <button type="button" onclick="number_inc()">+</button>
     <button type="button" onclick="number_dec()">-</button>
     <button type="button" onclick="number_mul()">*</button>
     <button type="button" onclick="number_div()">/</button>
 <br>
-    <button type="button" onclick="add7element()">7</button>
-    <button type="button" onclick="add8element()">8</button>
-    <button type="button" onclick="add9element()">9</button>
+    <button type="button" onclick="addnumber(7)">7</button>
+    <button type="button" onclick="addnumber(8)">8</button>
+    <button type="button" onclick="addnumber(9)">9</button>
     <button type="button" onclick="equlelement()">=</button>
 <br>    
-    <button type="button" onclick="add4element()">4</button>
-    <button type="button" onclick="add5element()">5</button>
-    <button type="button" onclick="add6element()">6</button>
+    <button type="button" onclick="addnumber(4)">4</button>
+    <button type="button" onclick="addnumber(5)">5</button>
+    <button type="button" onclick="addnumber(6)">6</button>
     <button type="button" onclick="removeelement()">C</button>
 <br>
-    <button type="button" onclick="add1element()">1</button>
-    <button type="button" onclick="add2element()">2</button>
-    <button type="button" onclick="add3element()">3</button>
-    <button type="button" onclick="add0element()">0</button>
+    <button type="button" onclick="addnumber(1)">1</button>
+    <button type="button" onclick="addnumber(2)">2</button>
+    <button type="button" onclick="addnumber(3)">3</button>
+    <button type="button" onclick="addnumber(0)">0</button>
     </div>
-    <script>
-        function removeelement() {
-            var 결과값Div=document.querySelector(".결과값");
-            var child= 결과값Div.querySelectorAll("div");
-            if (child.length > 0) {
-            결과값Div.removeChild(child[child.length -1]);
-            }
-            console.log("C");
-         }
-        function number_inc() {
-            var 결과값Div = document.querySelector(".결과값");
-            var children = 결과값Div.querySelectorAll("div");
-                if (children.length > 0) {
-                결과값Div.addChild(children[children.length - 1]);
-                }
-                if (children.length === 0) {
-                }
-                console.log("+");
-                
-        }
-        function number_dec() {
-            var 결과값Div = document.querySelector(".결과값");
-            var children = 결과값Div.querySelectorAll("div");
-                if (children.length > 0) {
-                결과값Div.removeChild(children[children.length - all]);
-                }
-                if (children.length === 0) {
-                }
-                console.log("-");
-
-        }
-        function number_mul() {
-            var 결과값Div = document.querySelector(".결과값");
-            var children = 결과값Div.querySelectorAll("div");
-                if (children.length > 0) {
-                결과값Div.multichild(children[children.length - 1]);
-                }
-                if (children.length === 0) {
-                }
-                console.log("*");
-        }
-        function number_div() {
-            var 결과값Div = document.querySelector(".결과값");
-            var children = 결과값Div.querySelectorAll("div");
-                if (children.length > 0) {
-                결과값Div.divChild(children[children.length - 1]);
-                }
-                if (children.length === 0) {
-                }
-                console.log("/");
-            
-        }
-        function equlelement() {
-            
-
-
-        console.log(eval(result));
-        }
-        function add0element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="0"; 
-            결과값Div.appendChild(div);
-            console.log(0);
-        }
-        function add1element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="1"; 
-            결과값Div.appendChild(div);
-            console.log(1);
-        }
-        function add2element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="2"; 
-            결과값Div.appendChild(div);
-            console.log(2);
-        }
-        function add3element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="3"; 
-            결과값Div.appendChild(div);
-            console.log(3);
-        }
-        function add4element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="4"; 
-            결과값Div.appendChild(div);
-            console.log(4);
-        }
-        function add5element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="5"; 
-            결과값Div.appendChild(div);
-            console.log(5);
-        }
-        function add6element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="6"; 
-            결과값Div.appendChild(div);
-            console.log(6);
-        }
-        function add7element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="7"; 
-            결과값Div.appendChild(div);
-            console.log(7);
-        }
-        function add8element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="8"; 
-            결과값Div.appendChild(div);
-            console.log(8);
-        }
-        function add9element() {
-            var 결과값Div =document.querySelector(".결과값");
-            var div =document.createElement("div"); 
-            div.textContent="9"; 
-            결과값Div.appendChild(div);
-            console.log(9);
-        }
-    </script>
 </body>
 </html>
