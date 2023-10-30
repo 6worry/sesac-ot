@@ -1,5 +1,3 @@
-let lastClickedButton = null;
-
     function addnumber (value) {
         document.getElementById('결과값').innerText += value;
         console.log(value);
