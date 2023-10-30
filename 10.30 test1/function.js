@@ -43,9 +43,23 @@ sub(5, 2);
 let sum2 = sub(5, 4);
 console.log(sum2);
 
+function mul(a, b){
+    console.log({a, b});
+    let sum3 = a * b;
+    console.log(sum3);
+    return sum3;
+}
+
 mul(5, 3);
 let sum3= mul(6, 3);
 console.log(sum3);
+
+function div(a, b){
+    console.log({a, b});
+    let sum4 = a / b;
+    console.log(sum4);
+    return sum4;
+}
 
 div(6, 3);
 let sum4 = div(10, 2);
