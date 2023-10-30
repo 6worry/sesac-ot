@@ -56,12 +56,18 @@ console.log(sum3);
 
 function div(a, b){
     console.log({a, b});
-    let sum4 = a / b;
-    console.log(sum4);
-    return sum4;
+    // console.log(sum4);
+    if(b===0){
+        
+        console.log('0으로 나눌 수 없다.')
+        return a/b;
+    } else {
+        let sum4 = a / b;
+        return sum4;
+    }
 }
 
-div(6, 3);
+div(6, 0);
 let sum4 = div(10, 2);
 console.log(sum4);
 
@@ -78,9 +84,36 @@ let result3 = function(x, y){
 };
 console.log(result3(2, 10));
 
+add(1, 2);
+let result5 = function(x, y){
+    return x + y
+};
+console.log(result5(1, 2));
+
+sub(10, 2);
+let result6= function(x, y){
+    return x - y
+};
+console.log(result6(10, 2));
 //화살표 함수(arrow function) (function 키워드 없이 가능- 더 간소화 가능)
 
 let result4 = (x, y) => {
     return x = y
 };
 console.log(result4(3, 5));
+
+console.log(add(2, 3));
+console.log(sub(2, 5));
+console.log(mul(10, 100));
+console.log(div(10,'100'));
+console.log(add('10',100));
+console.log(sub('100',10));
+console.log(sub('100', null));
+console.log(div('100', 0));
+console.log(add(5, 5, 5, 5));
+
+//부동소숫점의 오류
+
+console.log(mul(BigInt(999999), BigInt(999999)));
+
+
