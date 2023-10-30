@@ -54,5 +54,5 @@ let lastClickedButton = null;
 
     function removeelement(){
         document.getElementById('결과값').innerText = "";
-        console.log("C")
+        console.log("C");
     }
