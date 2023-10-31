@@ -12,6 +12,6 @@ function add(a, b) {
 // console.log('result:', result);
 
 result = add (2, 5);
-result = sub(result, 6);
-result = mul(result, 2);
+// result = sub(result, 6);
+// result = mul(result, 2);
 console.log('result:', result);

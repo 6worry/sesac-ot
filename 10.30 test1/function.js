@@ -57,8 +57,7 @@ console.log(sum3);
 function div(a, b){
     console.log({a, b});
     // console.log(sum4);
-    if(b===0){
-        
+    if(b===0){       
         console.log('0으로 나눌 수 없다.')
         return a/b;
     } else {

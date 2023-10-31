@@ -12,7 +12,7 @@ console.log(array1);
 let new_array1 = array1.slice(1, 3);
 console.log(new_array1);
 
-array1.splice(1, 2); //1=2번째 요소부터 갯수 (2)
+array1.splice(1, 2); //1=2번째 요소부터 갯수제거 (2)
 console.log(array1);
 
 const array3 = array1.concat(array2);
@@ -29,5 +29,5 @@ array1 = [1, 2, 3];
 console.log(array1);
 console.log(array2);
 
-array1.splice(1, 0, array2)
+array1.splice(1, 0, array2) // 인덱스 1부터 0개 요소 제거 인덱스 1부터 array2 이어서 추가 
 console.log(array1);

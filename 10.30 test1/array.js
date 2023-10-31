@@ -65,6 +65,7 @@ console.log(new_numbers);
 
 let variable
 console.log(variable);
+
 variable = null;
 console.log(variable);
 variable = 1;

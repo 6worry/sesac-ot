@@ -1,14 +1,14 @@
 console.log("hello");
 
-const greeting = 'hello, world';
+const _greeting = 'hello, world';
 
-console.log(greeting);
+console.log(_greeting);
 
 const a = 10;
 const b = 20;
 
 console.log('numbers: a,b');
-console.log('numbers: a=' + a + ', b=' +b);
+console.log('numbers: a=' +a + ', b=' +b);
 console.log('numbers: ${a} ${b}');
 console.log(`numbers: ${a} ${b}`); //template literal
 console.log({a,b}); //객체 형태로 출력
