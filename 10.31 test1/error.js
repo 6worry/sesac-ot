@@ -4,8 +4,13 @@ function divide(a, b){
             throw new TypeError('숫자입력');
         }
         //길이제한코드추가
-        if(){
-            
+        a_str = a.toString();
+        a_str_length = a_str.length;
+        console.log(a_str_length);
+
+        if(a_str_length   //'number'.length  //입력 문자열 길이 확인
+             >9){
+            throw new RangeError('10자 이상은 입력 못해');
         }
 
         if (b===0){
