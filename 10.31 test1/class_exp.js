@@ -1,4 +1,4 @@
-const car = class{
+const Car = class{
     constructor(make, model){
         this.make = make;
         this.model = model;
@@ -16,4 +16,7 @@ const car = class{
 }
 
 const mycar = new Car('kia', 'k3');
-const yourcar = new Car('kia', 'k3');
+const yourcar = new Car('kia', 'k13');
+
+console.log(mycar.drive());
+console.log(yourcar.drive());

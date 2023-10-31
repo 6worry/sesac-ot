@@ -6,7 +6,7 @@ function divide(a, b){
         //길이제한코드추가
         a_str = a.toString();
         a_str_length = a_str.length;
-        console.log(a_str_length);
+        // console.log(a_str_length);
 
         if(a_str_length   //'number'.length  //입력 문자열 길이 확인
              >9){
