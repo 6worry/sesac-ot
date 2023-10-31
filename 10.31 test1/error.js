@@ -1,0 +1,29 @@
+function divide(a, b){
+    try {
+        if(typeof b !== 'number'){
+            throw new TypeError('숫자입력');
+        }
+        //길이제한코드추가
+        if(){
+            
+        }
+
+        if (b===0){
+            throw new Error('0은 안돼');
+        }
+        return a/b;
+    } catch(error){
+        if (error instanceof TypeError){
+            console.log('타입오류', error.message);
+        } else{
+            console.log('기타오류', error.message);
+        }
+    }
+}
+
+console.log(divide(10, 2));
+console.log(divide(10, "문자열"));
+console.log(divide(10, 0));
+console.log(divide(12345, 5));
+console.log(divide(1234567890, 5));
+
