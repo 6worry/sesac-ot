@@ -39,6 +39,10 @@ class Employee extends Person{
         console.log(`${this.name} working`);
     }
 
+    greet(){
+        console.log(`안녕 나는 ${this.name}이고 직위는 ${this.jobTitle}이야. `);
+    }
+
 }
 
 const Employee1 = new Employee('영희', 30, '여', '매니저', 50000);
@@ -46,3 +50,33 @@ Employee1.greet();
 Employee1.displayInfo();
 Employee1.walk();
 Employee1.work();
+
+class people{
+    constructor(name, age, gender){
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+}
+
+class Manager extends People{
+    constructor (name, age, gender, jobTitle, salary){
+    super(name, age, gender);
+    this.jobTitle = jobTitle;
+    this.salary = salary;  
+    }
+}
+
+function introduce(people){
+    for(const person of people){
+        person.greet();
+    }
+
+    for (let i= 0; i<people.length;i++){
+        people[i].greet();
+    }
+}
+
+const people = [manager, empolyee1, employee2, empolyee3]
+
+introduce(people);
