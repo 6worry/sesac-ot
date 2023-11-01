@@ -21,7 +21,7 @@ function readFileCallback(err,data){
     console.log('파일 내용:', data);
 };
 // 파일 쓰기
-const content = "하이요"
+const content = "bb"
 fs.writeFile('newFile.txt', content, 'utf8', (err) => {
     if(err) {
         console.error('파일 결과 오류', err);

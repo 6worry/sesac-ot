@@ -16,3 +16,11 @@ function Sort_number(num){
 sort = Sort_number(number);
 console.log(sort);
 
+const fs = require('fs');
+
+fs.readdir(".", 'utf8', (err, file) =>{
+    if (err){
+        console.log('현재 디렉토리 오류', err);
+        return;
+    } console.log('현재 디렉토리:', file);
+});
