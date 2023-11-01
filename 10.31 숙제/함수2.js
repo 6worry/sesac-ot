@@ -1,3 +1,5 @@
+
+
 const text1 = '현재 시간은 새벽 4시';
 const dot = text1.split(' ');
 console.log(dot);
@@ -32,45 +34,6 @@ console.log(new_text8);
 const text9 = 'hello world';
 console.log(text9.toUpperCase());
 
+
 const text10 = 'hello world';
 console.log(text10.toLowerCase());
-
-
-const number = [11, 12, 13, 14, 15]; // MAX
-
-function max_number(num){
-    let num1 = num[0];
-    for (let i=0; i<num.length; i++){
-        if(num[i] > num1){
-            num1 = num[i]
-            // console.log(num1);
-        }
-    } return num1;
-}
-max_num = max_number(number);
-console.log('최댓값:', max_num);
-
-const number2 = [21, 22, 23, 24, 25];//MIN
-
-function min_number(num){
-    let num1 = num[0];
-    for (let i=0; i<num.length; i++){
-        if(num[i] < num1){
-            num1 = num[i]
-            // console.log(num1);
-        }
-    } return num1;
-}
-min_num = min_number(number2);
-console.log('최소값:', min_num);
-
-const number3 = [31, 32, 33, 34, 35];//AVG
-
-function AVG_number(num){
-    let sum = 0;
-    for (let i=0; i<num.length; i++){
-        sum+= num[i];
-    } return sum / num.length;
-}
-avg = AVG_number(number3);
-console.log('평균값:', avg);
