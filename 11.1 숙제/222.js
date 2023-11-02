@@ -10,7 +10,7 @@ function createDirectoryTree(directoryPath, tree, prefix, isLast = true) {
     const isDirectory = stats.isDirectory();
     
     let line = prefix;
-    line += isLast ? '└── ' : '├── ';
+    line += isLast ? '├── ' : '└── ' ;
     line += item;
 
     tree.push(line);
