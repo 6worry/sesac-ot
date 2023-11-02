@@ -1,5 +1,5 @@
-const http = require('http');
-
+// const http = require('http');
+import http from 'http';
 //요청하고 싶은 주소 정의
 
 const options ={

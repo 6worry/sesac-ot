@@ -1,8 +1,8 @@
-const readline = require('readline');
+// const readline = require('readline');
 
-// import readline from 'readline';
+import readline from 'readline';
 
-import {uuld} from 'uuld';
+import {v4 as uuid} from 'uuid';
 
 const r1 = readline.createInterface({
     input : process.stdin,
@@ -25,5 +25,5 @@ r1.question('구구단의 단을 입력해라:', (input) => {
     r1.close();
 });
 
-const uuid2 = uuid.v4();
-console.log(uuid);
+const uuid2 = uuid();
+console.log(uuid2);

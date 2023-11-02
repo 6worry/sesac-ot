@@ -1,4 +1,5 @@
-const path = require('path');
+// const path = require('path');
+import path from 'path';
 
 const filePath = path.join('/6worry/git-test/11.2 test1', 'file.txt');
 console.log('파일 경로', filePath);

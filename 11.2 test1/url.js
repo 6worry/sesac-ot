@@ -1,4 +1,5 @@
-const url = require('url');
+// const url = require('url');
+import url from 'url';
 
 const myUrl = 'https://chat.openai.com/c/963af72d-1f34-443a-916c-3c6e062ab014';
 

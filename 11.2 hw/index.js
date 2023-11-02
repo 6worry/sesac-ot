@@ -9,7 +9,7 @@ const r1 = readline.createInterface({
     output : process.stdout,
 });
 
-r1.question('계산기 종류 선택해라:', '1. 공학용 계산기', '2. ' ,(input) => {
+r1.question('계산기 종류 선택해라:', '1. 공학용 계산기', '2. 기본 계산기', '3. 프로그래머 계산기' ,(input) => {
     const num = parseInt(input);
     if(num === 1){
         console.log('2');
