@@ -1,3 +1,4 @@
+
 class GenericCalculator{
     constructor(number, operator, sub_oper, memory){
         this.number = number;
@@ -8,7 +9,9 @@ class GenericCalculator{
 
 }
 
-class EnginerringCalculator extends GenericCalculator{
+export default GenericCalculator;
+
+export class EnginerringCalculator extends GenericCalculator{
     constructor(number, operator, sub_oper, memory, mod, func){
         super(number, operator, sub_oper, memory);
         this.mod = mod;
@@ -16,7 +19,7 @@ class EnginerringCalculator extends GenericCalculator{
     }
 }
 
-class GraphCalculator extends GenericCalculator{
+export class GraphCalculator extends GenericCalculator{
     constructor(number, operator, sub_oper, memory, mod, func, _x, _y){
         super(number, operator, sub_oper, memory);
         this.mod = mod;
@@ -27,7 +30,7 @@ class GraphCalculator extends GenericCalculator{
     }
 }
 
-class ProgrammerCalculator extends GenericCalculator{
+export class ProgrammerCalculator extends GenericCalculator{
     constructor(number, operator, sub_oper, memory, hex, dec, oct, bin, beat, beat_shift){
         super(number, operator, sub_oper, memory);
         this.hex = hex;
