@@ -5,6 +5,7 @@ import path from 'path';
 import { pathToFileURL } from 'url';
 const directoryPath = "../";
 
+function listDir(directoryPath){
 fs.readdir(directoryPath, (err, files) => {
     if (err){
         console.log('읽기 오류', err);
@@ -14,9 +15,12 @@ fs.readdir(directoryPath, (err, files) => {
     files.forEach(file => {
         const filePath = path.join(directoryPath, file);
         console.log('파일', filePath);
-        checkFileSync(filePath);
+        if (checkFileSync(filePath) =1){
+            listDir(filePath);
+        }
     })
 });
+}
 
 function checkFile(filePath){
         fs.stat(filePath, (err, stats)=>{
@@ -40,9 +44,11 @@ function checkFileSync(filePath){
     
         if (stats.isFile()){
             console.log('이것은 파일');
+            return 0;
         } else if(stats.isDirectory()){
             console.log('이것은 디렉토리');
+            return 1;
         } else{
             console.log('파일 및 디렉토리 X');
-        }
+        } return 2;
 }
