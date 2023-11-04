@@ -19,11 +19,13 @@ console.log(generateBirthName());
 function generateGender(){
     const gender = ['Male', 'Femaie'];
 
-//     if(Math.random()< 0.5){
-
+//     if(Math.random()< 0.5){ // 0.5 = 비율, 조정 가능
+        // return 'Male';
+        // } else {
+        // return 'Female';     
 //     }
 
-// return Math.random() < 0.5 ? ""
+// return Math.random() < 0.5 ? "Male" : "Female"; 위의 if문을 한 줄로 정리 가능
 
     return gender[Math.floor(Math.random()*gender.length)];
 };
