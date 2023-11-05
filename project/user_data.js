@@ -25,19 +25,19 @@ function generateGender(){
 
 //20세~50세
 
-function genderateAge(){
+function generateAge(){
     const age = Math.floor(Math.random()*31)+20;
     return `${age}`;
 };
 
 //1974년~2004년
 
-function genderateBirthdate(){
-    const year = Math.floor(Math.random()*31)+1974;
-    const month = Math.floor(Math.random()*12)+1;
-    const day = Math.floor(Math.random()*28)+1;
+function generateBirthdate() {
+    const year = Math.floor(Math.random() * 31) + 1974;
+    const month = (Math.floor(Math.random() * 12) + 1).toString().padStart(2, 0);
+    const day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, 0);
     return `${year}.${month}.${day}`;
-};
+}
 
 //주소
 
@@ -52,7 +52,7 @@ function generateAddress(){
 //사용자 데이터
 
 function generateResult(){
-const result = `${generateID()}, ${generateName()}, ${generateGender()}, ${genderateAge()}, ${genderateBirthdate()}, ${generateAddress()}`;
+const result = `${generateID()}, ${generateName()}, ${generateGender()}, ${generateAge()}, ${generateBirthdate()}, ${generateAddress()}`;
 return `${result}`;
 };
 
@@ -86,3 +86,4 @@ if (err) {
 });
 
 //시간 나면 사람 이름 답게 만들기, 도시에 따라 지역구 다르게 설정하기!
+// 월마다 최대 날짜 설정하기
