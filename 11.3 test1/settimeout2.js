@@ -7,7 +7,7 @@ function perfromAsyncTask(callback){
             callback('notnull', '작업실패')
         }
         
-    }, 1000);
+    }, 10);
 }
 
 // 작업 호출
