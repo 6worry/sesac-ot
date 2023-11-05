@@ -68,18 +68,21 @@ if(process.argv.length<4){
 console.log('ID, 이름, 성별, 나이, 생년월일, 주소');
 
 const csvData = ['ID, 이름, 성별, 나이, 생년월일, 주소'];
-const csvString = csvData.join('\n');
 
 for (let i=0; i<dataRecords;i++){
-    console.log(generateResult());
-    csvData.push(generateResult());
+    const userdata = generateResult();
+    console.log(userdata);
+    csvData.push(userdata); //csv에 데이터 심기
 };
+
+const csvString = csvData.join('\n');
 
 fs.writeFile('user.csv', csvString, 'utf-8', (err) => {
 if (err) {
-    console.error('파일을 생성하는 동안 오류가 발생했습니다:', err);
+    console.error('오류!오류!:', err);
 } else {
-    console.log('CSV 파일이 생성되었습니다: user.csv');
+    console.log('CSV 생성 완료: user.csv');
     }
 });
+
 //시간 나면 사람 이름 답게 만들기, 도시에 따라 지역구 다르게 설정하기!
