@@ -65,14 +65,14 @@ if(process.argv.length<4){
 };
 
 console.log('ID, 이름, 성별, 나이, 생년월일, 주소');
+
 const csvData = ['ID, 이름, 성별, 나이, 생년월일, 주소'];
+const csvString = csvData.join('\n');
 
 for (let i=0; i<numRecords;i++){
     console.log(generateResult());
     csvData.push(generateResult());
 };
-
-const csvString = csvData.join('\n');
 
 fs.writeFileSync('user.csv', csvString, 'utf-8');
   console.log('CSV 파일이 생성되었습니다: user.csv');
