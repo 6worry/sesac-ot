@@ -3,13 +3,13 @@ import {v4 as uuidv4} from 'uuid';
 
 //ID
 
-function generateID(){
+function userID(){
     return uuidv4();
 };
 
 //이름
 
-function generateName(){
+function userName(){
     const firstname = ['강', '박', '진', '최', '유', '이', '조', '정', '고', '맹'];
     const secondname = ['강', '박', '진', '최', '유', '이', '조', '정', '고', '맹'];
     const thirdname = ['강', '박', '진', '최', '유', '이', '조', '정', '고', '맹'];
@@ -18,21 +18,21 @@ function generateName(){
 
 //성별
 
-function generateGender(){
+function userGender(){
     const gender = ['남', '여'];
     return gender[Math.floor(Math.random()*gender.length)];
 };
 
 //20세~50세
 
-function generateAge(){
+function userAge(){
     const age = Math.floor(Math.random()*31)+20;
     return `${age}`;
 };
 
 //1974년~2004년
 
-function generateBirthdate() {
+function userBirthdate() {
     const year = Math.floor(Math.random() * 31) + 1974;
     const month = (Math.floor(Math.random() * 12) + 1).toString().padStart(2, 0);
     const day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, 0);
@@ -41,8 +41,8 @@ function generateBirthdate() {
 
 //주소
 
-function generateAddress(){
-    const street_name1 = ['서울', '인천', '부산', '세종', '전주', ];
+function userAddress(){
+    const street_name1 = ['서울', '인천', '부산', '세종', '전주',];
     const street_name2 = ['자바구', '새싹구', '코드구', '지구', '웹구'];
     const street_num1 = Math.floor(Math.random()*100)+1;
     const street_num2 = Math.floor(Math.random()*100)+1;
@@ -51,8 +51,8 @@ function generateAddress(){
 
 //사용자 데이터
 
-function generateResult(){
-const result = `${generateID()}, ${generateName()}, ${generateGender()}, ${generateAge()}, ${generateBirthdate()}, ${generateAddress()}`;
+function userResult(){
+const result = `${userID()}, ${userName()}, ${userGender()}, ${userAge()}, ${userBirthdate()}, ${userAddress()}`;
 return `${result}`;
 };
 
@@ -70,7 +70,7 @@ console.log('ID, 이름, 성별, 나이, 생년월일, 주소');
 const csvData = ['ID, 이름, 성별, 나이, 생년월일, 주소'];
 
 for (let i=0; i<dataRecords;i++){
-    const userdata = generateResult();
+    const userdata = userResult();
     console.log(userdata);
     csvData.push(userdata); //csv에 데이터 심기
 };
