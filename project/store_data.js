@@ -23,7 +23,7 @@ function storeName(){
     return `${company[Math.floor(Math.random()*company.length)]}`;
 };
 
-//주소
+//가게주소
 
 function storeAddress(){
     const street_name1 = ['서울', '인천', '부산', '세종', '전주', ];
@@ -49,9 +49,9 @@ if(process.argv.length<4){
     displayformat ='csv';
 };
 
-console.log('ID, 가게명, 가맹업체, 주소');
+console.log('ID, 가게명, 가맹업체, 가게주소');
 
-const csvData = ['ID, 가게명, 가맹업체, 주소'];
+const csvData = ['ID, 가게명, 가맹업체, 가게주소'];
 
 for (let i=0; i<dataRecords;i++){
     const storedata = storeResult();
@@ -68,3 +68,5 @@ if (err) {
     console.log('CSV 생성 완료: store.csv');
     }
 });
+
+// 가게명이랑 가맹업체 서로 맞추기, 가게 가맹점과 도시 및 지역구 서로 맞추기

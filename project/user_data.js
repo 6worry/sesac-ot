@@ -39,7 +39,7 @@ function userBirthdate() {
     return `${year}.${month}.${day}`;
 }
 
-//주소
+//사용자 주소
 
 function userAddress(){
     const street_name1 = ['서울', '인천', '부산', '세종', '전주',];
