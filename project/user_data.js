@@ -1,13 +1,16 @@
+import fs from 'fs';
 //ID
+import {v4 as uuidv4} from 'uuid';
+const generateID = uuidv4();
 
-function generateID() {
-    return 'xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(code) {
-        // /[x]g - g플래그 = 글로벌 플래그로 전체 문자열을 검색하여 모든 일치 항목을 찾도록 지시함, g 플래그를 사용하지 않으면, 첫 번째 일치 항목만 찾음
-      const code_number = Math.floor(Math.random() * 16);
-      const random_code = code === 'x' ? code_number : code_number;
-      return random_code.toString(16);
-    });
-  };
+// function generateID() {
+//     return 'xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(code) {
+//         // /[x]g - g플래그 = 글로벌 플래그로 전체 문자열을 검색하여 모든 일치 항목을 찾도록 지시함, g 플래그를 사용하지 않으면, 첫 번째 일치 항목만 찾음
+//       const code_number = Math.floor(Math.random() * 16);
+//       const random_code = code === 'x' ? code_number : code_number;
+//       return random_code.toString(16);
+//     });
+//   };
 
 //이름
 
@@ -54,15 +57,15 @@ function generateAddress(){
 //사용자 데이터
 
 function generateResult(){
-const result = `${generateID()}, ${generateName()}, ${generateGender()}, ${genderateAge()}, ${genderateBirthdate()}, ${generateAddress()}`;
+const result = `${generateID}, ${generateName()}, ${generateGender()}, ${genderateAge()}, ${genderateBirthdate()}, ${generateAddress()}`;
 return `${result}`;
 };
 
 //랜덤 데이터 생성
+let numRecords = 1000;
+let displayformat = process.argv[2];
 
-let displayformat = process.argv[3];
-
-if(process.argv.length<4){
+if(process.argv.length<3){
     displayformat ='csv';
 }
 
@@ -71,5 +74,13 @@ console.log('ID, 이름, 성별, 나이, 생년월일, 주소');
 for (let i=0; i<numRecords;i++){
     console.log(generateResult());
 }
+
+const csvData = ['ID, 이름, 성별, 나이, 생년월일, 주소'];
+
+const csvString = csvData.join('\n');
+
+fs.writeFileSync('user.csv', csvString, 'utf-8');
+  console.log('CSV 파일이 생성되었습니다: user.csv');
+
 
 //시간 나면 사람 이름 답게 만들기, 도시에 따라 지역구 다르게 설정하기!
