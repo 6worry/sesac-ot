@@ -57,7 +57,8 @@ return `${result}`;
 };
 
 //랜덤 데이터 생성
-let numRecords = process.argv[2];
+
+let dataRecords = process.argv[2];
 let displayformat = process.argv[3];
 
 if(process.argv.length<4){
@@ -69,12 +70,16 @@ console.log('ID, 이름, 성별, 나이, 생년월일, 주소');
 const csvData = ['ID, 이름, 성별, 나이, 생년월일, 주소'];
 const csvString = csvData.join('\n');
 
-for (let i=0; i<numRecords;i++){
+for (let i=0; i<dataRecords;i++){
     console.log(generateResult());
     csvData.push(generateResult());
 };
 
-fs.writeFileSync('user.csv', csvString, 'utf-8');
-  console.log('CSV 파일이 생성되었습니다: user.csv');
-
+fs.writeFile('user.csv', csvString, 'utf-8', (err) => {
+if (err) {
+    console.error('파일을 생성하는 동안 오류가 발생했습니다:', err);
+} else {
+    console.log('CSV 파일이 생성되었습니다: user.csv');
+    }
+});
 //시간 나면 사람 이름 답게 만들기, 도시에 따라 지역구 다르게 설정하기!
