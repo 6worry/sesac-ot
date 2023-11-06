@@ -1,7 +1,9 @@
 import fs from 'fs';
 import {v4 as uuidv4} from 'uuid';
-
-//ID
+import {generateID} from './sub_data.js';
+// import {storeID} from './store_data.js';
+// import {userID} from './user_data.js';
+// //ID
 
 function orderID(){
     return uuidv4();
@@ -23,6 +25,8 @@ function orderDate() {
 
 import {storeID} from './store_data.js';
 
+const store_ID = storeID().StoreID;
+
 //  function storeID(){
 //     const company = ['스타벅스', '할리스', '이디야', '빽다방', '메가커피'];
 //     return `${company[Math.floor(Math.random()*company.length)]}`;
@@ -31,6 +35,8 @@ import {storeID} from './store_data.js';
 //사용자ID
 
 import {userID} from './user_data.js';
+
+const User_ID = userID().UserID;
 
 //주문 데이터
 
