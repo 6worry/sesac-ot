@@ -3,7 +3,6 @@ import {generateID} from './sub_data.js';
 
 //ID
 export function userID(){
-    // const UserID =generateID();
     return generateID();
 };
 
@@ -37,7 +36,7 @@ function userBirthdate() {
     const month = (Math.floor(Math.random() * 12) + 1).toString().padStart(2, 0);
     const day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, 0);
     return `${year}.${month}.${day}`;
-}
+};
 
 //사용자 주소
 
