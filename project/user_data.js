@@ -1,18 +1,11 @@
 import fs from 'fs';
-import {v4 as uuidv4} from 'uuid';
 import {generateID} from './sub_data.js';
 
 //ID
-const User_ID = [];
 export function userID(){
-    const UserID =generateID();
-    User_ID.push(UserID);
-    return UserID;
+    // const UserID =generateID();
+    return generateID();
 };
-
-export function USER_ID(){
-    return User_ID
-}
 
 //이름
 

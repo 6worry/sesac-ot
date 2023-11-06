@@ -1,8 +1,6 @@
 import fs from 'fs';
 import {v4 as uuidv4} from 'uuid';
-import {generateID} from './sub_data.js';
-// import {storeID} from './store_data.js';
-// import {userID} from './user_data.js';
+
 // //ID
 
 function orderID(){
@@ -25,21 +23,25 @@ function orderDate() {
 
 import {storeID} from './store_data.js';
 
-const store_ID = storeID().StoreID;
-const STORE_con_ID=store_ID[Math.floor(Math.random()*store_ID.length)];
+function equlstoreID(){
+    return storeID();
+};
 
 //사용자ID
 
-import {userID, USER_ID} from './user_data.js';
+import {userID} from './user_data.js';
 
-const user_ID = userID().UserID;
-const USER_con_ID = USER_ID[Math.floor(Math.random()*USER_ID.length)];
+function equluserID(){
+    return userID();
+};
 
 //주문 데이터
 
 function orderResult(){
-    const result = `${orderID()}, ${orderDate()}, ${STORE_con_ID}, ${USER_con_ID}`
-    return `${result}`
+    const EqulstoreID = equlstoreID();
+    const EquluserID = equluserID();
+    const result = `${orderID()}, ${orderDate()}, ${EqulstoreID()}, ${EquluserID()}`;
+    return `${result}`;
     };
 
 //랜덤 데이터 생성
