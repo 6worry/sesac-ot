@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 
 //ID
 
-function userID(){
+export function userID(){
     return uuidv4();
 };
 
