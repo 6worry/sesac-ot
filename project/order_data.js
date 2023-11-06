@@ -26,22 +26,19 @@ function orderDate() {
 import {storeID} from './store_data.js';
 
 const store_ID = storeID().StoreID;
-
-//  function storeID(){
-//     const company = ['스타벅스', '할리스', '이디야', '빽다방', '메가커피'];
-//     return `${company[Math.floor(Math.random()*company.length)]}`;
-// };
+const STORE_con_ID=store_ID[Math.floor(Math.random()*store_ID.length)];
 
 //사용자ID
 
-import {userID} from './user_data.js';
+import {userID, USER_ID} from './user_data.js';
 
-const User_ID = userID().UserID;
+const user_ID = userID().UserID;
+const USER_con_ID = USER_ID[Math.floor(Math.random()*USER_ID.length)];
 
 //주문 데이터
 
 function orderResult(){
-    const result = `${orderID()}, ${orderDate()}, ${storeID()}, ${userID()}`
+    const result = `${orderID()}, ${orderDate()}, ${STORE_con_ID}, ${USER_con_ID}`
     return `${result}`
     };
 

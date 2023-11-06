@@ -2,11 +2,16 @@ import fs from 'fs';
 import {v4 as uuidv4} from 'uuid';
 import {generateID} from './sub_data.js';
 //ID
-
+const Store_ID =[];
 export function storeID(){
     const StoreID = generateID();
-    return {StoreID};
+    Store_ID.push(StoreID);
+    return StoreID;
 };
+
+export function STORE_ID(){
+    return Store_ID
+}
 
 //가게명
 
@@ -37,7 +42,8 @@ function storeAddress(){
 //상점 데이터
 
 function storeResult(){
-const result = `${storeID()}, ${storeName()}, ${storeType()}, ${storeAddress()}`;
+    const StoreID = storeID();
+const result = `${StoreID()}, ${storeName()}, ${storeType()}, ${storeAddress()}`;
 return `${result}`;
 };
 

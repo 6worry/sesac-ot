@@ -1,11 +1,26 @@
 ID, 주문일자, 가게ID, 사용자ID
-86dd55e8-8900-421b-a9db-9a04e4498119, 2023-12-08 02:21:38 , [object Object], [object Object]
-a397c87c-26be-4b1f-baeb-72b51dd5b6af, 2023-06-17 07:56:50 , [object Object], [object Object]
-cf56ebeb-c359-417e-80ea-60d16d8f80ec, 2023-03-06 12:14:25 , [object Object], [object Object]
-9e0fbfed-2ca5-439a-a487-455b9b4a66e2, 2023-09-19 08:15:39 , [object Object], [object Object]
-0a9e315c-a3e3-45d7-a13c-e82440050214, 2023-12-23 17:31:40 , [object Object], [object Object]
-8c40df97-0bcd-4791-a9dd-0c6cd0fe9905, 2023-07-14 18:03:25 , [object Object], [object Object]
-e8ecebe7-29cd-4f8e-8f33-4f974ad24511, 2023-03-07 18:41:03 , [object Object], [object Object]
-6dcf3bb9-1f7c-4bca-96df-dcf9106e9e48, 2023-10-23 00:10:42 , [object Object], [object Object]
-1eeb4cc2-b11c-4dad-a49b-3258e3d6f8db, 2023-02-19 01:54:27 , [object Object], [object Object]
-a23f9e1e-7fae-47b0-96ae-0ec75f304be0, 2023-11-07 21:03:18 , [object Object], [object Object]
+379b194b-b102-4e86-957a-27d87b6ac101, 2023-12-19 22:56:56 , function storeID(){
+    const StoreID = generateID();
+    Store_ID.push(StoreID);
+    return StoreID;
+}, undefined
+0e046180-0bec-4682-b516-c629fef5ffa7, 2023-12-02 17:11:55 , function storeID(){
+    const StoreID = generateID();
+    Store_ID.push(StoreID);
+    return StoreID;
+}, undefined
+ccbf91f0-8145-49be-b8b2-4a3165fb11dd, 2023-01-09 17:21:21 , function storeID(){
+    const StoreID = generateID();
+    Store_ID.push(StoreID);
+    return StoreID;
+}, undefined
+3e7987ea-c43e-4ded-b0cf-19eb9a4f493a, 2023-09-22 19:30:14 , function storeID(){
+    const StoreID = generateID();
+    Store_ID.push(StoreID);
+    return StoreID;
+}, undefined
+6fd88898-3f44-4100-ac5a-7e732a12af8d, 2023-10-09 18:25:47 , function storeID(){
+    const StoreID = generateID();
+    Store_ID.push(StoreID);
+    return StoreID;
+}, undefined

@@ -3,11 +3,16 @@ import {v4 as uuidv4} from 'uuid';
 import {generateID} from './sub_data.js';
 
 //ID
-
+const User_ID = [];
 export function userID(){
     const UserID =generateID();
-    return {UserID};
+    User_ID.push(UserID);
+    return UserID;
 };
+
+export function USER_ID(){
+    return User_ID
+}
 
 //이름
 
@@ -54,7 +59,8 @@ function userAddress(){
 //사용자 데이터
 
 function userResult(){
-const result = `${userID()}, ${userName()}, ${userGender()}, ${userAge()}, ${userBirthdate()}, ${userAddress()}`;
+    const UserID = userID();
+const result = `${UserID()}, ${userName()}, ${userGender()}, ${userAge()}, ${userBirthdate()}, ${userAddress()}`;
 return `${result}`;
 };
 
