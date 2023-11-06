@@ -18,7 +18,6 @@ function itemName(){
 
  function itemType(){
     const product_type = ['COFFEE', 'ADE', 'CAKE', 'BREAD', 'TEA'];
-
     return `${product_type[Math.floor(Math.random()*product_type.length)]}`;
 };
 
@@ -26,7 +25,6 @@ function itemName(){
 
 function itemprice(){
     const product_price = ['3000₩', '5000', '4000', '4500', '3500', '5500', '6000'];
-
     return `${product_price[Math.floor(Math.random()*product_price.length)]}`;
 };
 
@@ -66,3 +64,5 @@ if (err) {
     console.log('CSV 생성 완료: item.csv');
     }
 });
+
+//상품 이름에 따라 종류, 가격 맞추기
