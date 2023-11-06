@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 
 // //ID
 
-function orderID(){
+export function orderID(){
     return uuidv4();
 };
 
@@ -15,9 +15,8 @@ function orderDate() {
     const hour = (Math.floor(Math.random() * 24)).toString().padStart(2, 0);
     const min = (Math.floor(Math.random() * 60)).toString().padStart(2, 0);
     const sec = (Math.floor(Math.random() * 60)).toString().padStart(2, 0);
-
     return `${'2023'}-${month}-${day} ${hour}:${min}:${sec} `;
-}
+};
 
 //가게ID
 
