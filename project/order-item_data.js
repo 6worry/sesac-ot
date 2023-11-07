@@ -27,7 +27,7 @@ function equlitemID(){
 
 function orderitemResult(){
     const EqulitemID = equlitemID();
-    const EqulorderID = equlorderID();
+    const EqulorderID = equlorderID;
     const result = `${orderitemID()}, ${EqulorderID()}, ${EqulitemID()}`;
     return `${result}`;
     };
