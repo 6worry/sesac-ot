@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {generateID} from './sub_data.js';
+import {generateID, generateDate} from './sub_data.js';
 
 //ID
 export function userID(){
@@ -10,8 +10,8 @@ export function userID(){
 
 function userName(){
     const firstname = ['강', '박', '진', '최', '유', '이', '조', '정', '고', '맹'];
-    const secondname = ['강', '박', '진', '최', '유', '이', '조', '정', '고', '맹'];
-    const thirdname = ['강', '박', '진', '최', '유', '이', '조', '정', '고', '맹'];
+    const secondname = ['영', '예', '상', '정', '유', '승', '다', '하', '지', '재'];
+    const thirdname = ['준', '우', '진', '민', '순', '미', '은', '연', '현', '림'];
     return `${firstname[Math.floor(Math.random()*firstname.length) ]}${secondname[Math.floor(Math.random()*secondname.length)]}${thirdname[Math.floor(Math.random()*thirdname.length)]}`;
 };
 
@@ -25,17 +25,15 @@ function userGender(){
 //20세~50세
 
 function userAge(){
-    const age = Math.floor(Math.random()*31)+20;
+    const age = Math.floor(Math.random() * 31)+20;
     return `${age}`;
 };
 
 //1974년~2004년
 
 function userBirthdate() {
-    const year = Math.floor(Math.random() * 31) + 1974;
-    const month = (Math.floor(Math.random() * 12) + 1).toString().padStart(2, 0);
-    const day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, 0);
-    return `${year}.${month}.${day}`;
+const year = 
+    return `${}.${generateDate()}`;
 };
 
 //사용자 주소
@@ -62,7 +60,7 @@ let dataRecords = process.argv[2];
 let displayformat = process.argv[3];
 
 if(process.argv.length<4){
-    displayformat ='csv';
+    displayformat ='csv'; // 추후 csv 뿐만 아니라 다른 파일들도 생성 할 수도 있을거 같아 내버려둠
 };
 
 console.log('ID, 이름, 성별, 나이, 생년월일, 주소');
@@ -85,5 +83,4 @@ if (err) {
     }
 });
 
-//시간 나면 사람 이름 답게 만들기, 도시에 따라 지역구 다르게 설정하기!
-// 월마다 최대 날짜 설정하기
+// 도시에 따라 지역구 다르게 설정하기! 생년월일에 맞는 나이 설정하기

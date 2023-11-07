@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {generateID} from './sub_data.js';
+import {generateID, generateitemPrice, generateitemType} from './sub_data.js';
 
 //ID
 
@@ -7,32 +7,45 @@ export function itemID(){
     return generateID();
 };
 
-//상품 이름
+//상품 이름 및 종류
 
 function itemName(){
-    const product = ['아메리카노', '카페라떼', '카페모카', '에스프레소', '토피넛라떼', '카라멜 마끼아또', '민트모카', '딸기에이드', '히비스커스', '캐모마일', '얼그레이', '생과일주스', '프라푸치노', '당근케잌', '초코케잌', '크로플', '소금빵', '초코머핀', '프레즐'];
-    return `${product[Math.floor(Math.random()*product.length)]}`;
-};
-
-//상품 종류
-
- function itemType(){
-    const product_type = ['COFFEE', 'ADE', 'CAKE', 'BREAD', 'TEA'];
-    return `${product_type[Math.floor(Math.random()*product_type.length)]}`;
-};
+return `${generateitemType()}`
+}
 
 //상품 가격
 
 function itemprice(){
-    const product_price = ['3000₩', '5000', '4000', '4500', '3500', '5500', '6000'];
-    return `${product_price[Math.floor(Math.random()*product_price.length)]}`;
+    const productPrices = {
+        '아메리카노': '3000₩',
+        '소금빵': '3000₩',
+        '프레즐': '3000₩',
+        '카페라떼': '3500₩',
+        '카페모카': '3500₩',
+        '에스프레소': '3500₩',
+        '토피넛라떼': '4000₩',
+        '카라멜 마끼아또': '4000₩',
+        '민트모카': '4000₩',
+        '크로플': '4000₩',
+        '초코머핀': '4000₩',
+        '얼그레이': '4500₩',
+        '히비스커스': '4500₩',
+        '캐모마일': '4500₩',
+        '생과일주스': '5000₩',
+        '딸기에이드': '5000₩',
+        '레몬에이드': '5000₩',
+        '프라푸치노': '5500₩',
+        '당근케잌': '6000₩',
+        '초코케잌': '6000₩'
+    };
+    return `${generateitemPrice()}`
 };
 
 //상품 데이터
 
 function itemResult(){
     const ItemID = itemID(); 
-const result = `${ItemID()}, ${itemName()}, ${itemType()}, ${itemprice()}`;
+const result = `${ItemID()}, ${itemName()}, ${itemprice()}`;
 return `${result}`;
 };
 
@@ -42,7 +55,7 @@ let dataRecords = process.argv[2];
 let displayformat = process.argv[3];
 
 if(process.argv.length<4){
-    displayformat ='csv';
+    displayformat ='csv'; // 추후 csv 뿐만 아니라 다른 파일들도 생성 할 수도 있을거 같아 내버려둠
 };
 
 console.log('ID, 상품이름, 상품종류, 상품가격');
@@ -65,4 +78,4 @@ if (err) {
     }
 });
 
-//상품 이름에 따라 종류, 가격 맞추기
+//상품 이름에 따라, 가격 맞추기

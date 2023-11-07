@@ -38,7 +38,7 @@ let dataRecords = process.argv[2];
 let displayformat = process.argv[3];
 
 if(process.argv.length<4){
-    displayformat ='csv';
+    displayformat ='csv'; // 추후 csv 뿐만 아니라 다른 파일들도 생성 할 수도 있을거 같아 내버려둠
 };
 
 console.log('ID, 주문ID, 상품ID');

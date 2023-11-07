@@ -1,6 +1,6 @@
 import fs from 'fs';
 import {v4 as uuidv4} from 'uuid';
-import { generateDate } from './sub_data.js';
+
 // //ID
 
 export function orderID(){
@@ -10,12 +10,23 @@ export function orderID(){
 //주문일자
 
 function orderDate() {
-    const hour = (Math.floor(Math.random() * 24)).toString().padStart(2, 0);
-    const min = (Math.floor(Math.random() * 60)).toString().padStart(2, 0);
-    const sec = (Math.floor(Math.random() * 60)).toString().padStart(2, 0);
+    const month = (Math.floor(Math.random() * 12) + 1).toString().padStart(2, '0');
+    let day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, '0');
+    const hour = (Math.floor(Math.random() * 24)).toString().padStart(2, '0');
+    const min = (Math.floor(Math.random() * 60)).toString().padStart(2, '0');
+    const sec = (Math.floor(Math.random() * 60)).toString().padStart(2, '0');
+    
+    if (month === '01' || month === '03' || month === '05' || month === '07' || month === '08' || month === '10' || month === '12') {
+        day = (Math.floor(Math.random() * 31) + 1).toString().padStart(2, '0');
+    } else if (month === '04' || month === '06' || month === '09' || month === '11') {
+        day = (Math.floor(Math.random() * 30) + 1).toString().padStart(2, '0');
+    } else {
+        day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, '0');
+    }
+    
+    return `2023-${month}-${day} ${hour}:${min}:${sec}`;
+}
 
-    return `${'2023'}.${generateDate()} ${hour}:${min}:${sec} `;
-};
 
 //가게ID
 
@@ -70,3 +81,5 @@ if (err) {
     console.log('CSV 생성 완료: order.csv');
     }
 });
+
+//주문일자의 일자를 월에 맞게 설정하기
