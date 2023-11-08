@@ -1,4 +1,4 @@
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuidv4} from 'uuid'
 
 export function generateID(){
     return uuidv4;
@@ -14,10 +14,10 @@ export function generateDate() {
         day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, '0');
     } else{
         day = (Math.floor(Math.random() * 31) + 1).toString().padStart(2, '0');
-    };
+    }   
     
     return `${month}.${day}`;
-};
+}
 
 export function generateitemType() {
     const product = ['아메리카노', '카페라떼', '카페모카', '에스프레소', '토피넛라떼', '카라멜 마끼아또', '민트모카', '딸기에이드', '히비스커스', '캐모마일', '얼그레이', '생과일주스', '프라푸치노', '레몬에이드', '당근케잌', '초코케잌', '크로플', '소금빵', '초코머핀', '프레즐'];
@@ -43,7 +43,7 @@ export function generateitemType() {
     return `${selectedProduct}, ${product_type[0]}, ${itemPrice}`;
 }
 
-function generateitemPrice(product) {
+function generateitemPrice() {
     const productPrices = {
         '아메리카노': '3000₩',
         '소금빵': '3000₩',
@@ -67,6 +67,5 @@ function generateitemPrice(product) {
         '초코케잌': '6000₩'
     };
 
-    return productPrices[product]; // 선택된 제품에 해당하는 가격 반환
+    return productPrices; // 선택된 제품에 해당하는 가격 반환
 }
-

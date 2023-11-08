@@ -12,16 +12,29 @@ export function storeID(){
 const company = ['스타벅스', '할리스', '이디야', '빽다방', '메가커피'];
 const area = ['금천', '부평','해운대', '세종시청', '전주'];
 const area_num = Math.floor(Math.random()*4)+1;
-
+const selectcompany = company[Math.floor(Math.random()*company.length)];
 function storeName(){
-    return `${company[Math.floor(Math.random()*company.length)]} ${area[Math.floor(Math.random()*company.length)]}${area_num}${'호점'}`;
+    return `${selectcompany} ${area[Math.floor(Math.random()*company.length)]}${area_num}${'호점'}`;
 };
 
 //가맹업체
 
  function storeType(){
-    return `${company[Math.floor(Math.random()*company.length)]}`;
+    let company = ['스타벅스', '할리스', '이디야', '빽다방', '메가커피'];
+    for(let i=0;i<company.length;i++){
+    if (['이디야'].includes(selectcompany)){
+        company =['이디야'];
+    } else if (['빽다방'].includes(selectcompany)){
+        company =['빽다방'];
+    } else if (['할리스'].includes(selectcompany)){
+        company =['할리스'];
+    } else if (['스타벅스'].includes(selectcompany)){
+    company =['스타벅스'];
+    } else if (['메가커피'].includes(selectcompany)){company =['메가커피'];
+    }
+    return `${company[i]}`;
 };
+ }
 
 //가게주소
 

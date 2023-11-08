@@ -1,85 +1,50 @@
-import fs from 'fs';
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuidv4} from 'uuid'
 
-// //ID
+export function generateitemType() {
+    const product = ['아메리카노', '카페라떼', '카페모카', '에스프레소', '토피넛라떼', '카라멜 마끼아또', '민트모카', '딸기에이드', '히비스커스', '캐모마일', '얼그레이', '생과일주스', '프라푸치노', '레몬에이드', '당근케잌', '초코케잌', '크로플', '소금빵', '초코머핀', '프레즐'];
+    let product_type = ['COFFEE', 'ADE', 'CAKE', 'BREAD', 'TEA'];
 
-export function orderID(){
-    return uuidv4();
-};
+    const selectedProduct = product[Math.floor(Math.random() * product.length)];
 
-//주문일자
-
-function orderDate() {
-    const month = (Math.floor(Math.random() * 12) + 1).toString().padStart(2, '0');
-    let day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, '0');
-    const hour = (Math.floor(Math.random() * 24)).toString().padStart(2, '0');
-    const min = (Math.floor(Math.random() * 60)).toString().padStart(2, '0');
-    const sec = (Math.floor(Math.random() * 60)).toString().padStart(2, '0');
-    
-    if (month === '01' || month === '03' || month === '05' || month === '07' || month === '08' || month === '10' || month === '12') {
-        day = (Math.floor(Math.random() * 31) + 1).toString().padStart(2, '0');
-    } else if (month === '04' || month === '06' || month === '09' || month === '11') {
-        day = (Math.floor(Math.random() * 30) + 1).toString().padStart(2, '0');
-    } else {
-        day = (Math.floor(Math.random() * 28) + 1).toString().padStart(2, '0');
+    if (['아메리카노', '카페라떼', '카페모카', '민트모카', '에스프레소', '카라멜 마끼아또', '토피넛라떼'].includes(selectedProduct)) {
+        product_type = ['COFFEE'];
+    } else if (['프라푸치노', '딸기에이드', '생과일주스', '레몬에이드'].includes(selectedProduct)) {
+        product_type = ['ADE'];
+    } else if (['얼그레이', '히비스커스', '캐모마일'].includes(selectedProduct)) {
+        product_type = ['TEA'];
+    } else if (['당근케잌', '초코케잌'].includes(selectedProduct)) {
+        product_type = ['CAKE'];
+    } else if (['프레즐', '크로플', '소금빵', '초코머핀'].includes(selectedProduct)) {
+        product_type = ['BREAD'];
     }
-    
-    return `2023-${month}-${day} ${hour}:${min}:${sec}`;
+
+    const itemPrice = generateitemPrice(selectedProduct);
+    return `${selectedProduct}, ${product_type[0]}, ${itemPrice}`;
 }
 
-
-//가게ID
-
-import {storeID} from './store_data.js';
-
-function equlstoreID(){
-    return storeID();
-};
-
-//사용자ID
-
-import {userID} from './user_data.js';
-
-function equluserID(){
-    return userID();
-};
-
-//주문 데이터
-
-function orderResult(){
-    const EqulstoreID = equlstoreID();
-    const EquluserID = equluserID();
-    const result = `${orderID()}, ${orderDate()}, ${EqulstoreID()}, ${EquluserID()}`;
-    return `${result}`;
+export function generateitemPrice(selectedProduct) {
+    const productPrices = {
+        '아메리카노': '3000₩',
+        '소금빵': '3000₩',
+        '프레즐': '3000₩',
+        '카페라떼': '3500₩',
+        '카페모카': '3500₩',
+        '에스프레소': '3500₩',
+        '토피넛라떼': '4000₩',
+        '카라멜 마끼아또': '4000₩',
+        '민트모카': '4000₩',
+        '크로플': '4000₩',
+        '초코머핀': '4000₩',
+        '얼그레이': '4500₩',
+        '히비스커스': '4500₩',
+        '캐모마일': '4500₩',
+        '생과일주스': '5000₩',
+        '딸기에이드': '5000₩',
+        '레몬에이드': '5000₩',
+        '프라푸치노': '5500₩',
+        '당근케잌': '6000₩',
+        '초코케잌': '6000₩'
     };
 
-//랜덤 데이터 생성
-
-let dataRecords = process.argv[2];
-let displayformat = process.argv[3];
-
-if(process.argv.length<4){
-    displayformat ='csv'; // 추후 csv 뿐만 아니라 다른 파일들도 생성 할 수도 있을거 같아 내버려둠
-};
-
-console.log('ID, 주문일자, 가게ID, 사용자ID');
-
-const csvData = ['ID, 주문일자, 가게ID, 사용자ID'];
-
-for (let i=0; i<dataRecords;i++){
-    const orderdata = orderResult();
-    console.log(orderdata);
-    csvData.push(orderdata); //csv에 데이터 심기
-};
-
-const csvString = csvData.join('\n');
-
-fs.writeFile('order.csv', csvString, 'utf-8', (err) => {
-if (err) {
-    console.error('오류!오류!:', err);
-} else {
-    console.log('CSV 생성 완료: order.csv');
-    }
-});
-
-//주문일자의 일자를 월에 맞게 설정하기
+    return productPrices[selectedProduct] || '가격 정보 없음';
+}

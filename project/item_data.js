@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {generateID, generateitemPrice, generateitemType} from './sub_data.js';
+import {generateID, generateitemType} from './sub_data.js';
 
 //ID
 
@@ -7,45 +7,17 @@ export function itemID(){
     return generateID();
 };
 
-//상품 이름 및 종류
+//상품 이름 및 종류, 가격
 
 function itemName(){
-return `${generateitemType()}`
-}
-
-//상품 가격
-
-function itemprice(){
-    const productPrices = {
-        '아메리카노': '3000₩',
-        '소금빵': '3000₩',
-        '프레즐': '3000₩',
-        '카페라떼': '3500₩',
-        '카페모카': '3500₩',
-        '에스프레소': '3500₩',
-        '토피넛라떼': '4000₩',
-        '카라멜 마끼아또': '4000₩',
-        '민트모카': '4000₩',
-        '크로플': '4000₩',
-        '초코머핀': '4000₩',
-        '얼그레이': '4500₩',
-        '히비스커스': '4500₩',
-        '캐모마일': '4500₩',
-        '생과일주스': '5000₩',
-        '딸기에이드': '5000₩',
-        '레몬에이드': '5000₩',
-        '프라푸치노': '5500₩',
-        '당근케잌': '6000₩',
-        '초코케잌': '6000₩'
-    };
-    return `${generateitemPrice()}`
+return generateitemType();
 };
 
 //상품 데이터
 
 function itemResult(){
     const ItemID = itemID(); 
-const result = `${ItemID()}, ${itemName()}, ${itemprice()}`;
+const result = `${ItemID()}, ${itemName()}`;
 return `${result}`;
 };
 
@@ -70,12 +42,10 @@ for (let i=0; i<dataRecords;i++){
 
 const csvString = csvData.join('\n');
 
-fs.writeFile('store.csv', csvString, 'utf-8', (err) => {
+fs.writeFile('item.csv', csvString, 'utf-8', (err) => {
 if (err) {
     console.error('오류!오류!:', err);
 } else {
     console.log('CSV 생성 완료: item.csv');
-    }
+    };
 });
-
-//상품 이름에 따라, 가격 맞추기
