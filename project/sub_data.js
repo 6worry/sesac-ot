@@ -108,3 +108,5 @@ export function generateCompany(){
     const street_name2 = ['자바구', '새싹구', '코드구', '지구', '웹구'];
     return `${selectcompany} ${selectarea}${area_num}${'호점'}, ${company2[0]}, ${realarea} ${street_name2[Math.floor(Math.random()*street_name2.length)]} ${street_num1}${'길'} ${street_num2}`;   
 }
+
+//집가서 코드 정렬하기
