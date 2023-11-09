@@ -15,7 +15,6 @@ export function generateDate() {
     } else{
         day = (Math.floor(Math.random() * 31) + 1).toString().padStart(2, '0');
     };
-    
     return `${month}.${day}`;
 };
 
@@ -35,7 +34,7 @@ export function generateitemType() {
         product_type = ['CAKE'];
     } else if (['프레즐', '크로플', '소금빵', '초코머핀'].includes(selectedProduct)) {
         product_type = ['BREAD'];
-    }
+    };
 
     const itemPrice = generateitemPrice(selectedProduct);  //선택된 제품에 해당하는 가격을 가져와서 반환
 
@@ -80,35 +79,8 @@ function generateAddress(area){
         '세종시청': '세종',
         '전주': '전주',
     }
-    return addressarea[area];
-
-    // return `${street_name1} ${street_name2[Math.floor(Math.random()*street_name2.length)]} ${street_num1}${'길'} ${street_num2}`;   
+    return addressarea[area]; 
 }
-
-
-
-// let street_name1 = ['서울', '인천', '부산', '세종', '전주', ];
-// let area = ['금천', '부평','해운대', '세종시청', '전주'];
-// const street_name2 = ['자바구', '새싹구', '코드구', '지구', '웹구'];
-// export function generateAddress(){
-//     const street_num1 = Math.floor(Math.random()*100)+1;
-//     const street_num2 = Math.floor(Math.random()*100)+1;
-//     const selectarea =area[Math.floor(Math.random()* area.length)]
-
-//     if(['금천'].includes(selectarea)){
-//         street_name1 = ['서울']
-//     }else if(['부평'].includes(selectarea)){
-//         street_name1 = ['인천']
-//     }else if(['해운대'].includes(selectarea)){
-//         street_name1 = ['부산']
-//     }else if(['세종시청'].includes(selectarea)){
-//         street_name1 = ['세종']
-//     }else if(['전주'].includes(selectarea)){
-//         street_name1 = ['전주']
-//     }
-
-//     return `${street_name1} ${street_name2[Math.floor(Math.random()*street_name2.length)]} ${street_num1}${'길'} ${street_num2}`;   
-// }
 
 export function generateCompany(){
     let company = ['스타벅스', '할리스', '이디야', '빽다방', '메가커피'];
@@ -131,6 +103,8 @@ export function generateCompany(){
     }
 
     const realarea = generateAddress(selectarea);
-
-    return `${selectcompany} ${area[Math.floor(Math.random()*area.length)]}${area_num}${'호점'}, ${company2[0]}, ${realarea}`;   
+    const street_num1 = Math.floor(Math.random()*100)+1;
+    const street_num2 = Math.floor(Math.random()*100)+1;
+    const street_name2 = ['자바구', '새싹구', '코드구', '지구', '웹구'];
+    return `${selectcompany} ${selectarea}${area_num}${'호점'}, ${company2[0]}, ${realarea} ${street_name2[Math.floor(Math.random()*street_name2.length)]} ${street_num1}${'길'} ${street_num2}`;   
 }

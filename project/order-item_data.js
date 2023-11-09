@@ -53,10 +53,10 @@ for (let i=0; i<dataRecords;i++){
 
 const csvString = csvData.join('\n');
 
-fs.writeFile('order.csv', csvString, 'utf-8', (err) => {
+fs.writeFile('order-item.csv', csvString, 'utf-8', (err) => {
 if (err) {
     console.error('오류!오류!:', err);
 } else {
     console.log('CSV 생성 완료: order-item.csv');
-    }
+    };
 });

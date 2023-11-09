@@ -7,17 +7,11 @@ export function storeID(){
     return generateID();
 };
 
-//가게명 및 가맹업체
+//가게명 및 가맹업체, 주소
 
  function storeType(){
     return `${generateCompany()}`;
 };
-
-//가게주소
-
-// function storeAddress(){
-//     return generateAddress();
-// };
 
 //상점 데이터
 
@@ -53,7 +47,5 @@ if (err) {
     console.error('오류!오류!:', err);
 } else {
     console.log('CSV 생성 완료: store.csv');
-    }
+    };
 });
-
-// 도시 및 지역구 서로 맞추기

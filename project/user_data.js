@@ -45,8 +45,8 @@ function userAddress(){
 
 function userResult(){
     const UserID = userID();
-const result = `${UserID()}, ${userName()}, ${userGender()}, ${userBirthdate()}, ${userAddress()}`;
-return `${result}`;
+    const result = `${UserID()}, ${userName()}, ${userGender()}, ${userBirthdate()}, ${userAddress()}`;
+    return `${result}`;
 };
 
 //랜덤 데이터 생성
@@ -75,5 +75,5 @@ if (err) {
     console.error('오류!오류!:', err);
 } else {
     console.log('CSV 생성 완료: user.csv');
-    }
+    };
 });

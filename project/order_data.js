@@ -1,6 +1,6 @@
 import fs from 'fs';
 import {v4 as uuidv4} from 'uuid';
-import { generateDate } from './sub_data.js';
+import {generateDate} from './sub_data.js';
 // //ID
 
 export function orderID(){
@@ -14,7 +14,7 @@ function orderDate() {
     const min = (Math.floor(Math.random() * 60)).toString().padStart(2, 0);
     const sec = (Math.floor(Math.random() * 60)).toString().padStart(2, 0);
 
-    return `${'2023'}.${generateDate()} ${hour}:${min}:${sec} `;
+    return `${'2023'}.${generateDate()} ${hour}:${min}:${sec}`;
 };
 
 //가게ID
@@ -68,5 +68,5 @@ if (err) {
     console.error('오류!오류!:', err);
 } else {
     console.log('CSV 생성 완료: order.csv');
-    }
+    };
 });
