@@ -37,8 +37,7 @@ export function generateitemType() {
         product_type = ['BREAD'];
     }
 
-    // 이 부분에서 선택된 제품에 해당하는 가격을 가져와서 반환
-    const itemPrice = generateitemPrice(selectedProduct);
+    const itemPrice = generateitemPrice(selectedProduct);  //선택된 제품에 해당하는 가격을 가져와서 반환
 
     return `${selectedProduct}, ${product_type[0]}, ${itemPrice}`;
 }
