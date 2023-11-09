@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {generateID} from './sub_data.js';
+import {generateID, generateCompany} from './sub_data.js';
 
 //ID
 
@@ -7,37 +7,23 @@ export function storeID(){
     return generateID();
 };
 
-//가게명
-
-const company = ['스타벅스', '할리스', '이디야', '빽다방', '메가커피'];
-const area = ['금천', '부평','해운대', '세종시청', '전주'];
-const area_num = Math.floor(Math.random()*4)+1;
-
-function storeName(){
-    return `${company[Math.floor(Math.random()*company.length)]} ${area[Math.floor(Math.random()*company.length)]}${area_num}${'호점'}`;
-};
-
-//가맹업체
+//가게명 및 가맹업체
 
  function storeType(){
-    return `${company[Math.floor(Math.random()*company.length)]}`;
+    return `${generateCompany()}`;
 };
 
 //가게주소
 
-function storeAddress(){
-    const street_name1 = ['서울', '인천', '부산', '세종', '전주', ];
-    const street_name2 = ['자바구', '새싹구', '코드구', '지구', '웹구'];
-    const street_num1 = Math.floor(Math.random()*100)+1;
-    const street_num2 = Math.floor(Math.random()*100)+1;
-    return `${street_name1[Math.floor(Math.random()* street_name1.length)]} ${street_name2[Math.floor(Math.random()*street_name2.length)]} ${street_num1}${'길'} ${street_num2}`;
-};
+// function storeAddress(){
+//     return generateAddress();
+// };
 
 //상점 데이터
 
 function storeResult(){
     const StoreID = storeID(); 
-const result = `${StoreID()}, ${storeName()}, ${storeType()}, ${storeAddress()}`;
+const result = `${StoreID()}, ${storeType()}`;
 return `${result}`;
 };
 
@@ -70,4 +56,4 @@ if (err) {
     }
 });
 
-// 가게명이랑 가맹업체 서로 맞추기, 가게 가맹점과 도시 및 지역구 서로 맞추기
+// 도시 및 지역구 서로 맞추기

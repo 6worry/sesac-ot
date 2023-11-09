@@ -22,18 +22,13 @@ function userGender(){
     return gender[Math.floor(Math.random()*gender.length)];
 };
 
-//20세~50세
-
-function userAge(){
-    const age = Math.floor(Math.random() * 31)+20;
-    return `${age}`;
-};
-
-//1974년~2004년
+//1974년~2004년, 20세~50세
 
 function userBirthdate() {
-const year = 
-    return `${}.${generateDate()}`;
+    const age = Math.floor(Math.random()*31)+20;
+    const today = new Date();
+    const year = today.getFullYear() - age +1;
+    return `${age}, ${year}.${generateDate()}`;
 };
 
 //사용자 주소
@@ -50,7 +45,7 @@ function userAddress(){
 
 function userResult(){
     const UserID = userID();
-const result = `${UserID()}, ${userName()}, ${userGender()}, ${userAge()}, ${userBirthdate()}, ${userAddress()}`;
+const result = `${UserID()}, ${userName()}, ${userGender()}, ${userBirthdate()}, ${userAddress()}`;
 return `${result}`;
 };
 
@@ -82,5 +77,3 @@ if (err) {
     console.log('CSV 생성 완료: user.csv');
     }
 });
-
-// 도시에 따라 지역구 다르게 설정하기! 생년월일에 맞는 나이 설정하기
