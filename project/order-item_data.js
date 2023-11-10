@@ -29,8 +29,9 @@ function orderitemResult(){
     const EqulitemID = equlitemID();
     const EqulorderID = equlorderID;
     const result = `${orderitemID()}, ${EqulorderID()}, ${EqulitemID()}`;
+    
     return `${result}`;
-    };
+};
 
 //랜덤 데이터 생성
 
@@ -54,9 +55,9 @@ for (let i=0; i<dataRecords;i++){
 const csvString = csvData.join('\n');
 
 fs.writeFile('order-item.csv', csvString, 'utf-8', (err) => {
-if (err) {
+    if (err) {
     console.error('오류!오류!:', err);
-} else {
+    } else {
     console.log('CSV 생성 완료: order-item.csv');
     };
 });

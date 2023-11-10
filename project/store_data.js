@@ -17,8 +17,8 @@ export function storeID(){
 
 function storeResult(){
     const StoreID = storeID(); 
-const result = `${StoreID()}, ${storeType()}`;
-return `${result}`;
+    const result = `${StoreID()}, ${storeType()}`;
+    return `${result}`;
 };
 
 //랜덤 데이터 생성
@@ -43,9 +43,9 @@ for (let i=0; i<dataRecords;i++){
 const csvString = csvData.join('\n');
 
 fs.writeFile('store.csv', csvString, 'utf-8', (err) => {
-if (err) {
+    if (err) {
     console.error('오류!오류!:', err);
-} else {
+    } else {
     console.log('CSV 생성 완료: store.csv');
     };
 });

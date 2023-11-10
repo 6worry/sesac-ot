@@ -12,6 +12,7 @@ function userName(){
     const firstname = ['강', '박', '진', '최', '유', '이', '조', '정', '고', '맹'];
     const secondname = ['영', '예', '상', '정', '유', '승', '다', '하', '지', '재'];
     const thirdname = ['준', '우', '진', '민', '순', '미', '은', '연', '현', '림'];
+
     return `${firstname[Math.floor(Math.random()*firstname.length) ]}${secondname[Math.floor(Math.random()*secondname.length)]}${thirdname[Math.floor(Math.random()*thirdname.length)]}`;
 };
 
@@ -28,6 +29,7 @@ function userBirthdate() {
     const age = Math.floor(Math.random()*31)+20;
     const today = new Date();
     const year = today.getFullYear() - age +1;
+
     return `${age}, ${year}.${generateDate()}`;
 };
 
@@ -38,6 +40,7 @@ function userAddress(){
     const street_name2 = ['자바구', '새싹구', '코드구', '지구', '웹구'];
     const street_num1 = Math.floor(Math.random()*100)+1;
     const street_num2 = Math.floor(Math.random()*100)+1;
+
     return `${street_name1[Math.floor(Math.random()* street_name1.length)]} ${street_name2[Math.floor(Math.random()*street_name2.length)]} ${street_num1}${'길'} ${street_num2}`;
 };
 
@@ -71,9 +74,9 @@ for (let i=0; i<dataRecords;i++){
 const csvString = csvData.join('\n');
 
 fs.writeFile('user.csv', csvString, 'utf-8', (err) => {
-if (err) {
+    if (err) {
     console.error('오류!오류!:', err);
-} else {
+    } else {
     console.log('CSV 생성 완료: user.csv');
     };
 });
