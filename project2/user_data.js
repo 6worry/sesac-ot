@@ -68,7 +68,11 @@ const csvData = ['ID, 이름, 성별, 나이, 생년월일, 주소'];
 for (let i=0; i<dataRecords;i++){
     const userdata = userResult();
     console.log(userdata);
+    csvData.push(userdata);
+    
+    if(dataRecords>=1000){
     csvData.push(userdata); //csv에 데이터 심기
+}
 };
 
 const csvString = csvData.join('\n');

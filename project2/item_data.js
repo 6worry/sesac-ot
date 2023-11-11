@@ -38,6 +38,10 @@ for (let i=0; i<dataRecords;i++){
     const itemdata = itemResult();
     console.log(itemdata);
     csvData.push(itemdata); //csv에 데이터 심기
+
+    if(dataRecords>=20){
+    csvData.push(itemdata);
+}
 };
 
 const csvString = csvData.join('\n');
