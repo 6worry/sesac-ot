@@ -1,8 +1,30 @@
+import {readFileSync} from 'fs';
 import {v4 as uuidv4} from 'uuid';
 
 export function generateID(){
     return uuidv4;
 };
+
+export function readID(csvfile){
+    const csvData = readFileSync(csvfile, 'utf-8', (err) => {
+        if (err) {
+        console.error('읽기오류!:', err);
+        } 
+        // else {
+        // console.log('CSV 생성 완료: item.csv');
+        // };
+    });
+    const IdData = csvData.split('\n');
+    IdData.shift();
+
+    const Id = IdData.map(IdData => IdData.split(",")[0]);
+    return Id;
+}
+
+export function getID(id){
+    return id[Math.floor(Math.random()*id.length)];
+
+}
 
 export function generateDate() {
     const month = (Math.floor(Math.random() * 12) + 1).toString().padStart(2, '0');
