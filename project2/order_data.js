@@ -1,7 +1,8 @@
 import fs from 'fs';
 import {v4 as uuid} from 'uuid';
 import {readDataID, getDataID, generateDate} from './sub_data.js';
-// //ID
+
+//ID
 
 export function orderID(){
     return uuid();
@@ -20,17 +21,17 @@ function orderDate() {
 //가게ID
 
 
-let storeIDlist = readDataID('./store.csv')
+let storeIDlist = readDataID('./store.csv');
 function equlstoreID(storeid){
-    return getDataID(storeid)
-}
+    return getDataID(storeid);
+};
 
 //사용자ID
 
-let userIDlist = readDataID('./user.csv')
+let userIDlist = readDataID('./user.csv');
 function equluserID(userid){
-    return getDataID(userid)
-}
+    return getDataID(userid);
+};
 
 //주문 데이터
 

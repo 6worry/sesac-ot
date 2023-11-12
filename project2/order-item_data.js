@@ -10,17 +10,17 @@ function orderitemID(){
 
 // 주문ID
 
-let orderIDlist = readDataID('./order.csv')
+let orderIDlist = readDataID('./order.csv');
 function equlorderID(orderid){
-    return getDataID(orderid)
-}
+    return getDataID(orderid);
+};
 
 //상품ID
 
-let itemIDlist = readDataID('./item.csv')
+let itemIDlist = readDataID('./item.csv');
 function equlitemID(itemid){
-    return getDataID(itemid)
-}
+    return getDataID(itemid);
+};
 
 //주문 상품 데이터
 

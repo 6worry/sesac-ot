@@ -1,10 +1,11 @@
 import fs from 'fs';
-import {generateID, generateCompany} from './sub_data.js';
+import {v4 as uuid} from 'uuid';
+import {generateCompany} from './sub_data.js';
 
 //ID
 
 export function storeID(){
-    return generateID();
+    return uuid();
 };
 
 //가게명 및 가맹업체, 주소
@@ -16,8 +17,7 @@ export function storeID(){
 //상점 데이터
 
 function storeResult(){
-    const StoreID = storeID(); 
-    const result = `${StoreID()}, ${storeType()}`;
+    const result = `${storeID()}, ${storeType()}`;
     return `${result}`;
 };
 

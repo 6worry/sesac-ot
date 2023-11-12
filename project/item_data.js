@@ -1,10 +1,11 @@
 import fs from 'fs';
-import {generateID, generateitemType} from './sub_data.js';
+import {v4 as uuid} from 'uuid';
+import {generateitemType} from './sub_data.js';
 
 //ID
 
 export function itemID(){
-    return generateID();
+    return uuid();
 };
 
 //상품 이름 및 종류, 가격
@@ -16,8 +17,7 @@ function itemName(){
 //상품 데이터
 
 function itemResult(){
-    const ItemID = itemID(); 
-    const result = `${ItemID()}, ${itemName()}`;
+    const result = `${itemID()}, ${itemName()}`;
     return `${result}`;
 };
 

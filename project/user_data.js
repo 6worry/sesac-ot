@@ -1,9 +1,10 @@
 import fs from 'fs';
-import {generateID, generateDate} from './sub_data.js';
+import {v4 as uuid} from 'uuid';
+import {generateDate} from './sub_data.js';
 
 //ID
 export function userID(){
-    return generateID();
+    return uuid();
 };
 
 //이름
@@ -47,8 +48,7 @@ function userAddress(){
 //사용자 데이터
 
 function userResult(){
-    const UserID = userID();
-    const result = `${UserID()}, ${userName()}, ${userGender()}, ${userBirthdate()}, ${userAddress()}`;
+    const result = `${userID()}, ${userName()}, ${userGender()}, ${userBirthdate()}, ${userAddress()}`;
     return `${result}`;
 };
 

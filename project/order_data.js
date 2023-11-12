@@ -1,10 +1,11 @@
 import fs from 'fs';
-import {v4 as uuidv4} from 'uuid';
-import {generateDate} from './sub_data.js';
-// //ID
+import {v4 as uuid} from 'uuid';
+import {readDataID, getDataID, generateDate} from './sub_data.js';
+
+//ID
 
 export function orderID(){
-    return uuidv4();
+    return uuid();
 };
 
 //주문일자
@@ -19,27 +20,22 @@ function orderDate() {
 
 //가게ID
 
-import {storeID} from './store_data.js';
-
-function equlstoreID(){
-    return storeID();
+let storeIDlist = readDataID('./store.csv');
+function equlstoreID(storeid){
+    return getDataID(storeid);
 };
 
 //사용자ID
 
-import {userID} from './user_data.js';
-
-function equluserID(){
-    return userID();
+let userIDlist = readDataID('./user.csv');
+function equluserID(userid){
+    return getDataID(userid);
 };
 
 //주문 데이터
 
 function orderResult(){
-    const EqulstoreID = equlstoreID();
-    const EquluserID = equluserID();
-    const result = `${orderID()}, ${orderDate()}, ${EqulstoreID()}, ${EquluserID()}`;
-    
+    const result = `${orderID()}, ${orderDate()}, ${equlstoreID(storeIDlist)}, ${equluserID(userIDlist)}`;
     return `${result}`;
 };
 

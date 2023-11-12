@@ -1,7 +1,19 @@
-import {v4 as uuidv4} from 'uuid';
+import {readFileSync} from 'fs';
 
-export function generateID(){
-    return uuidv4;
+export function readDataID(csvfile){
+    const csvData = readFileSync(csvfile, 'utf-8', (err) => {
+        if (err) {
+        console.error('읽기오류!:', err);
+        };
+    });
+    const IdData = csvData.split('\n');// 배열로 분할
+    IdData.shift(); // csv 첫번째 요소 제거 (csv 헤더인 ID 항목 제거)
+    const readId = IdData.map(IdData => IdData.split(",")[0]); // ,로 분할 후 첫번째 열 추출
+    return readId;
+};
+
+export function getDataID(dataid){
+    return dataid[Math.floor(Math.random()*dataid.length)];
 };
 
 export function generateDate() {
@@ -104,6 +116,5 @@ function generateAddress(area){
         '세종시청': '세종',
         '전주': '전주',
     };
-
     return addressArea[area]; 
 };
