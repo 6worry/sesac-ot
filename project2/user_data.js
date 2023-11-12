@@ -1,9 +1,10 @@
 import fs from 'fs';
-import {generateID, generateDate} from './sub_data.js';
+import {v4 as uuid} from 'uuid';
+import {generateDate} from './sub_data.js';
 
 //ID
 export function userID(){
-    return generateID();
+    return uuid();
 };
 
 //이름
@@ -47,37 +48,26 @@ function userAddress(){
 //사용자 데이터
 
 function userResult(){
-    const UserID = userID();
-    const result = `${UserID()}, ${userName()}, ${userGender()}, ${userBirthdate()}, ${userAddress()}`;
+    const result = `${userID()}, ${userName()}, ${userGender()}, ${userBirthdate()}, ${userAddress()}`;
     return `${result}`;
 };
 
 //랜덤 데이터 생성
 
-let dataRecords = process.argv[2];
-let displayformat = process.argv[3];
-
-if(process.argv.length<4){
-    displayformat ='csv'; // 추후 csv 뿐만 아니라 다른 파일들도 생성 할 수도 있을거 같아 내버려둠
-};
-
 console.log('ID, 이름, 성별, 나이, 생년월일, 주소');
 
 const csvData = ['ID, 이름, 성별, 나이, 생년월일, 주소'];
+;
 
-for (let i=0; i<dataRecords;i++){
+for (let i=0; i<1000;i++){
     const userdata = userResult();
     console.log(userdata);
     csvData.push(userdata);
-    
-    if(dataRecords>=1000){
-    csvData.push(userdata); //csv에 데이터 심기
-}
 };
 
-const csvString = csvData.join('\n');
+const realcsvData = csvData.join('\n');
 
-fs.writeFile('user.csv', csvString, 'utf-8', (err) => {
+fs.writeFile('user.csv', realcsvData, 'utf-8', (err) => {
     if (err) {
     console.error('오류!오류!:', err);
     } else {

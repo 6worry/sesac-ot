@@ -1,10 +1,10 @@
 import fs from 'fs';
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 // //ID
 
 function orderitemID(){
-    return uuidv4();
+    return uuid();
 };
 
 // 주문ID
@@ -26,27 +26,19 @@ function equlitemID(){
 //주문 상품 데이터
 
 function orderitemResult(){
-    const EqulitemID = equlitemID();
     const EqulorderID = equlorderID;
-    const result = `${orderitemID()}, ${EqulorderID()}, ${EqulitemID()}`;
+    const result = `${orderitemID()}, ${EqulorderID()}, ${equlitemID()}`;
     
     return `${result}`;
 };
 
 //랜덤 데이터 생성
 
-let dataRecords = process.argv[2];
-let displayformat = process.argv[3];
-
-if(process.argv.length<4){
-    displayformat ='csv'; // 추후 csv 뿐만 아니라 다른 파일들도 생성 할 수도 있을거 같아 내버려둠
-};
-
 console.log('ID, 주문ID, 상품ID');
 
 const csvData = ['ID, 주문ID, 상품ID'];
 
-for (let i=0; i<dataRecords;i++){
+for (let i=0; i<50000;i++){
     const orderitemdata = orderitemResult();
     console.log(orderitemdata);
     csvData.push(orderitemdata); //csv에 데이터 심기
