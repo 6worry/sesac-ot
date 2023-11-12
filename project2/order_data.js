@@ -1,6 +1,6 @@
 import fs from 'fs';
 import {v4 as uuid} from 'uuid';
-import {generateDate} from './sub_data.js';
+import {readDataID, getDataID, generateDate} from './sub_data.js';
 // //ID
 
 export function orderID(){
@@ -19,25 +19,23 @@ function orderDate() {
 
 //가게ID
 
-import {storeID} from './store_data.js';
 
-function equlstoreID(){
-    return storeID();
-};
+let storeIDlist = readDataID('./store.csv')
+function equlstoreID(storeid){
+    return getDataID(storeid)
+}
 
 //사용자ID
 
-import {userID} from './user_data.js';
-
-function equluserID(){
-    return userID();
-};
+let userIDlist = readDataID('./user.csv')
+function equluserID(userid){
+    return getDataID(userid)
+}
 
 //주문 데이터
 
 function orderResult(){
-    const result = `${orderID()}, ${orderDate()}, ${equlstoreID()}, ${equluserID()}`;
-    
+    const result = `${orderID()}, ${orderDate()}, ${equlstoreID(storeIDlist)}, ${equluserID(userIDlist)}`;
     return `${result}`;
 };
 

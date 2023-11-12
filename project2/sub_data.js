@@ -5,24 +5,20 @@ export function generateID(){
     return uuidv4;
 };
 
-export function readID(csvfile){
+export function readDataID(csvfile){
     const csvData = readFileSync(csvfile, 'utf-8', (err) => {
         if (err) {
         console.error('읽기오류!:', err);
-        } 
-        // else {
-        // console.log('CSV 생성 완료: item.csv');
-        // };
+        }
     });
-    const IdData = csvData.split('\n');
-    IdData.shift();
-
-    const Id = IdData.map(IdData => IdData.split(",")[0]);
-    return Id;
+    const IdData = csvData.split('\n');// 배열로 분할
+    IdData.shift(); // csv 첫번째 요소 제거 (csv 헤더인 ID 항목 제거)
+    const readId = IdData.map(IdData => IdData.split(",")[0]); // ,로 분할 후 첫번째 열 추출
+    return readId;
 }
 
-export function getID(id){
-    return id[Math.floor(Math.random()*id.length)];
+export function getDataID(dataid){
+    return dataid[Math.floor(Math.random()*dataid.length)];
 
 }
 

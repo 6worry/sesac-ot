@@ -1,5 +1,6 @@
 import fs from 'fs';
 import {v4 as uuid} from 'uuid';
+import {readDataID, getDataID} from './sub_data.js';
 
 // //ID
 
@@ -9,26 +10,22 @@ function orderitemID(){
 
 // 주문ID
 
-import {orderID} from './order_data.js';
-
-function equlorderID(){
-    return orderID();
-};
+let orderIDlist = readDataID('./order.csv')
+function equlorderID(orderid){
+    return getDataID(orderid)
+}
 
 //상품ID
 
-import {itemID} from './item_data.js';
-
-function equlitemID(){
-    return itemID();
-};
+let itemIDlist = readDataID('./item.csv')
+function equlitemID(itemid){
+    return getDataID(itemid)
+}
 
 //주문 상품 데이터
 
 function orderitemResult(){
-    const EqulorderID = equlorderID;
-    const result = `${orderitemID()}, ${EqulorderID()}, ${equlitemID()}`;
-    
+    const result = `${orderitemID()}, ${equlorderID(orderIDlist)}, ${equlitemID(itemIDlist)}`;
     return `${result}`;
 };
 
