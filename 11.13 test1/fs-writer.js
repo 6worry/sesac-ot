@@ -25,7 +25,7 @@ for (let i=0;i<dataTowrite.length; i++){
 
 fs.writeFile(filePath, csvContent, 'utf8', (err) => {
     if(err){
-        console.error('에러!에러!');
+        console.error('에러!에러!', err);
         return;
     };
     console.log('파일 생성 성공');
