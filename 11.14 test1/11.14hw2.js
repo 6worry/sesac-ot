@@ -25,21 +25,20 @@ const server = http.createServer(async (req, res) => {
         await createStaticFolder();
 
         if(req.method === 'GET' && req.url.startsWith('/static/')) {
-            const filePath = path.join(StaticFolder, req.url.slice('/static/'.length));
-            const data = await fs.readFile(filePath);
-            let ContentType = 'image/jpg';
-
-            res.writeHead(Success, {'Content-Type':ContentType });
-            res.end(data);
-            if(ContentType === 'text/css'){
-                res.writeHead(Success, { 'Content-Type': ContentType });
+            const FolderPath = path.join(StaticFolder, req.url.slice('/static/'.length)); // slice = /static/ 이후의 경로만 가져오기 위해 사용
+            const data = await fs.readFile(FolderPath);
+            if(req.url.startsWith('/static/images')){
+                res.writeHead(Success, {'Content-Type': 'image/jpg'});
+                res.end(data);            
+            } else if(req.url.startsWith('/static/css')){
+                res.writeHead(Success, { 'Content-Type': 'text/css' });
                 res.end(data);
-            } else if(ContentType === 'application/javascript'){
-                res.writeHead(Success, {'Content-Type': ContentType});
+            } else if(req.url.startsWith('/static/js')){
+                res.writeHead(Success, {'Content-Type': 'application/javascript'});
                 res.end(data);
             }
             // const data = await fs.readFile('images/photo2.jpg') // 1개일 때 단일 파일로
-            // const data = await fs.readFile(req.url); // 2개 이상일 때 
+            // const data = await fs.readFile(`./${req.url}`); // 2개 이상일 때 
             // res.writeHead(Success, {'Content-Type': 'image/jpg'});
             // res.end(data);
         } else if(req.method === 'GET') {
