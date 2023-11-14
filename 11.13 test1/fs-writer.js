@@ -16,7 +16,7 @@ const dataTowrite = [
 let csvContent = '';
 for (let i=0;i<dataTowrite.length; i++){
     csvContent += dataTowrite[i].join(',');
-    if(i<dataTowrite.length -1){
+    if(i<dataTowrite.length -1){ // 현재 처리중인 요소의 배열이 마지막이 아닌 경우를 나타냄
         csvContent += '\n';
     }
     console.log(dataTowrite[i]);
