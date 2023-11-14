@@ -1,6 +1,3 @@
-const http = require('http');
-const fs = require('fs').promises;
-
 const Success = 200;
 const Server_Error = 500;
 const Not_Found = 404;
