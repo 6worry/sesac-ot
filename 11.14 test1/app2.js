@@ -1,14 +1,28 @@
 const http = require('http');
 
-const server = http.createServer((req, res)=>{
-    //헤더
-    res.writeHead(200, {'Content-Type': 'text/html; charset-utf-8'})
-    //본문(Body)
-    res.write('<H1>my first Was server</H1>')
-    res.end('<p> 안녕:)</p>')
+http.createServer((req, res) =>{
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(200, {'<H1>Hello</H1>'});
+    res.end('<p>ㅎㅇㅎㅇ</p>');
+
+}).listen (7500, ()=>{
+    console.log('7500번 포트 생성 완료!')
 });
 
-server.listen(4001, ()=>{
-    console.log('서버 4001에 연결됨. 준비 완료!');
+http.createServer((req, res) =>{
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(200, {'<H1>Hello</H1>'});
+    res.end('<p>ㅎㅇㅎㅇ</p>');
+
+}).listen (7501, ()=>{
+    console.log('7501번 포트 생성 완료!')
 });
 
+http.createServer((req, res) =>{
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(200, {'<H1>Hello</H1>'});
+    res.end('<p>ㅎㅇㅎㅇ</p>');
+
+}).listen (7502, ()=>{
+    console.log('7502번 포트 생성 완료!')
+});
