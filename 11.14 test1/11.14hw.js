@@ -1,47 +1,20 @@
 const http = require('http');
 const fs = require('fs').promises;
-const path = require('path');
 
 const Success = 200;
 const Server_Error = 500;
 const Not_Found = 404;
-const StaticFolder = './static'
-
-async function createStaticFolder(){
-    try{
-        await fs.access(StaticFolder) // 파일 및 폴더 접근 여부 확인
-    }catch(err){
-        if(err.code === 'ENOENT') { // ENOENT = 파일 및 디렉토리 찾을 수 없음을 뜻하는 에러코드
-            await fs.mkdir(StaticFolder) // 폴더 없을 시 폴더 생성
-        } else {
-            console.log('오류!오류!', err);
-        }
-    }
-}
 
 const server = http.createServer(async (req, res) => {
     console.log(req.method, req.url);
     try{
-        await createStaticFolder();
-
-        if(req.method === 'GET' && req.url.startsWith('/static/')) {
-            const filePath = path.join(StaticFolder, req.url.slice('/static/'.length));
-            const data = await fs.readFile(filePath);
-            let ContentType = 'image/jpg';
-
-            res.writeHead(Success, {'Content-Type':ContentType });
-            res.end(data);
-            if(ContentType === 'text/css'){
-                res.writeHead(Success, { 'Content-Type': ContentType });
-                res.end(data);
-            } else if(ContentType === 'application/javascript'){
-                res.writeHead(Success, {'Content-Type': ContentType});
-                res.end(data);
-            }
+        if(req.method === 'GET' && req.url.startsWith('/images/')) {
+            // url 파싱해서 파일 불러와서 반환한다 3줄정도의 코드
             // const data = await fs.readFile('images/photo2.jpg') // 1개일 때 단일 파일로
-            // const data = await fs.readFile(req.url); // 2개 이상일 때 
-            // res.writeHead(Success, {'Content-Type': 'image/jpg'});
-            // res.end(data);
+            const data = await fs.readFile(`./${req.url}`); // 2개 이상일 때 
+                res.writeHead(Success, {'Content-Type': 'image/jpg'});
+                res.end(data);
+
         } else if(req.method === 'GET') {
             if(req.url === '/') {
                 const data = await fs.readFile('./index.html');
