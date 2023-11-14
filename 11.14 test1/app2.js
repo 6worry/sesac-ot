@@ -2,7 +2,7 @@ const http = require('http');
 
 http.createServer((req, res) =>{
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(200, {'<H1>Hello</H1>'});
+    res.write('<H1>Hello</H1>');
     res.end('<p>ㅎㅇㅎㅇ</p>');
 
 }).listen (7500, ()=>{
@@ -11,7 +11,7 @@ http.createServer((req, res) =>{
 
 http.createServer((req, res) =>{
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(200, {'<H1>Hello</H1>'});
+    res.write('<H1>Hello</H1>');
     res.end('<p>ㅎㅇㅎㅇ</p>');
 
 }).listen (7501, ()=>{
@@ -20,7 +20,7 @@ http.createServer((req, res) =>{
 
 http.createServer((req, res) =>{
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(200, {'<H1>Hello</H1>'});
+    res.write('<H1>Hello</H1>');
     res.end('<p>ㅎㅇㅎㅇ</p>');
 
 }).listen (7502, ()=>{
