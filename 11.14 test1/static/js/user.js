@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
 
         //fetch = 내가 원하는 API 정보를 불러와줌
-        //POST 요청을 하여 이름응ㄹ JSON 형식으로 BODY에 담음
+        //POST 요청을 하여 이름을 JSON 형식으로 BODY에 담음, JSON 형식 = {} 필수!
         try{
 
             const response = await fetch('/user', {
