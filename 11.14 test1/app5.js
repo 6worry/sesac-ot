@@ -16,15 +16,15 @@ const users={};
 const server = http.createServer(async (req, res) => {
     console.log(req.method, req.url);
     try{
-        if(req.method === 'GET' && req.url.startsWith('/images/')) {
+        if(req.method === 'GET' && req.url.startsWith('/static/')) {
             // url 파싱해서 파일 불러와서 반환한다 3줄정도의 코드
             // const data = await fs.readFile('images/photo2.jpg') // 1개일 때 단일 파일로
-            console.log(req.url);
+            
             const filePath = '.' + req.url;
-            console.log(filePath);
             const data = await fs.readFile(filePath); // 2개 이상일 때 
-                res.writeHead(Success, {'Content-Type': 'image/jpg'});
-                res.end(data);
+            const ContentType = getContentType(filePath);
+            res.writeHead(Success, {'Content-Type': ContentType});
+            return res.end(data);
 
         } else if(req.method === 'GET') {
             if(req.url === '/') {
@@ -77,7 +77,7 @@ const server = http.createServer(async (req, res) => {
                 });
                 req.on('end', ()=>{
                 console.log('요청내용:', body);
-                const formData = parse(body)
+                const formData = JSON.parse(body)
                 console.log('파싱 이후:', formData);
                 
                 const username = formData.name;
