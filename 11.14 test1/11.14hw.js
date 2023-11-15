@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs').promises;
 
 const Success = 200;
+const Create = 201;
 const Server_Error = 500;
 const Not_Found = 404;
 
@@ -37,7 +38,7 @@ const server = http.createServer(async (req, res) => {
             };
         } else if(req.method === 'POST') {
             //요청을 생성할 때 사용
-            res.writeHead(201);
+            res.writeHead(Create);
             res.end('등록 성공');
         } else if (req.method === 'PUT') {
             //요청을 수정할 때 사용
