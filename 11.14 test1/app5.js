@@ -96,8 +96,29 @@ const server = http.createServer(async (req, res) => {
             //요청을 수정할 때 사용
             //수정 명령어 : curl -X PUT 127.0.0.1:7600/user/aaa -d "name=bbb"
 
-            res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
+            if(req.url.startsWith('/user/')){
+                const key = req.url.split('/')[2];
+                let body = '';
+                req.on('data', (data)=>{
+                    body += data
+                });
+                req.on('end', ()=>{
+                console.log('요청내용:', body);
+                delete users[key]
+                const formData = parse(body)
+                users[key] = formData.name;
+                // const username = formData.name;
+                // console.log('사용자 이름:', username);
+                
+                // users[username] = username;
+                // console.log('최종객체:', users)
+                });
+            }
+
+            //요청에 대한 응답결과 출력
+            res.writeHead(Success, {'Content-Type': 'text/plain; charset=utf-8'});
             res.end('수정 성공');
+
         }else if(req.method === 'DELETE') {
 
             //요청을 삭제할 때 사용
@@ -106,34 +127,26 @@ const server = http.createServer(async (req, res) => {
             //1. url에 /users/ 시작하는걸 찾고
             //2. 그 뒤에 있는 글자를 읽어서 key 처리
             //3. 그 키를 users라는 객체안에서 삭제
-            if(req.url.startsWith('/user')){
-                let body='';
-                req.on('data', (data)=>{
-                body += data
-                });
-                req.on('end', ()=>{
-                    console.log('요청내용:', body);
-                    const formData = parse(body)
-                    console.log('파싱 이후:', formData);
-                    
-                    const username = req.url.split('/').pop();
-                    console.log('삭제할 내용:', username);
-                    users[username] = username;
-                    delete users[username];
-                    console.log('최종객체:', users)
-                });
-                
-                
-                //요청을 생성할 때 사용
-                //요청 request를 파싱해서 처리함
-                
-                
-                //요청에 대한 응답결과
-                res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
-                res.end('삭제 성공');
-            }
             
+            // if(req.url.startsWith('/user')){
+            try {
+                const key = req.url.split('/')[2];
+                delete users[key];
+            
+                //요청에 대한 응답결과
+                res.writeHead(Success, {'Content-Type': 'text/plain; charset=utf-8'});
+                res.end('삭제 성공');
+            } catch (err) {
+                console.error('삭제중 오류:', err)
+                res.writeHead(Server_Error, {'Content-Type': 'text/plain; charset=utf-8'});
+                res.end('삭제 오류');
+            }
+        } else {
+            res.writeHead(Not_Found);
+            res.end('Not Found')
         }
+            
+        
     } catch(err) {
         console.error('오류!', err.message);
         res.writeHead(Server_Error, {'Content-Type': 'text/plain; charset=utf-8'});
