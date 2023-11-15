@@ -103,7 +103,6 @@ const server = http.createServer(async (req, res) => {
                     body += data
                 });
                 req.on('end', ()=>{
-                console.log('요청내용:', body);
                 delete users[key]
                 const formData = parse(body)
                 users[key] = formData.name;
@@ -145,7 +144,6 @@ const server = http.createServer(async (req, res) => {
             res.writeHead(Not_Found);
             res.end('Not Found')
         }
-            
         
     } catch(err) {
         console.error('오류!', err.message);
