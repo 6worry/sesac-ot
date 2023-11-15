@@ -50,4 +50,17 @@ async function updateTable(){
 
 function displayUsers(){
     //users에는 json 포맷의 사용자 데이터를 전부 갖고 있음
+    const userTable = document.getElementById('userTable');
+    
+    if(Object.keys(users).length === 0){
+        const messageRow = document.createElement('div')
+        messageRow.textContent = '등록된 사용자 X'
+        userTable.appendChild(messageRow);
+    } else{
+        for (const key in users){
+            const row = document.createElement('div')
+            row.innerHTML = `ID: ${key}, Name: ${users[key]}`;
+            userTable.appendChild(row);
+        }
+    }
 }
