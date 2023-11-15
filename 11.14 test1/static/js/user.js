@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
             if(response.ok){
                 alert('등록 성공')
+                await updateTable() // 등록 성공시 화면 컴포넌트 추가
             } else{
                 const errorMessage = await response.text();
                 alert(`등록 실패: ${errorMessage}`)
@@ -38,3 +39,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     })
 })
+
+async function updateTable(){
+    //갱신을 위한 최신 정보를 가져옴
+    await fetch('/user')
+        .then(response => response.json())
+        .then(users => displayUsers(users))
+        .catch(error => console.error('사용자 정보 불러오기 실패', err))
+}
+
+function displayUsers(){
+    //users에는 json 포맷의 사용자 데이터를 전부 갖고 있음
+}
