@@ -11,14 +11,22 @@
     <nav>
         <a href="/">Home</a>
         <a href="/about">About</a>
+        <a href="/user">User</a>
     </nav>
     <section>
         <H1>안녕안녕</H1>
         <p>서버1 이얌</p>
-        <img src="/static/images/photo2.jpg">
+        <!-- <img src="/static/images/photo2.jpg">
         <img src="/static/images/photo3.jpg">
         <img src="images/photo2.jpg">
-        <img src="images/photo3.jpg">
+        <img src="images/photo3.jpg"> -->
+    </section>
+    <section>
+        <h2>Users!</h2>
+        <form id ="form" action="/user" method="post">
+            <input text = "text" name="name"></input>
+            <button type="submit">submit</button>
+        </form>
     </section>
 </body>
 </html>
