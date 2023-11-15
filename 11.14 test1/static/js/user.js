@@ -45,10 +45,10 @@ async function updateTable(){
     await fetch('/user')
         .then(response => response.json())
         .then(users => displayUsers(users))
-        .catch(error => console.error('사용자 정보 불러오기 실패', err))
+        .catch(error => console.error('사용자 정보 불러오기 실패', error))
 }
 
-function displayUsers(){
+function displayUsers(users){
     //users에는 json 포맷의 사용자 데이터를 전부 갖고 있음
     const userTable = document.getElementById('userTable');
     
