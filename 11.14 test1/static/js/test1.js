@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', ()=>{
     const form = document.getElementById('form');
     const username = document.getElementById('username');
-    const userTable = document.getElementById('userTable')
 
     form.addEventListener('submit', async (ev) => {// submit 버튼 눌렀을때 수행 가능
 
@@ -38,43 +37,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
             alert('오류!')
         }
 
-    })
-
-    userTable.addEventListener('수정', async(ev) => {
-        ev.preventDefault();
-        try{
-            const response = await fetch('/user'{
-                method: 'PUT',
-                header: {'Content-Type': 'application/json'},
-                body: JSON.stringify({name})
-            })
-            if(response.ok){
-                alert('수정할 이름은?')
-                
-            }
-
-        } catch (err) {
-            alert ('수정 오류')
-        }
-    })
-
-    userTable.addEventListener('삭제', async(ev) => {
-        ev.preventDefault();
-        const name = username.value;
-        try{
-            const response = await fetch('/user'{
-                method: 'DELETE',
-                header: {'Content-Type': 'application/json'},
-                body: JSON.stringify({name})
-            })
-            if(response.ok){
-                alert('정말 삭제할건가?')
-                
-            }
-
-        } catch (err) {
-            alert ('수정 오류')
-        }
     })
 })
 
