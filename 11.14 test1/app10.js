@@ -84,7 +84,9 @@ const server = http.createServer(async (req, res) => {
                 const username = formData.name;
                 console.log('사용자 이름:', username);
                 
-                users[username] = username;
+                const id = Date.now();
+
+                users[id] = username;
                 console.log('최종객체:', users)
             });
             

@@ -1,7 +1,8 @@
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', async ()=>{
     const form = document.getElementById('form');
     const username = document.getElementById('username');
-    const userTable = document.getElementById('userTable')
+
+    await updateTable(); // 페이지 최초 로딩시 백엔드에 사용자 데이터 요청
 
     form.addEventListener('submit', async (ev) => {// submit 버튼 눌렀을때 수행 가능
 
@@ -40,42 +41,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     })
 
-    userTable.addEventListener('수정', async(ev) => {
-        ev.preventDefault();
-        try{
-            const response = await fetch('/user'{
-                method: 'PUT',
-                header: {'Content-Type': 'application/json'},
-                body: JSON.stringify({name})
-            })
-            if(response.ok){
-                alert('수정할 이름은?')
+    // userTable.addEventListener('수정', async(ev) => {
+    //     ev.preventDefault();
+    //     try{
+    //         const response = await fetch('/user'{
+    //             method: 'PUT',
+    //             header: {'Content-Type': 'application/json'},
+    //             body: JSON.stringify({name})
+    //         })
+    //         if(response.ok){
+    //             alert('수정할 이름은?')
                 
-            }
+    //         }
 
-        } catch (err) {
-            alert ('수정 오류')
-        }
-    })
+    //     } catch (err) {
+    //         alert ('수정 오류')
+    //     }
+    // })
 
-    userTable.addEventListener('삭제', async(ev) => {
-        ev.preventDefault();
-        const name = username.value;
-        try{
-            const response = await fetch('/user'{
-                method: 'DELETE',
-                header: {'Content-Type': 'application/json'},
-                body: JSON.stringify({name})
-            })
-            if(response.ok){
-                alert('정말 삭제할건가?')
-                
-            }
-
-        } catch (err) {
-            alert ('수정 오류')
-        }
-    })
 })
 
 async function updateTable(){
@@ -89,30 +72,62 @@ async function updateTable(){
 function displayUsers(users){
     //users에는 json 포맷의 사용자 데이터를 전부 갖고 있음
     const userTable = document.getElementById('userTable');
-    
+
+    userTable.innerHTML = ''; // 테이블 데이터 초기화
+
     if(Object.keys(users).length === 0){
         const messageRow = document.createElement('div')
         messageRow.textContent = '등록된 사용자 X'
         userTable.appendChild(messageRow);
     } else{
         for (const key in users){
-            const mainrow = document.createElement('div')
             const row = document.createElement('div')
-            const modifybutton = document.createElement('button')
-            const deletebutton = document.createElement('button')
 
-            row.innerHTML = `ID: ${Date.now()}, Name: ${users[key]}`;
-            modifybutton.innerHTML = '수정'
-            deletebutton.innerHTML = '삭제'
+            row.innerHTML = `<strong>ID:</strong> ${key}, <strong>Name:</strong> ${users[key]}
+                            <button onclick="modifyUser('${key}')">수정</button>
+                            <button onclick="deleteUser('${key}')">삭제</button>`;
 
-            row.style.display = 'inline-block';
-            modifybutton.style.display = 'inline-block';
-            deletebutton.style.display = 'inline-block';
-            
-            mainrow.appendChild(row);
-            mainrow.appendChild(modifybutton);
-            mainrow.appendChild(deletebutton);
-            userTable.appendChild(mainrow);
+            userTable.appendChild(row);
         }
+    }
+}
+
+async function deleteUser(userID) {
+
+    // 사용자에게 삭제 유무 확인
+    const confirmDelete = confirm(`${userID}를 삭제할건가?`)
+    
+    if(confirmDelete){
+        const response = await fetch(`/user/${userID}`, {
+            method: 'DELETE'
+        })
+        
+        if(response.ok){
+            alert ('삭제 성공')
+            await updateTable(); // 화면 갱신
+        } else {
+            const errorMessage = await response.text();
+            throw new Error(`삭제 실패: ${errorMessage}`)
+        }    
+    }
+}
+
+async function modifyUser(userID) {
+
+    // 사용자에게 삭제 유무 확인
+    const confirmModify = confirm('수정할 이름을 입력해라')
+    
+    if(confirmModify){
+        const response = await fetch(`/user/${userID}`, {
+            method: 'PUT'
+        })
+        
+        if(response.ok){
+            alert ('수정 성공')
+            await updateTable(); // 화면 갱신
+        } else {
+            const errorMessage = await response.text();
+            throw new Error(`수정 실패: ${errorMessage}`)
+        }    
     }
 }
