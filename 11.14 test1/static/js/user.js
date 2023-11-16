@@ -114,12 +114,13 @@ async function deleteUser(userID) {
 
 async function modifyUser(userID) {
 
-    // 사용자에게 삭제 유무 확인
-    const confirmModify = confirm('수정할 이름을 입력해라')
-    
-    if(confirmModify){
+    // 사용자에게 수정 유무 확인
+    const promptModify = prompt('수정할 이름을 입력해라')
+    if(promptModify){
         const response = await fetch(`/user/${userID}`, {
-            method: 'PUT'
+            method: 'PUT',
+            header: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name: promptModify}),
         })
         
         if(response.ok){
