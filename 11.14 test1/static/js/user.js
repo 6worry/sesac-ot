@@ -59,7 +59,7 @@ function displayUsers(users){
     } else{
         for (const key in users){
             const row = document.createElement('div')
-            row.innerHTML = `ID: ${key}, Name: ${users[key]}`;
+            row.innerHTML = `ID: ${Date.now()}, Name: ${users[key]}`;
             userTable.appendChild(row);
         }
     }
