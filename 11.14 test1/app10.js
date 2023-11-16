@@ -5,7 +5,7 @@ const path = require('path');
 // = const parse = querystring.parse;
 // =
 //객체 디스트럭처링 (de-structuring)
-const {parse} = require('querystring')
+const {parse} = require('querystring');
 
 const Success = 200;
 const Create = 201;
@@ -17,7 +17,7 @@ const users={};
 const server = http.createServer(async (req, res) => {
     console.log(req.method, req.url);
     try{
-        if(req.method === 'GET' && req.url.startsWith('/static/')) {
+        if (req.method === 'GET' && req.url.startsWith('/static/')) {
             // url 파싱해서 파일 불러와서 반환한다 3줄정도의 코드
             // const data = await fs.readFile('images/photo2.jpg') // 1개일 때 단일 파일로
             
@@ -26,9 +26,8 @@ const server = http.createServer(async (req, res) => {
             const ContentType = getContentType(filePath);
             res.writeHead(Success, {'Content-Type': ContentType});
             return res.end(data);
-
-        } else if(req.method === 'GET') {
-            if(req.url === '/') {
+        } else if (req.method === 'GET') {
+            if (req.url === '/') {
                 const data = await fs.readFile('./new index.html');
                 res.writeHead(Success, {'Content-Type': 'text/html; charset=utf-8'});
                 res.end(data);
@@ -109,11 +108,6 @@ const server = http.createServer(async (req, res) => {
                 delete users[key]
                 const formData = JSON.parse(body)
                 users[key] = formData.name;
-                // const username = formData.name;
-                // console.log('사용자 이름:', username);
-                
-                // users[username] = username;
-                // console.log('최종객체:', users)
                 });
             }
 
