@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             })
 
             if(response.ok){
-                alert('등록 성공')
+                alert('등록 성공2')
                 await updateTable() // 등록 성공시 화면 컴포넌트 추가
             } else{
                 const errorMessage = await response.text();

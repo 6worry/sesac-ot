@@ -1,5 +1,3 @@
-const errorMessage = await response.text();
-
 document.addEventListener('DOMContentLoaded', async () => {
     const form = document.getElementById('form');
     const username = document.getElementById('username');
@@ -26,12 +24,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 header: {'Content-Type': 'application/json'},
                 body: JSON.stringify({name})
             });
-
+            console.log(JSON.stringify({name}))
             if (response.ok) {
-                alert('등록 성공');
+                alert('등록 성공2');
                 username.value = ''; // 등록 완료시 입력바 초기화
                 await updateTable(); // 등록 성공시 화면 컴포넌트 추가
             } else {
+                const errorMessage = await response.text();
                 alert(`등록 실패: ${errorMessage}`);
             };
         } catch(err) {
