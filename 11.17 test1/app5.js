@@ -30,7 +30,7 @@ app.get('/about', (req, res) => {
             return;
         };
 
-        res.send(data);
+        res.send(data); // 파일을 잘 읽었으면 send
     });
 });
 
