@@ -33,6 +33,10 @@ app.get('/about', (req, res) => {
     });
 });
 
+app.get('/user', (req, res) => {
+    
+});
+
 
 app.listen(port, () => {
     console.log(`${port} 생성!`);

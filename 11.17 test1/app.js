@@ -13,12 +13,12 @@ function myLogger(req, res, next) {
 
 function requestTime(req, res, next) {
     req.requestTime = Date.now();
+    console.log(req.requestTime);
     next();
 }
 
 // 1. 라우팅
 app.get('/', (req, res) => {
-    console.log(req.requestTime);
     res.send('Hi');
 }); // 루트 경로 설정
 
