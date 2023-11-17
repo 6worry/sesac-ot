@@ -48,22 +48,26 @@ app.post('/user', (req, res) => {
     });
     req.on('end', ()=>{
         try{
-            // const formData = JSON.parse(body)
-                
-            // const username = formData.name;
+            const jsonData = JSON.parse(body)
+            res.json({receiveData: jsonData})
+            const username = jsonData.name;
+            const id = Date.now();
+            users[id] = username;
+            console.log('456:', username)
             
-            // const id = Date.now();
-            
-            // users[id] = username;
+            //결과 response를 주는 코드
+        // res.writeHead(201, {'Content-Type': 'text/plain; charset=utf-8'});
+        // res.end('등록 성공');
+
             // res.json({receiveData: formData})
         } catch (err) {
             res.status(400).json({err: "입력값이 잘못됐다."});
         };
     });
     
-    //결과 response를 주는 코드
-        res.writeHead(201, {'Content-Type': 'text/plain; charset=utf-8'});
-        res.end('등록 성공');
+    // //결과 response를 주는 코드
+    //     res.writeHead(201, {'Content-Type': 'text/plain; charset=utf-8'});
+    //     res.end('등록 성공');
     
 });
 
