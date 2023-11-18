@@ -48,16 +48,14 @@ app.post('/user', (req, res) => {
     });
     req.on('end', ()=>{
         try{
-            const jsonData = JSON.parse(body)
-            res.json({receiveData: jsonData})
-            const username = jsonData.name;
+            const jsonData = JSON.parse(body);
             const id = Date.now();
-            users[id] = username;
-            console.log('456:', username)
+            users[id] = jsonData.name;   
+            console.log('456:', users[id])
             
-            //결과 response를 주는 코드
-        // res.writeHead(201, {'Content-Type': 'text/plain; charset=utf-8'});
-        // res.end('등록 성공');
+            // 결과 response를 주는 코드
+        res.writeHead(201, {'Content-Type': 'text/plain; charset=utf-8'});
+        res.send('등록 성공');
 
             // res.json({receiveData: formData})
         } catch (err) {
@@ -70,7 +68,6 @@ app.post('/user', (req, res) => {
     //     res.end('등록 성공');
     
 });
-
 
 app.listen(port, () => {
     console.log(`${port} 생성!`);
