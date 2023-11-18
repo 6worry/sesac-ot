@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
             console.log(JSON.stringify({name}))
             if (response.ok) {
-                alert('등록 성공2');
+                alert('등록 성공!');
                 username.value = ''; // 등록 완료시 입력바 초기화
                 await updateTable(); // 등록 성공시 화면 컴포넌트 추가
             } else {
