@@ -8,6 +8,7 @@ const users ={};
 app.use(express.json());
 app.use("/static", express.static('static'));
 app.use(express.static('public/new index.html'));
+// app.use("public", express.static('images/photo3.jpg'));
 app.use((req, res, next) => {
     next();
 });
@@ -55,14 +56,14 @@ app.post('/user', (req, res) => {
 });
 
 app.put('/user/:id', (req,res) => {
-    const id = res.params.id;
+    const id = req.params.id;
     const jsonData = req.body;
     users[id] = jsonData.name;
     res.json({receiveData: users});
 });
 
 app.delete('/user/:id', (req,res) => {
-    const id = res.params.id;
+    const id = req.params.id;
     delete users[id];
     res.send('삭제 완료');
 });
