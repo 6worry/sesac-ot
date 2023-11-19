@@ -1,15 +1,19 @@
+const { create } = require('domain');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
+const Success = 200;
+const Create = 201;
+const Server_Error = 500;
+const Not_Found = 404;
 const app = express();
 const port = 3001;
 const users ={};
 
 app.use("/static", express.static('static'));
+app.use(express.static(path.join(__dirname, 'images', 'photo3.jpg')));
 app.use(express.static('public/new index.html'));
-
-// app.use("public", express.static('images/photo3.jpg'));
 
 app.get('/', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'public', 'new index.html');
@@ -17,11 +21,11 @@ app.get('/', (req, res) => {
     fs.readFile(htmlFilePath, 'utf-8', (err, data) => {
         if (err) {
             console.error('읽기 오류:', err);
-            res.status(500).send('서버 오류!');
+            res.status(Server_Error).send('서버 오류!');
             return;
         };
 
-        res.send(data); // 파일을 잘 읽었으면 send
+        res.status(Success).send(data); // 파일을 잘 읽었으면 send
     });
 });
 
@@ -31,16 +35,16 @@ app.get('/about', (req, res) => {
     fs.readFile(htmlFilePath, 'utf-8', (err, data) => {
         if (err) {
             console.error('읽기 오류:', err);
-            res.status(500).send('서버 오류!');
+            res.status(Server_Error).send('서버 오류!');
             return;
         };
         
-        res.send(data); // 파일을 잘 읽었으면 send
+        res.status(Success).send(data); // 파일을 잘 읽었으면 send
     });
 });
 
 app.get('/user', (req, res) => {
-    res.status(200).send(users);
+    res.status(Success).send(users);
 });
 
 app.post('/user', (req, res) => {
@@ -58,7 +62,7 @@ app.post('/user', (req, res) => {
         users[id] = username;
     });
 
-    res.send('등록 성공');   
+    res.status(Create).send('등록 성공');   
 });
 
 app.put('/user/:id', (req,res) => {
@@ -76,14 +80,20 @@ app.put('/user/:id', (req,res) => {
         users[id] = formData.name;
     });
 
-    res.send('수정 성공');
+    res.status(Success).send('수정 성공');
 });
 
 app.delete('/user/:id', (req,res) => {
     const id = req.params.id;
     delete users[id];
 
-    res.send('삭제 완료');
+    res.status(Success).send('삭제 완료');
+});
+
+app.use((req, res) => {
+    res.status(Not_Found).send(`
+    <H1>This is ERROR</H1>
+    `);
 });
 
 app.listen(port, () => {
