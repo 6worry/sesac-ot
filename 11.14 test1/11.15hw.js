@@ -40,11 +40,11 @@ const server = http.createServer(async (req, res) => {
                 res.writeHead(Success, {'Content-Type': 'text/plain; charset=utf-8'});
                 res.end(JSON.stringify(users)); // JSON 파일을 문자열로 바꿔줌
             }
-            // else if(req.url === '/photo3.jpg') {
-            //     const data = await fs.readFile('images/photo3.jpg');
-            //     res.writeHead(Success, {'Content-Type': 'image/jpg'});
-            //     res.end(data);
-            // }
+            else if(req.url === '/photo3.jpg') {
+                const data = await fs.readFile('images/photo3.jpg');
+                res.writeHead(Success, {'Content-Type': 'image/jpg'});
+                res.end(data);
+            }
              else {
                 const imageMatch = req.url.match(/^\/images\/(.+)$/)
                 if (imageMatch){
