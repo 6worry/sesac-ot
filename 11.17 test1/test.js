@@ -1,20 +1,19 @@
 const express = require('express');
-const app = express();
-const port = 3001;
 const fs = require('fs');
 const path = require('path');
-const {parse} = require('querystring');
+
+const app = express();
+const port = 3001;
 const users ={};
-app.use(express.json());
+
 app.use("/static", express.static('static'));
 app.use(express.static('public/new index.html'));
+
 // app.use("public", express.static('images/photo3.jpg'));
-app.use((req, res, next) => {
-    next();
-});
 
 app.get('/', (req, res) => {
     const htmlFilePath = path.join(__dirname, 'public', 'new index.html');
+
     fs.readFile(htmlFilePath, 'utf-8', (err, data) => {
         if (err) {
             console.error('읽기 오류:', err);
@@ -35,6 +34,7 @@ app.get('/about', (req, res) => {
             res.status(500).send('서버 오류!');
             return;
         };
+        
         res.send(data); // 파일을 잘 읽었으면 send
     });
 });
@@ -44,27 +44,45 @@ app.get('/user', (req, res) => {
 });
 
 app.post('/user', (req, res) => {
-        try {
-            const jsonData = req.body;
-            const id = Date.now();
-            users[id] = jsonData.name;
-            console.log('456:', users);
-            res.json({receiveData: users}); 
-        } catch (err) {
-            res.status(400).json({err: "입력값이 잘못됐다."});
-        };    
+    let body='';
+
+    req.on('data', (data) => {
+        body += data;
+    });
+
+    req.on('end', () => {
+        const formData = JSON.parse(body);
+        const username = formData.name;
+        const id = Date.now();
+
+        users[id] = username;
+    });
+
+    res.send('등록 성공');   
 });
 
 app.put('/user/:id', (req,res) => {
     const id = req.params.id;
-    const jsonData = req.body;
-    users[id] = jsonData.name;
-    res.json({receiveData: users});
+    let body = '';
+
+    req.on('data', (data) => {
+        body += data;
+    });
+
+    req.on('end', () => {
+        delete users[id];
+        const formData = JSON.parse(body);
+
+        users[id] = formData.name;
+    });
+
+    res.send('수정 성공');
 });
 
 app.delete('/user/:id', (req,res) => {
     const id = req.params.id;
     delete users[id];
+
     res.send('삭제 완료');
 });
 
