@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try{
             const response = await fetch('/user', {
                 method: 'POST',
-                header: {'Content-Type': 'application/json'},
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({name})
             });
             console.log(JSON.stringify({name}))
@@ -79,7 +79,7 @@ async function modifyUser(userID) {
     if (promptModify) {
         const response = await fetch(`/user/${userID}`, {
             method: 'PUT',
-            header: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({name: promptModify})
         });
         
