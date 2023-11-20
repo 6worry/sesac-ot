@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹서버서버</title>
+    <script src="static/user.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/user">User</a>
+    </nav>
+    <section>
+        <H1>안녕안녕</H1>
+        <p>서버1 이얌</p>
+        <img src="/static/photo3.jpg">
+        <img src="/static/images/photo3.jpg">
+        <img src="images/photo2.jpg">
+        <img src="images/photo3.jpg">
+    </section>
+    <section>
+        <h2>Users!</h2>
+        <form id ="form" action="/user" method="post">
+            <input text = "text" name="name" id ="username"></input>
+            <button type="submit">submit</button>
+        </form>
+
+        <div id="userTable"></div>
+    </section>
+</body>
+</html>
