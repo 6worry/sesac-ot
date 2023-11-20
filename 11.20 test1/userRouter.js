@@ -9,16 +9,20 @@ router.get('/profile', (req, res) => {
     res.send('프로필');
 });
 
+router.post('/profile', (req, res) => {
+    res.send('프로필 등록');
+});
+
+router.put('/profile', (req, res) => {
+    res.send('프로필 수정');
+});
+
+router.delete('/profile', (req, res) => {
+    res.send('프로필 제거');
+});
+
 router.get('/settings', (req, res) => {
     res.send('사용자 설정');
-});
-
-router.get('/details', (req, res) => {
-    res.send('상품 세부 정보');
-});
-
-router.get('/list', (req, res) => {
-    res.send('상품 리스트');
 });
 
 module.exports = router;

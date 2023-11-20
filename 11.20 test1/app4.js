@@ -9,6 +9,8 @@ nunjucks.configure('views', {
     express: app
 });
 
+app.set('view engine', 'html');
+
 app.get('/page', (req, res) => {
     const data = {
         title: 'MY Page',
