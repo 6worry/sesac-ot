@@ -6,8 +6,10 @@ const app = express();
 const port = 3002;
 const Success = 200;
 const Create = 201;
-const Server_Error = 500;
+const No_Content = 204;
 const Not_Found = 404;
+const Server_Error = 500;
+
 const users = {};
 
 app.use('/static', express.static('public/static'));
@@ -46,10 +48,15 @@ app.put('/user/:id', (req, res) => {
 });
 
 app.delete('/user/:id', (req, res) => {
-    const id = req.params.id;
-    delete users[id];
-    
-    res.status(Success).send('삭제 완료');
+    try {
+        const id = req.params.id;
+        delete users[id];
+        
+        res.status(No_Content).send('삭제 완료');
+    } catch(err) {
+        console.error('삭제 오류:', err);
+        res.status(Server_Error).send('서버 오류!');
+    };
 });
 
 app.listen(port, () => {
