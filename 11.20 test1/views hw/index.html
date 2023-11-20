@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>사용자들</title>
+    <!-- <link rel="stylesheet" href="/static/css/hw2.css"> -->
 </head>
 <body>
+    <h1>사용자 테이블</h1>
     <table>
-    {% for () %}
-    본문
+    {% for data in data %}
+        <tr>{{ data }}</tr>
     {% endfor %}
     </table>
 </body>

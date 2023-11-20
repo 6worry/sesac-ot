@@ -6,15 +6,18 @@ const csv = require('csv-parser');
 const app = express();
 const port = 3003;
 
-nunjucks.configure() {
+nunjucks.configure('views hw', {
+    express: app
+});
 
-};
+app.set('view engine', 'html');
 
 app.get('/', (req, res) => {
     const data = []; // 읽은 데이터를 담을 곳
-    fs.readFile('data.csv', {encoding: 'utf-8'});
+    fs.readFileSync('user.csv', {encoding: 'utf-8'})
+   
     // === 파일 읽기
-    res.render('index', 데이터전달)
+    res.render('index', { data });
 });
 
 app.listen(port, () => {
