@@ -12,7 +12,12 @@ app.get('/', (req, res) => { // 템플릿 엔진을 통해 렌더링 필요
 app.get('/greeting', (req, res) => {
     const username = '진영록';
 
-    res.render('greeting', {username: username})
+    res.render('greeting', {username: username});
+});
+
+app.get('/welcome', (req, res) => {
+    const Admin = true;
+    res.render('welcome', {Admin: Admin});
 });
 
 app.listen(port, () => {
