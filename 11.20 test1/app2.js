@@ -20,6 +20,19 @@ app.get('/welcome', (req, res) => {
     res.render('welcome', {Admin: Admin});
 });
 
+app.get('/fruits', (req, res) => {
+    const fruits = ['Apple', 'Lemon', 'Grapes'];
+    res.render('fruits', {fruits: fruits});
+});
+
+app.get('/page', (req, res) => {
+    const data = {
+        title: 'MY Page',
+        content: 'I want to eat lunch'
+    };
+    res.render('main', data);
+});
+
 app.listen(port, () => {
     console.log(`${port}번 실행 완료`);
 });
