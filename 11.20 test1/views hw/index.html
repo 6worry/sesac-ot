@@ -4,14 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사용자들</title>
-    <!-- <link rel="stylesheet" href="/static/css/hw2.css"> -->
+    <style>
+        table {
+            width: 100%;
+        }
+
+        th {
+            background-color: antiquewhite;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+
+        }
+    </style>
 </head>
 <body>
     <h1>사용자 테이블</h1>
     <table>
-    {% for data in data %}
-        <tr>{{ data }}</tr>
-    {% endfor %}
+        <tr>
+            {% for header in headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for header in headers %}
+                <td>{{ row[header] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
     </table>
 </body>
+<script>
+    // var data = {{ data | dump | safe}};
+    // console.log(data)
+</script>
 </html>
