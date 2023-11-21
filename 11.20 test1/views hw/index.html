@@ -16,6 +16,17 @@
         th, td {
             padding: 8px;
             text-align: left;
+            border-bottom: 1px solid blue;
+        }
+        .page a{
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration: none;
+            border: 1px solid black;
+        }
+        .page a.current{
+            background-color: pink;
+            border: 1px solid pink;
         }
     </style>
 </head>
@@ -28,13 +39,20 @@
             {% endfor %}
         </tr>
         {% for row in data %}
-        <tr>
+        <tr class="button" type="button">
             {% for header in headers %}
                 <td>{{ row[header] }}</td>
             {% endfor %}
         </tr>
         {% endfor %}
     </table>
+    <div class="page">
+        {% for num in range(1, pagebuttons +1) %}
+            <a href ='/?page={{ num - 1 }}' {% if num !=1 %}class="backbutton"{% endif %}>이전</a>
+            <a href ='/?page={{ num }}' {% if num == page %}class="current"{% endif %}>{{ num }}</a>
+            <a href ='/?page={{ num + 1 }}' {% if num !=67 %}class="gobutton"{% endif %}>다음</a>
+        {% endfor %} 
+    </div>
 </body>
 <script>
     // var data = {{ data | dump | safe}};

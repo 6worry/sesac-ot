@@ -16,11 +16,13 @@ app.set('view engine', 'html');
 
 app.use((req, res, next) => {
     const start = Date.now();
+
     res.on('finish', () => {
         const end = Date.now();
         const duration = end - start;
-        console.log(`${duration}ms`)
+        console.log(`${duration}ms`);
     });
+
     next();
 });
 
@@ -34,7 +36,7 @@ async function loadDataIntoMemory() {
         fs.createReadStream('user.csv', {encoding: 'utf-8'})
         .pipe(csv.parse({headers: true, trim: true}))
         .on('headers', (headers) => {
-            header.push(...headers)
+            header.push(...headers);
         })
         .on('data', (row) => {
             data.push(row);
@@ -43,22 +45,38 @@ async function loadDataIntoMemory() {
             resolve();
         })
         .on('error', (err) => {
-            reject(err)
-        })
-    })
-}
+            reject(err);
+        });
+    });
+};
 
 
 async function startServer() {
     await loadDataIntoMemory();
-app.get('/', (req, res) => {
-    // 읽은 데이터 10개만 준다
-    const realdata = data.slice(0, 10)
-    res.render('index', {data: realdata, headers: header});
+
+    app.get('/', (req, res) => {
+        const itemsPerPage = 15;
+        let startIndex;
+        let endIndex;
+
+        console.log(`요청 파라미터: ${req.query.page}`)
+        page = req.query.page || 1;
+        startIndex = (page -1) * itemsPerPage;
+        endIndex = startIndex + itemsPerPage;
+
+        const totalPages = Math.ceil(data.length / itemsPerPage);
+
+        const realdata = data.slice(startIndex, endIndex);
+        res.render('index', {data: realdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
+    });
+
+    app.listen(port, () => {
+        console.log(`${port}번 실행 완료`);
+    });
+};
+
+app.get('/user/:ID', (req, res) => {
+
 });
 
-app.listen(port, () => {
-    console.log(`${port}번 실행 완료`);
-});
-}
 startServer();
