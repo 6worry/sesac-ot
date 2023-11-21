@@ -3,6 +3,7 @@ const nunjucks = require('nunjucks');
 const fs = require('fs');
 // const csv = require('csv-parser');
 const csv = require('fast-csv');
+const router = express.Router();
 
 const app = express();
 const port = 3003;
@@ -70,13 +71,13 @@ async function startServer() {
         res.render('index', {data: realdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
     });
 
+    router.get('/user/:ID', (req, res) => {
+    
+    });
+
     app.listen(port, () => {
         console.log(`${port}번 실행 완료`);
     });
 };
-
-app.get('/user/:ID', (req, res) => {
-
-});
 
 startServer();
