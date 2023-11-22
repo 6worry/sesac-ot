@@ -18,6 +18,18 @@ app.post('/login', (req, res) => {
         u.userid === userid
         && u.userpw === userpw
     );
+
+    if (user) {
+        console.log('로그인 성공');
+        res.json({message: 'login success'});
+    } else {
+        console.log('로그인 실패');
+        res.status(401).json({message: 'login fail'});
+    };
+});
+
+app.get('/', (req, res) => {
+    res.send('Login 하시오');
 });
 
 app.listen(port, () => {
