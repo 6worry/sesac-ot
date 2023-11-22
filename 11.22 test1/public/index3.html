@@ -34,12 +34,15 @@
                 <li><a href="/logout">Log out</a></li>
             </ul>
         </nav>
-            <h2>로그인</h2>
-            <form id ="form" action="/login" method="post">
-                <p>id<input text = "text" name="userid" id ="userid" required></input></p>
-                <p>pw<input text = "text" name="userpw" id ="userpw" required></input></p>
-                <button type="submit" value="login">login</button>
+            <h2>로그인3</h2>
+            <form id ="loginform">
+                <label for="userid">Userid:</label>
+                <input text = "text" name="userid" id ="userid" required></input>
+                <br/>
+                <label for="userpw">Userpw:</label>
+                <input text = "text" name="userpw" id ="userpw" required></input>
+                <br/>
+                <input type="submit" onclick="login()" value="login"/>
             </form>
-    
-            <div id="userTable"></div>
+            <script src="/static/js/login3.js"></script>
 </html>
