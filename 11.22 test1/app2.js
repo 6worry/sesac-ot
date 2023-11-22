@@ -7,7 +7,7 @@ const port = 3004;
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-    res.cookie('mycookie', 'test3');
+    res.cookie('mycookie', 'test', {maxAge: 10000});
     res.send('쿠키 생성 완료');
 });
 
