@@ -1,13 +1,19 @@
 <html>
     <head>
         <title>login이야</title>
+        <script src="static/login.js"></script>
     </head>
     <body>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/login">Log in</a>
+            <a href="/profile">프로필</a>
+            <a href="/logout">Log out</a>
+        </nav>
             <h2>로그인</h2>
             <form id ="form" action="/login" method="post">
-                
-                <p>id<input text = "text" name="userid" id ="username"></input></p>
-                <p>pw<input text = "text" name="userpw" id ="username"></input></p>
+                <p>id<input text = "text" name="userid" id ="userid"></input></p>
+                <p>pw<input text = "text" name="userpw" id ="userpw"></input></p>
                 <button type="submit">login</button>
             </form>
     

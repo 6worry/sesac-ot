@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-    const user = req.session.user
+    const user = req.session.user;
 
     if (user) {
         res.json({userid: user.userid, message: '프로필 정보'})
@@ -56,7 +56,7 @@ app.post('/login', (req, res) => {
 
     if (user) {
         console.log('로그인 성공');
-        req.session.user = user
+        req.session.user = user;
         res.json({message: 'login success'});
     } else {
         console.log('로그인 실패');
