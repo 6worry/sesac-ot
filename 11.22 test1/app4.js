@@ -1,17 +1,19 @@
 const express = require('express');
 const session = require('express-session');
-
+const path = require('path')
 const app = express();
 const port = 3004;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static('public'));
-
+app.use('/static', express.static(path.join(__dirname, 'public')))
 app.use(session({
     secret: 'my-key2',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 6000
+    }
 }));
 
 const users = [
@@ -20,7 +22,7 @@ const users = [
 ];
 
 app.get('/', (req, res) => {
-    res.send('Login 하시오');
+    res.sendFile(path.join(__dirname, 'public', 'index3.html'));
 });
 
 app.get('/profile', (req, res) => {
@@ -44,6 +46,21 @@ app.get('/logout', (req, res) => {
         };
     });
 });
+
+app.get('/check-login', (req, res) => {
+    const user = req.session.user;
+
+    if (user) {
+        res.json({userid: user.userid});
+    } else {
+        res.status(401).json({message: '로그인 정보가 맞지 않습니다.'});
+    };
+});
+
+app.get('/user-activity', (req, res) => {
+    req.session.touch()
+    res.json({message: '사용자 세션 만료'})
+})
 
 app.post('/login', (req, res) => {
     const { userid, userpw } = req.body;

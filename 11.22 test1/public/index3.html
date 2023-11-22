@@ -1,48 +1,25 @@
 <html>
     <head>
-        <title>login이야</title>
-        <style>
-            nav {
-                background-color: aqua;
-                overflow: hidden;
-            };
-
-            nav ul {
-                list-style-type: none;
-                overflow: hidden;
-            };
-
-            nav li {
-                float: left;
-            };
-
-            nav a {
-                display: block;
-                padding: 15px 15px;
-                text-decoration: none;
-                color: black;
-            };
-        </style>
-        <!-- <script src="static/login.js"></script> -->
+        <title>login이야3</title>
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Log in</a></li>
-                <li><a href="/profile">프로필</a></li>
-                <li><a href="/logout">Log out</a></li>
-            </ul>
-        </nav>
-            <h2>로그인3</h2>
+        <h1>로그인3</h1>
+        <div>
             <form id ="loginform">
                 <label for="userid">Userid:</label>
                 <input text = "text" name="userid" id ="userid" required></input>
-                <br/>
+                
                 <label for="userpw">Userpw:</label>
                 <input text = "text" name="userpw" id ="userpw" required></input>
-                <br/>
-                <input type="submit" onclick="login()" value="login"/>
+                
+                <button type="button" onclick="login()">LogIN</button>
             </form>
-            <script src="/static/js/login3.js"></script>
+        </div>
+        <div id="profile" style="display:none">
+            <h2>Welcome, <span id="useridSpan"></span>!</h2>
+            <button onclick="logout()">LogOUT</button>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/static/js/login3-axios.js"></script>
+    </body>
 </html>

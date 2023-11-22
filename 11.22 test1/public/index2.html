@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>login이야</title>
+        <title>login이야2</title>
         <style>
             nav {
                 background-color: aqua;
@@ -35,11 +35,14 @@
             </ul>
         </nav>
             <h2>로그인</h2>
-            <form id ="form" action="/login" method="post">
-                <p>id<input text = "text" name="userid" id ="userid" required></input></p>
-                <p>pw<input text = "text" name="userpw" id ="userpw" required></input></p>
-                <button type="submit" value="login">login</button>
+            <form action="/login" method="post">
+                <label for="userid">Userid:</label>
+                <input text = "text" name="userid" id ="userid" required></input>
+                <br/>
+                <label for="userpw">Userpw:</label>
+                <input text = "text" name="userpw" id ="userpw" required></input>
+                <br/>
+                <input type="submit" value="login"/>
             </form>
-    
-            <div id="userTable"></div>
+        </body>
 </html>

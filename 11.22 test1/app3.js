@@ -6,7 +6,6 @@ const port = 3004;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use('/static', express.static('public'));
 
 app.use(session({
     secret: 'my-key2',
@@ -20,11 +19,7 @@ const users = [
 ];
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index3.html'));
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index2.html'));
 });
 
 app.get('/profile', (req, res) => {

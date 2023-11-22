@@ -1,9 +1,11 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
 const port = 3004;
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 const users = [
     {id: 1, userid: 'user1', userpw: 'pw1'},
@@ -29,7 +31,7 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('Login 하시오');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(port, () => {
