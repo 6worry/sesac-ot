@@ -31,8 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
             console.log(JSON.stringify({id, pw}))
             if (response.ok) {
-                alert('등록 성공2');
-                username.value = ''; // 등록 완료시 입력바 초기화
+                alert('등록 성공');
                 await updateTable(); // 등록 성공시 화면 컴포넌트 추가
             } else {
                 const errorMessage = await response.text();
@@ -56,7 +55,6 @@ function displayUsers(users) {
 
             row.innerHTML = `<strong>Welcome, ${key}</strong>
                             <button>Logout</button>`;
-
             form.appendChild(row);
         };
     };
@@ -65,6 +63,6 @@ async function updateTable() {
     //갱신을 위한 최신 정보를 가져옴
     await fetch('/login')
         .then(response => response.json())
-        .then(user => displayUsers(user))
-        .catch(error => console.error('사용자 정보 불러오기 실패', error));
+        .then(users => displayUsers(users))
+        .catch(error => console.error('사용자 로그인정보 불러오기 실패', error));
 };
