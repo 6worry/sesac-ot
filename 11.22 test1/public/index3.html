@@ -1,26 +1,70 @@
-<html>
-    <head>
-        <title>login이야3</title>
-    </head>
-    <body>
-        <h1>로그인3</h1>
-        <div id="loginFormContainer">
-            <form id ="loginForm">
-                <label for="userid">Userid:</label>
-                <input text = "text" name="userid" id ="userid" required></input>
-                
-                <label for="userpw">Userpw:</label>
-                <input text = "text" name="userpw" id ="userpw" required></input>
-                
-                <button type="button" onclick="login()">LogIN</button>
-            </form>
-        </div>
-        <div id="profile" style="display:none">
-            <h2>Welcome, <span id="useridSpan"></span>!</h2>
-            <button onclick="logout()">LogOUT</button>
-        </div>
-        <script src="/static/js/login3.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="/static/js/login3-axios.js"></script> -->
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        nav{
+            background-color: #f2f2f2;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        nav li{
+            float: left;
+        }
+
+        nav a {
+            display: block;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: #333
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>       
+    </nav>
+    <h2>로그인 하기333</h2>
+    
+    <div id="loginFormContainer"> 
+        <form id="loginForm">
+            <label for="userid">username:</label>
+            <input type="text" id="userid" name="userid" required />
+            <br />
+            <label for="userpw">password:</label>
+            <input type="userpw" id="userpw" name="userpw" required />
+            <br /><br />
+            <!-- <input type="submit" onclick="login()" value="로그인"/> -->
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <!-- 로그인 한 사용자의 정보를 보여줄 공간 -->
+    <div id="profile" style="display:none">
+        <h2>Welcome, <span id="useridSpan"></span>님 !</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script src="/static/js/login3.js"></script>
+</body>
 </html>
