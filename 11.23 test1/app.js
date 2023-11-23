@@ -21,9 +21,39 @@ const products = [
     { id: 3, name: 'Product3', price: 1700},
 ];
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'real.html'));
+});
+
 app.get('/products', (req, res) => {
     res.json(products);
 });
+
+app.get('/cart', (req, res) => {
+    const cart = req.session.cart || [];
+
+    res.json(cart);
+});
+
+app.post('/add-to-cart/:productid', (req, res) => {
+    const productid = parseInt(req.params.productid);
+    const product = products.find((p) => p.id == productid);
+
+    if (!product) {
+        return res.status(404).json({message: '상품을 못찾겠어'});
+    };
+
+    const cart = req.session.cart ||[];
+    cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price
+    });
+
+    req.session.cart = cart;
+    res.json({message: '상품 추가함', cart});
+});
+
 
 app.listen(port, () => {
     console.log(`${port} 완완료`);

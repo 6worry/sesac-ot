@@ -1,0 +1,20 @@
+table {
+    width: 15%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+th, td {
+    border: 1px solid green;
+    padding: 10px;
+    text-align: left;
+    color: blue;
+}
+
+th {
+    background-color: bisque;
+}
+
+button {
+    cursor: pointer;
+}
