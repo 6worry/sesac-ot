@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('/products')
         .then((response) => response.json())
         .then((products) => displayProduct(products));
+    updateTable()
 });
 
 function displayProduct(products) {
@@ -46,6 +47,10 @@ function displayCart(cart) {
     });
 };
 
-function updateTable () {
-    
-}
+function updateTable() {
+    //갱신을 위한 최신 정보를 가져옴
+    fetch('/cart')
+        .then(response => response.json())
+        .then(cart => displayCart(cart))
+        .catch(error => console.error('사용자 정보 불러오기 실패', error));
+};
