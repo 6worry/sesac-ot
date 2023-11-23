@@ -1,8 +1,17 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/products')
         .then((response) => response.json())
-        .then((products) => displayProduct(products));
-    updateTable()
+        .then((products) => displayProduct(products))
+        .then(() => {
+            fetch('/cart')
+                .then((response) => response.json())
+                // .then((cart) => displayCart(cart))
+                // 여기서 display하는게 아니고 다른페이지로 이동
+                .then((cart) => {
+                    window.location.href = '/cart.html'
+                })
+        });
 });
 
 function displayProduct(products) {
@@ -47,14 +56,6 @@ function displayCart(cart) {
             `;
         cartTableBody.appendChild(row);
     });
-};
-
-function updateTable() {
-    //갱신을 위한 최신 정보를 가져옴
-    fetch('/cart')
-        .then(response => response.json())
-        .then(cart => displayCart(cart))
-        .catch(error => console.error('사용자 정보 불러오기 실패', error));
 };
 
 function removeToCart(productid) {

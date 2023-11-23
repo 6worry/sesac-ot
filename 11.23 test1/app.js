@@ -12,8 +12,8 @@ app.use(session ({
     resave: false,
     saveUninitialized: true
 }));
-app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 const products = [
     { id: 1, name: 'Product1', price: 1000},
@@ -26,12 +26,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/products', (req, res) => {
+    console.log('Session Info:', req.session);
     res.json(products);
 });
 
 app.get('/cart', (req, res) => {
     const cart = req.session.cart || [];
 
+    console.log('Session Info:', req.sessionStore.sessions);
     res.json(cart);
 });
 
@@ -58,11 +60,7 @@ app.delete('/remove-to-cart/:productid', (req, res) => {
     const productid = parseInt(req.params.productid);
     const product = products.find((p) => p.id == productid);
 
-    if (!product) {
-        return res.status(404).json({message: '상품을 못찾겠어'});
-    };
-
-    const cart = req.session.cart || [];
+    const cart = req.session.cart
     // req.session.cart = cart;
     delete products[cart];
     res.json({message: '상품 제거함'});
