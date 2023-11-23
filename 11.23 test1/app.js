@@ -22,7 +22,7 @@ const products = [
 ];
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'real.html'));
+    res.sendFile(path.join(__dirname, 'public', 'product.html'));
 });
 
 app.get('/products', (req, res) => {
@@ -56,18 +56,49 @@ app.post('/add-to-cart/:productid', (req, res) => {
     res.json({message: '상품 추가함', cart});
 });
 
-app.delete('/remove-to-cart/:productid', (req, res) => {
+app.post('/update-quantity/:productid', (req, res) => {
     const productid = parseInt(req.params.productid);
-    const product = products.find((p) => p.id == productid);
+    const change = parseInt(req.query.change);
+    const cart = req.session.cart;
+    const item = cart.find((i) => i.id === productid);
 
-    const cart = req.session.cart
-    // req.session.cart = cart;
-    delete products[cart];
-    res.json({message: '상품 제거함'});
-});
+    if (!item) {
+        return res.status(404).json({message: '상품을 찾을 수 없음'})
+    }
+    item.quantity = Math.max(1, item.quantity + change); // 둘 중 큰값을 반환 (1이상 나오게 함)
+})
+
+app.post('/remove-from-cart/:productid', (req, res) => {
+
+})
+
+// app.delete('/remove-to-cart/:productid', (req, res) => {
+//     const productid = parseInt(req.params.productid);
+//     const product = products.find((p) => p.id == productid);
+
+//     const cart = req.session.cart
+//     // req.session.cart = cart;
+//     delete products[cart];
+//     res.json({message: '상품 제거함'});
+// });
 
 
 app.listen(port, () => {
     console.log(`${port} 완완료`);
 });
 
+function calculateTotalAmount(cart) {
+    let total = 0;
+
+    for(let i =0;i<cart.length;i++){
+        const item = cart[i]
+        total+= item.price*item.quantity
+    }
+    return total
+}
+
+function calculateTotalAmount2(cart){
+    return cart.reduce((total, item) => 
+        total+ item.price*item.quantity, 0
+    )
+}
