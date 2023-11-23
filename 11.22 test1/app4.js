@@ -12,7 +12,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 6000
+        maxAge: 60000
     }
 }));
 
@@ -59,7 +59,7 @@ app.get('/check-login', (req, res) => {
 
 app.get('/user-activity', (req, res) => {
     req.session.touch()
-    res.json({message: '사용자 세션 만료'})
+    res.json({message: '읽힘'})
 })
 
 app.post('/login', (req, res) => {
