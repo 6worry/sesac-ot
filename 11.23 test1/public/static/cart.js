@@ -42,6 +42,8 @@ function displayCart(cart) {
             <td>${item.id}</td>
             <td>${item.name}</td>
             <td>${item.price}</td>
+            <td><button onclick="num_inc">+</button><button onclick="num_dec">-</button></td>
+            <td><button onclick="removeToCart(${item.id})">Remove</button></td>
             `;
         cartTableBody.appendChild(row);
     });
@@ -53,4 +55,14 @@ function updateTable() {
         .then(response => response.json())
         .then(cart => displayCart(cart))
         .catch(error => console.error('사용자 정보 불러오기 실패', error));
+};
+
+function removeToCart(productid) {
+    fetch(`/remove-to-cart/${productid}`, {method: 'DELETE'})
+        .then((response) => response.json())
+        .then((data) => {
+            alert(data.message);
+            // alert(Json.stringify(data.cart))
+            updateTable();
+        });
 };

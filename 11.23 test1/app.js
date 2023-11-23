@@ -43,7 +43,7 @@ app.post('/add-to-cart/:productid', (req, res) => {
         return res.status(404).json({message: '상품을 못찾겠어'});
     };
 
-    const cart = req.session.cart ||[];
+    const cart = req.session.cart || [];
     cart.push({
         id: product.id,
         name: product.name,
@@ -52,6 +52,20 @@ app.post('/add-to-cart/:productid', (req, res) => {
 
     req.session.cart = cart;
     res.json({message: '상품 추가함', cart});
+});
+
+app.delete('/remove-to-cart/:productid', (req, res) => {
+    const productid = parseInt(req.params.productid);
+    const product = products.find((p) => p.id == productid);
+
+    if (!product) {
+        return res.status(404).json({message: '상품을 못찾겠어'});
+    };
+
+    const cart = req.session.cart || [];
+    // req.session.cart = cart;
+    delete products[cart];
+    res.json({message: '상품 제거함'});
 });
 
 
