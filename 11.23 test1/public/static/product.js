@@ -32,5 +32,6 @@ function addToCart(productid) {
                 // localStoreage.setItem('cart', JSON.stringify(data))// 로컬 스토리지에 저장
 
                 .then((cart) => {window.location.href= '/cart.html'});
+                
         });
 };

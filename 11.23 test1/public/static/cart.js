@@ -53,10 +53,6 @@ function updateQuantity(itemid, action){
     })
 }
 
-function totalPrice() {
-
-}
-
 function removeToCart(productid) {
     fetch(`/remove-to-cart/${productid}`, {method: 'DELETE'})
         .then((response) => response.json())

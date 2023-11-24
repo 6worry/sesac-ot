@@ -46,6 +46,13 @@ app.post('/add-to-cart/:productid', (req, res) => {
     };
 
     const cart = req.session.cart || [];
+    const item = cart.find((i) => i.id === product.id);
+    
+    if (item) {
+        // 이미 있는 경우 수량만 증가
+        item.quantity += 1;
+        item.totalprice += product.price;
+    } else {
     cart.push({
         id: product.id,
         name: product.name,
@@ -53,7 +60,7 @@ app.post('/add-to-cart/:productid', (req, res) => {
         quantity: 1,
         totalprice: product.price
     });
-
+    }
     req.session.cart = cart;
     res.json({message: '상품 추가함', cart});
 });
