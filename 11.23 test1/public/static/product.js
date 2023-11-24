@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/products')
         .then((response) => response.json())
