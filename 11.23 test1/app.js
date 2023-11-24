@@ -65,8 +65,9 @@ app.post('/update-quantity/:productid', (req, res) => {
     if (!item) {
         return res.status(404).json({message: '상품을 찾을 수 없음'})
     }
+
     item.quantity = Math.max(1, item.quantity + change); // 둘 중 큰값을 반환 (1이상 나오게 함)
-    res.json(cart)
+    res.json({cart, updatedQuantity: item.quantity})
 })
 
 app.post('/remove-from-cart/:productid', (req, res) => {

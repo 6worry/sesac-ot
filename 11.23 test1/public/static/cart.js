@@ -4,19 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((cart) => displayCart(cart))
 });
 
-function displayCart(cart) {
+function displayCart(cart, change) {
     console.log(cart)
     const cartTableBody = document.querySelector('#cartTable tbody');
     cartTableBody.innerHTML = '';
-    if(cart) {
-
+    if(cart && cart.length >0) {
         cart.forEach((item) => {
+            item.quantity = item.quantity + change
             const row = document.createElement('tr');
             row.innerHTML = `
             <td>${item.id}</td>
             <td>${item.name}</td>
             <td>${item.price}</td>
-            <td><button onclick="updateQuantity(${item.id}, 'inc')">+</button><button onclick="updateQuantity(${item.id}, 'dec')">-</button></td>
+            <td>
+            <span id="quantity-${item.id}">${item.quantity}</span>
+            <button onclick="updateQuantity(${item.id}, 'inc')">+</button>
+            <button onclick="updateQuantity(${item.id}, 'dec')">-</button>
+            </td>
             <td><button onclick="removeToCart(${item.id})">Remove</button></td>
             `;
             cartTableBody.appendChild(row)
@@ -32,14 +36,15 @@ function displayCart(cart) {
 
 function updateQuantity(itemid, action){
     const change = action === 'inc' ? 1 : -1;
-    fetch(`/update-quantity/${itemid}}`, {
+    console.log(change)
+    fetch(`/update-quantity/${itemid}?change=${change}`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({change})
+        headers: {'Content-Type': 'application/json'}
     })
     .then((response) => response.json())
     .then((data) => {
-        displayCart(data.cart)
+        document.getElementById(`quantity-${itemid}`).innerText = data.updatedQuantity;
+        displayCart(data.cart, change)
     })
 }
 
