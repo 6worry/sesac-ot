@@ -4,14 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((cart) => displayCart(cart))
 });
 
-function displayCart(cart, change) {
-    console.log(cart)
+function displayCart(cart) {
     const cartTableBody = document.querySelector('#cartTable tbody');
     cartTableBody.innerHTML = '';
     if(cart && cart.length >0) {
         cart.forEach((item) => {
-            item.quantity = item.quantity + change
             const row = document.createElement('tr');
+            const row2 = document.createElement('tr');
             row.innerHTML = `
             <td>${item.id}</td>
             <td>${item.name}</td>
@@ -23,20 +22,26 @@ function displayCart(cart, change) {
             </td>
             <td><button onclick="removeToCart(${item.id})">Remove</button></td>
             `;
+            row2.innerHTML=`
+            <td colspan="3"></td>
+            <td>Total:</td>
+            <td>${item.totalprice}</td>
+            `
             cartTableBody.appendChild(row)
+            cartTableBody.appendChild(row2)
         });
         } else {
             const row = document.createElement('tr');
             row.innerHTML = `
             <td colspan="5">상품X</td>
             `;
+            
             cartTableBody.appendChild(row)
         }
 };
 
 function updateQuantity(itemid, action){
     const change = action === 'inc' ? 1 : -1;
-    console.log(change)
     fetch(`/update-quantity/${itemid}?change=${change}`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'}
@@ -44,8 +49,12 @@ function updateQuantity(itemid, action){
     .then((response) => response.json())
     .then((data) => {
         document.getElementById(`quantity-${itemid}`).innerText = data.updatedQuantity;
-        displayCart(data.cart, change)
+        displayCart(data.cart)
     })
+}
+
+function totalPrice() {
+
 }
 
 function removeToCart(productid) {

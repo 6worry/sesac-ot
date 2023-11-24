@@ -49,7 +49,9 @@ app.post('/add-to-cart/:productid', (req, res) => {
     cart.push({
         id: product.id,
         name: product.name,
-        price: product.price
+        price: product.price,
+        quantity: 1,
+        totalprice: product.price
     });
 
     req.session.cart = cart;
@@ -67,6 +69,7 @@ app.post('/update-quantity/:productid', (req, res) => {
     }
 
     item.quantity = Math.max(1, item.quantity + change); // 둘 중 큰값을 반환 (1이상 나오게 함)
+    item.totalprice =calculateTotalAmount2(cart);
     res.json({cart, updatedQuantity: item.quantity})
 })
 

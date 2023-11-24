@@ -28,6 +28,9 @@ function addToCart(productid) {
             // alert(Json.stringify(data.cart))
             fetch('/cart')
                 .then((response) => response.json())
+                // sessionStoreage.setItem('cart', JSON.stringify(data))// 세션 스토리지에 저장
+                // localStoreage.setItem('cart', JSON.stringify(data))// 로컬 스토리지에 저장
+
                 .then((cart) => {window.location.href= '/cart.html'});
         });
 };
