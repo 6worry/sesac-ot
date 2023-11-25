@@ -78,18 +78,18 @@ app.post('/update-quantity/:productid', (req, res) => {
     res.json({cart, updatedQuantity: item.quantity})
 })
 
-app.post('/remove-from-cart/:productid', (req, res) => {
-
+app.delete('/remove-from-cart/:productid', (req, res) => {
+    const productid = parseInt(req.params.productid);
+    const cart = req.session.cart
+        const item = cart.findIndex((i) => i.id == productid);
+        if (item !== -1) {
+            // If the item is found, remove it from the cart
+            cart.splice(item, 1);
+        res.json({message: '상품 제거함', cart});
+        }
 })
 
 // app.delete('/remove-to-cart/:productid', (req, res) => {
-//     const productid = parseInt(req.params.productid);
-//     const product = products.find((p) => p.id == productid);
-
-//     const cart = req.session.cart
-//     // req.session.cart = cart;
-//     delete products[cart];
-//     res.json({message: '상품 제거함'});
 // });
 
 

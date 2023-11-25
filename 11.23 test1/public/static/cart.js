@@ -56,12 +56,12 @@ function updateQuantity(itemid, action){
 }
 
 function removeToCart(productid) {
-    fetch(`/remove-to-cart/${productid}`, {method: 'DELETE'})
+    fetch(`/remove-from-cart/${productid}`, {method: 'DELETE'})
         .then((response) => response.json())
         .then((data) => {
             alert(data.message);
             // alert(Json.stringify(data.cart))
-            updateTable();
+            displayCart(data.cart)
         });
 };
 
