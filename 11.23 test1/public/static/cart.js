@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function displayCart(cart) {
     const cartTableBody = document.querySelector('#cartTable tbody');
+    const cartTableBody2 = document.querySelector('#cartTable tbody');
     cartTableBody.innerHTML = '';
     if(cart && cart.length >0) {
         cart.forEach((item) => {
             const row = document.createElement('tr');
-            const row2 = document.createElement('tr');
             row.innerHTML = `
             <td>${item.id}</td>
             <td>${item.name}</td>
@@ -22,14 +22,16 @@ function displayCart(cart) {
             </td>
             <td><button onclick="removeToCart(${item.id})">Remove</button></td>
             `;
+            cartTableBody.appendChild(row)
+        });
+            const row2 = document.createElement('tr');
             row2.innerHTML=`
             <td colspan="3"></td>
             <td>Total:</td>
-            <td>${item.totalprice}</td>
+            <td>${calculateTotalAmount(cart)}</td>
             `
-            cartTableBody.appendChild(row)
             cartTableBody.appendChild(row2)
-        });
+        
         } else {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -62,3 +64,9 @@ function removeToCart(productid) {
             updateTable();
         });
 };
+
+function calculateTotalAmount(cart){
+    return cart.reduce((total, item) => 
+        total+ item.price*item.quantity, 0
+    )
+}
