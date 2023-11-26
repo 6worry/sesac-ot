@@ -18,3 +18,25 @@ th {
 button {
     cursor: pointer;
 }
+
+nav {
+    background-color: aqua;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 15px;
+    color: black;
+}
