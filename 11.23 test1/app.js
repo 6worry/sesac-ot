@@ -15,6 +15,11 @@ app.use(session ({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const users = [
+    {id: 1, userid: 'user1', userpw: 'pw1'},
+    {id: 2, userid: 'user2', userpw: 'pw2'}
+];
+
 const products = [
     { id: 1, name: 'Product1', price: 1000},
     { id: 2, name: 'Product2', price: 2000},
@@ -22,19 +27,49 @@ const products = [
 ];
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'product.html'));
+    res.sendFile(path.join(__dirname, 'public', 'real.html'));
 });
 
 app.get('/products', (req, res) => {
     console.log('Session Info:', req.session);
-    res.json(products);
+    res.sendFile(path.join(__dirname, 'public', 'product.html'));
 });
 
 app.get('/cart', (req, res) => {
     const cart = req.session.cart || [];
 
-    console.log('Session Info:', req.sessionStore.sessions);
-    res.json(cart);
+    console.log('Session Info:', req.sessionStore.sessions); res.sendFile(path.join(__dirname, 'public', 'cart.html'));
+});
+
+app.post('/login', (req, res) => {
+    const { userid, userpw } = req.body;
+    console.log(userid, userpw);
+
+    const user = users.find((u) => 
+        u.userid === userid
+        && u.userpw === userpw
+    );
+
+    if (user) {
+        console.log('로그인 성공');
+        req.session.user = user;
+        res.json({message: 'login success'});
+    } else {
+        console.log('로그인 실패');
+        res.status(401).json({message: 'login fail'});
+    };
+});
+
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log('삭제오류', err);
+            res.status(500).json({message: '실패!'});
+        } else {        
+            console.log('로그아웃 성공');
+            res.json({message: 'logout success'});
+        };
+    });
 });
 
 app.post('/add-to-cart/:productid', (req, res) => {
