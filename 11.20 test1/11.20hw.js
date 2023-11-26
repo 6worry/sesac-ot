@@ -3,8 +3,6 @@ const nunjucks = require('nunjucks');
 const fs = require('fs');
 // const csv = require('csv-parser');
 const csv = require('fast-csv');
-const router = express.Router();
-
 const app = express();
 const port = 3003;
 
@@ -14,7 +12,6 @@ nunjucks.configure('views hw', {
 });
 
 app.set('view engine', 'html');
-
 app.use((req, res, next) => {
     const start = Date.now();
 
@@ -57,13 +54,11 @@ async function startServer() {
 
     app.get('/', (req, res) => {
         const itemsPerPage = 15;
-        let startIndex;
-        let endIndex;
 
         console.log(`요청 파라미터: ${req.query.page}`)
         page = req.query.page || 1;
-        startIndex = (page -1) * itemsPerPage;
-        endIndex = startIndex + itemsPerPage;
+        const startIndex = (page -1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
 
         const totalPages = Math.ceil(data.length / itemsPerPage);
 
@@ -71,8 +66,11 @@ async function startServer() {
         res.render('index', {data: realdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
     });
 
-    router.get('/user/:ID', (req, res) => {
-    
+    app.get('/user/:ID', (req, res) => {
+        const userid = parseInt(req.params.rowid);
+        const user = data.find((d) => d.id == userid);
+
+        res.render('user', {data: user, headers: header});
     });
 
     app.listen(port, () => {
