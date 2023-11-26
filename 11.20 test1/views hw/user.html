@@ -32,10 +32,9 @@
 </head>
 <body>
     <h1>사용자 정보</h1>
-    
     <table>
-        <input type="text">
-        <button>검색</button>
+        <input type="text" name="name">
+        <button type="submit">검색</button>
         <tr>
             {% for header in headers %}
                 <th>{{ header }}</th>
@@ -44,7 +43,7 @@
         {% for row in data %}
         <tr class="button" type="button">
             {% for header in headers %}
-                <td><a href="/?user/{{ data.id }}">{{ row[header] }}</a></td>
+                <td><a href="/user/{{ row.id }}">{{ row[header] }}</a></td>
             {% endfor %}
         </tr>
         {% endfor %}

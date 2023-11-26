@@ -12,6 +12,7 @@ nunjucks.configure('views hw', {
 });
 
 app.set('view engine', 'html');
+app.use(express.static("view hw"));
 app.use((req, res, next) => {
     const start = Date.now();
 
@@ -23,7 +24,6 @@ app.use((req, res, next) => {
 
     next();
 });
-
 
 const data = []; // 읽은 데이터를 담을 곳
 const header = [];
@@ -55,7 +55,6 @@ async function startServer() {
     app.get('/', (req, res) => {
         const itemsPerPage = 15;
 
-        console.log(`요청 파라미터: ${req.query.page}`)
         page = req.query.page || 1;
         const startIndex = (page -1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
@@ -66,11 +65,23 @@ async function startServer() {
         res.render('index', {data: realdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
     });
 
-    app.get('/user/:ID', (req, res) => {
-        const userid = parseInt(req.params.rowid);
-        const user = data.find((d) => d.id == userid);
+    app.get("/user", (req, res) => {
+        const itemsPerPage = 15;
 
-        res.render('user', {data: user, headers: header});
+        page = req.query.page || 1;
+        const username = req.query.name
+        const searchdata = data.filter((d) => d.name && d.name.includes(username));
+        const totalPages = Math.ceil(data.length / itemsPerPage);
+    
+        res.render("index", {data: searchdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
+      });
+
+    app.get('/user/:id', (req, res) => {
+        
+        const userid = req.params.id;
+        const user = (data.find((d) => d.id == userid));
+
+        res.render("user", {data: user, headers: header, page: parseInt(page)});
     });
 
     app.listen(port, () => {

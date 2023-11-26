@@ -89,10 +89,6 @@ app.delete('/remove-from-cart/:productid', (req, res) => {
         }
 })
 
-// app.delete('/remove-to-cart/:productid', (req, res) => {
-// });
-
-
 app.listen(port, () => {
     console.log(`${port} 완완료`);
 });
