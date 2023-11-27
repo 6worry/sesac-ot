@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function displayCart(cart) {
     const cartTableBody = document.querySelector('#cartTable tbody');
-    const cartTableBody2 = document.querySelector('#cartTable tbody');
     cartTableBody.innerHTML = '';
     if(cart && cart.length >0) {
         cart.forEach((item) => {
