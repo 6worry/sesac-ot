@@ -1,0 +1,19 @@
+초급
+1. select u.name, u.age from users u;
+
+2. select o.id, o.orderat from orders o order by o.orderat desc limit 2 ;
+
+3. select * from items i where i.type='Coffee';
+
+4. select * from stores s where s. address like '%서울%' limit 3;
+
+5. select * from users where gender='Female' and birthdate >='2000';
+
+6. select * from users order by age desc limit 1;
+
+7. select * from items order by unitprice desc limit 1;
+
+중급
+1. select u.name, count(o.userid), sum(i.unitprice)from users u join orders o on u.id = o.userid join orderitems oi on o.id= oi.orderid join items i on i.id= oi.itemid group by u.id order by i.unitprice limit 2;
+
+2.
