@@ -16,4 +16,16 @@
 중급
 1. select u.name, count(o.userid), sum(i.unitprice)from users u join orders o on u.id = o.userid join orderitems oi on o.id= oi.orderid join items i on i.id= oi.itemid group by u.id order by i.unitprice limit 2;
 
-2.
+2. select s.name, sum(i.unitprice) from stores s join orders o on s.id=o.storeid join orderitems oi on o.id = oi.orderid join items i on i.id=oi.itemid where o.orderat between '2023-01-01' and '2023-01-31' group by s.name limit 3;
+
+3. select s.name, sum(i.unitprice) as total from stores s join orders o on s.id=o.storeid join orderitems oi on o.id = oi.orderid join items i on i.id=oi.itemid where o.orderat like '2023%' group by s.name order by sum(i.unitprice) desc limit 10;
+
+4. select i.name, count(oi.id), sum(i.unitprice) from items i join orderitems oi on i.id=oi.itemid group by i.name limit 4;
+
+5. select u.id, count(oi.id), sum(i.unitprice) from users u join orders o on u.id=o.userid join orderitems oi on o.id=oi.orderid join items i on i.id=oi.itemid group by u.id order by sum(i.unitprice) desc limit 20;
+
+6. SELECT distinct TRIM(SUBSTR(s.address, 1, 6)) as city, sum(i.unitprice) FROM stores s join orders o on s.id=o.storeid join orderitems oi on o.id=oi.orderid join items i on i.id=oi.itemid group by city;
+
+7. select u.id, count(o.id) from users u join orders o on u.id=o.userid join stores s on s.id= o.storeid where s.name='스타벅스 강남1호점' group by u.id order by count(o.id) desc limit 10;
+
+8. select s.name, sum(i.unitprice) from stores s join orders o on s.id=o.storeid join orderitems oi on o.id = oi.orderid join items i on i.id=oi.itemid where o.orderat between '2023-10-01' and '2023-12-31' group by s.name;
