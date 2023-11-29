@@ -34,3 +34,5 @@ ORDER BY strftime('%Y', invoicedate);
 16. select t.name, al.title, m.name from tracks t join albums al on t.albumid=al.albumid join media_types m on t.mediatypeid=m.mediatypeid where t.trackid limit 4;
 
 23. SELECT billingcountry, MAX(Totalprice) FROM (SELECT billingcountry , SUM(total) as Totalprice FROM invoices GROUP BY billingcountry);
+
+24. select t.name, count(ii.quantity) from tracks t join invoice_items ii on t.trackid=ii.trackid join invoices i on i.invoiceid=ii.invoiceid where i.invoicedate between '2013-01-01' and '2013-12-31' group by t.name order by count(ii.quantity);
