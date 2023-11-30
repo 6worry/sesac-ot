@@ -3,7 +3,7 @@ const sqlite3 = require("sqlite3");
 class Database {
   constructor(dbname) {
     this.db = new sqlite3.Database(dbname);
-  }
+  };
   //데이터 테이블 생성
   createTable() {
     return new Promise((resolve, reject) => {
@@ -41,7 +41,7 @@ class Database {
         }
       );
     });
-  }
+  };
 
   //데이터 수정 (UPDATE)
   updateUser(updateUser) {
