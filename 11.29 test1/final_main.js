@@ -1,8 +1,8 @@
 const Database = require('./final_database2');
 
 async function main() {
-    //  db= new Database('mydb4.db');
-     db= new Database(':memory:');
+     db= new Database('mydb4.db');
+    //  db= new Database(':memory:');
     try{
         await db.createTable();
         const newUserA = {username: '6worry', email: '6worry.sesac.co.kr'};

@@ -4,23 +4,56 @@ const fs = require('fs');
 
 const app = express();
 const port = 3001;
-const dbFile = 'mydb1.db';
+// const dbFile = 'mydb5.db';
+const dbFile = ':memory:';
 
 const db = new sqlite3.Database(dbFile);
 
-//db 초기화 함수
-function init_database() {
-    const sql = fs.readFileSync('init_database.sql', 'utf-8');
-    db.exec(sql, (err) => {
-        if (err) {
-            console.error('초기화 실패', err);
-        } else {
-            console.log('초기화 성공');
-        };
+const sql = fs.readFileSync('init_database.sql', 'utf-8');
+
+// //db 초기화 함수
+async function init_database() {
+    await createTable()
+    await insertTable()
+};
+
+function createTable() {
+    return new Promise((resolve, reject) => {
+        db.exec(sql, (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            };
+        });
+    });
+};
+
+function insertTable() {
+    return new Promise((resolve, reject) => {
+        db.prepare(sql, (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            };
+        });
     });
 };
 
 init_database();
+
+
+// function createTable() {
+//         db.exec(sql, (err) => {
+//             if (err) {
+//             } else {
+//             };
+//         });
+
+// }
+
+// createTable();
 
 //서버 URL
 app.get('/:table', (req, res) => {
