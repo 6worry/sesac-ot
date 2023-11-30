@@ -10,7 +10,14 @@ const db = new sqlite3.Database(dbFile);
 
 //db 초기화 함수
 function init_database() {
-    const sql = fs.readFileSync('init_database.sql');
+    const sql = fs.readFileSync('init_database.sql', 'utf-8');
+    db.exec(sql, (err) => {
+        if (err) {
+            console.error('초기화 실패', err);
+        } else {
+            console.log('초기화 성공');
+        };
+    });
 };
 
 init_database();
@@ -18,6 +25,24 @@ init_database();
 //서버 URL
 app.get('/:table', (req, res) => {
     //db로부터 특정 테이블 조회 코드 작성
+    const db_table = req.params.table;
+    const query = `SELECT * FROM ${db_table}`;
+
+    db.all(query, (err, rows) => {
+        res.json(rows);
+    });
+});
+
+app.get('/:table/:id', (req, res) => {
+    //db로부터 특정 테이블 조회 코드 작성
+    const db_table = req.params.table;
+    const table_id = req.params.id;
+    // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
+    const query = `SELECT * FROM ${db_table} WHERE id = ?`;
+    
+    db.get(query, [table_id], (err, row) => {
+        res.json(row);
+    });
 });
 
 //express 서버 시작
