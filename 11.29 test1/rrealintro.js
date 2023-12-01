@@ -4,56 +4,28 @@ const fs = require('fs');
 
 const app = express();
 const port = 3001;
-// const dbFile = 'mydb5.db';
-const dbFile = ':memory:';
+const dbFile = 'mydb5.db';
+// const dbFile = ':memory:';
 
 const db = new sqlite3.Database(dbFile);
 
-const sql = fs.readFileSync('init_database.sql', 'utf-8');
 
 // //db 초기화 함수
-async function init_database() {
-    await createTable()
-    await insertTable()
-};
-
-function createTable() {
+function init_database() {
     return new Promise((resolve, reject) => {
+        const sql = fs.readFileSync('init_database.sql', 'utf-8');
+        
         db.exec(sql, (err) => {
             if (err) {
-                reject(err);
+                // console.error('초기화 실패', err);
+                reject();
             } else {
+                // console.log('초기화 성공');
                 resolve();
-            };
-        });
+            }
+        })
     });
 };
-
-function insertTable() {
-    return new Promise((resolve, reject) => {
-        db.prepare(sql, (err) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            };
-        });
-    });
-};
-
-init_database();
-
-
-// function createTable() {
-//         db.exec(sql, (err) => {
-//             if (err) {
-//             } else {
-//             };
-//         });
-
-// }
-
-// createTable();
 
 //서버 URL
 app.get('/:table', (req, res) => {
@@ -79,6 +51,16 @@ app.get('/:table/:id', (req, res) => {
 });
 
 //express 서버 시작
-app.listen(port, () => {
-    console.log(`${port} 서버 시작합니다.`);
-});
+async function startServer() {
+    try {
+        await init_database();
+
+        app.listen(port, () => {
+            console.log(`${port} 서버 시작합니다.`);
+        });
+    } catch (err) {
+        console.error(err);
+    };
+};
+
+startServer();
