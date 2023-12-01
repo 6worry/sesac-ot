@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자들</title>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        th {
+            background-color: antiquewhite;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid blue;
+        }
+        .page a{
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration: none;
+            border: 1px solid black;
+        }
+        .page a.current{
+            background-color: pink;
+            border: 1px solid pink;
+        }
+
+        button {
+    cursor: pointer;
+}
+
+nav {
+    background-color: aqua;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 15px;
+    color: black;
+}
+    </style>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/users">사용자목록</a></li>
+            <li><a href="/stores">매장정보</a></li>
+            <li><a href="/orders">주문목록</a></li>
+            <li><a href="/items">상품목록</a></li>
+            <li><a href="/orderitems">장바구니</a></li>
+            <li><a href="#">Log in</a></li> 
+        </ul>
+    </nav>
+    <h1>사용자 테이블</h1>
+    <table >
+        <form action="/users" method="get">
+            <input type="text" name="name">
+            <button type="submit">검색</button>
+        </form>
+        <tr>
+            {% for header in headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr class="button" type="button">
+            {% for header in headers %}
+                <td><a href="/users/{{ row.id }}">{{ row[header] }}</a></td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="page">
+        {% if page !=1 %}
+        <a href ='/?page={{ page - 1 }}'class="backbutton">이전</a>
+        {% endif %}
+        {% for num in range(1, pagebuttons +1) %}
+        <a href ='/?page={{ num }}' {% if num == page %}class="current"{% endif %}>{{ num }}</a>
+        {% endfor %}
+        {% if page !=pagebuttons %}
+            <a href ='/?page={{ page + 1 }}' class="gobutton">다음</a>
+            {% endif %}
+        </div>
+</body>
+<script>
+    // var data = {{ data | dump | safe}};
+    // console.log(data)
+</script>
+</html>

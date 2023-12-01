@@ -1,0 +1,42 @@
+table {
+    width: 15%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+th, td {
+    border: 1px solid green;
+    padding: 10px;
+    text-align: left;
+    color: blue;
+}
+
+th {
+    background-color: bisque;
+}
+
+button {
+    cursor: pointer;
+}
+
+nav {
+    background-color: aqua;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 15px;
+    color: black;
+}

@@ -5,7 +5,8 @@ const fs = require('fs');
 const app = express();
 const port = 3001;
 // const dbFile = 'mydb5.db';
-const dbFile = ':memory:';
+// const dbFile = ':memory:';
+const dbFile = 'user.db';
 
 const db = new sqlite3.Database(dbFile);
 
@@ -15,7 +16,7 @@ app.use(express.urlencoded({extended: true})); // -d로 오는
 // //db 초기화 함수
 function init_database() {
     return new Promise((resolve, reject) => {
-        const sql = fs.readFileSync('init_database.sql', 'utf-8');
+        const sql = fs.readFileSync('userdb.sql', 'utf-8');
         
         db.exec(sql, (err) => {
             if (err) {
@@ -101,9 +102,9 @@ app.delete('/users/:id', (req, res) => {
 });
 
 
-app.get('/users/:id', (req, res) => {
+app.get('/users/:ID', (req, res) => {
     //db로부터 특정 테이블 조회 코드 작성
-    const users_id = req.params.id;
+    const users_id = req.params.ID;
     // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
     const query = `SELECT * FROM users WHERE id = ?`;
     
