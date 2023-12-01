@@ -17,8 +17,12 @@ function init_database() {
         
         db.exec(sql, (err) => {
             if (err) {
-                // console.error('초기화 실패', err);
-                reject();
+                if (err.errno == 19) {
+                    console.warn('초기화 이미 했다.');
+                } else {
+                    console.error('초기화 실패', err);
+                    reject();
+                };
             } else {
                 // console.log('초기화 성공');
                 resolve();
