@@ -69,6 +69,65 @@ async function loadDataIntoMemory2() {
     });
 };
 
+async function loadDataIntoMemory3() {
+    return new Promise((resolve, reject) => {
+
+        fs.createReadStream('item.csv', {encoding: 'utf-8'})
+        .pipe(csv.parse({headers: true, trim: true}))
+        .on('headers', (headers) => {
+            header.push(...headers);
+        })
+        .on('data', (row) => {
+            data.push(row);
+        })
+        .on('end', () => {
+            resolve();
+        })
+        .on('error', (err) => {
+            reject(err);
+        });
+    });
+};
+
+async function loadDataIntoMemory4() {
+    return new Promise((resolve, reject) => {
+
+        fs.createReadStream('order.csv', {encoding: 'utf-8'})
+        .pipe(csv.parse({headers: true, trim: true}))
+        .on('headers', (headers) => {
+            header.push(...headers);
+        })
+        .on('data', (row) => {
+            data.push(row);
+        })
+        .on('end', () => {
+            resolve();
+        })
+        .on('error', (err) => {
+            reject(err);
+        });
+    });
+};
+
+async function loadDataIntoMemory5() {
+    return new Promise((resolve, reject) => {
+
+        fs.createReadStream('orderitem.csv', {encoding: 'utf-8'})
+        .pipe(csv.parse({headers: true, trim: true}))
+        .on('headers', (headers) => {
+            header.push(...headers);
+        })
+        .on('data', (row) => {
+            data.push(row);
+        })
+        .on('end', () => {
+            resolve();
+        })
+        .on('error', (err) => {
+            reject(err);
+        });
+    });
+};
 
 async function startServer() {
     await loadDataIntoMemory();
