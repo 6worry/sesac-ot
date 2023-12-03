@@ -14,7 +14,7 @@ nunjucks.configure('views hw', {
 });
 
 app.set('view engine', 'html');
-app.use("/", express.static("static"));
+app.use("/", express.static("public"));
 app.use(express.json());
 app.use((req, res, next) => {
     const start = Date.now();
@@ -31,19 +31,52 @@ app.use((req, res, next) => {
 const data = []; // 읽은 데이터를 담을 곳
 const header = [];
 
-async function startServer() {
+async function dbData(table) {
+    return new Promise((resolve, reject) => {
+        const sql = `SELECT COUNT(*) as total FROM ${table}`;
+        db.get(sql, (err, row) => {
+            if (err) {
+                console.error('초기화 실패', err);
+                reject();
+            } else {
+                // console.log('초기화 성공');
+                resolve(row);
+            }
+        });
+    });
+};
 
+// async function f1234(){
+    
+    // const itemsPerPage = 15;
+
+    // page = req.query.page || 1;
+    // const startIndex = (page -1) * itemsPerPage;
+    // const endIndex = startIndex + itemsPerPage;
+    // const { total } = await dbData()
+    // const totalPages = Math.ceil(total / itemsPerPage);
+
+    // const realdata = total.slice(startIndex, endIndex);
+// }
+
+async function startServer() {
+    // await f1234()
     app.get('/', (req, res) => {
         const itemsPerPage = 15;
 
         page = req.query.page || 1;
         const startIndex = (page -1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-
-        const totalPages = Math.ceil(data.length / itemsPerPage);
-
+        const totalPages = Math.ceil(startIndex / itemsPerPage);
+    
         const realdata = data.slice(startIndex, endIndex);
-        res.render('index', {data: realdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
+        const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"]
+        query = 'SELECT * FROM users'
+        // res.render('index', {data: realdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
+        db.all(query, (err, row) => {
+            res.render('index', {data: row, headers: header});
+        });
+
     });
 
     app.get('/users', (req, res) => {
@@ -57,9 +90,10 @@ async function startServer() {
             //get 방식으로 username 받아와서 사용자 검색하기
             // 127.0.0.1:3001/users?username=user1
         }
-            db.all(query, (err, row) => {
-                res.render('user', row);
-            });
+        const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"]
+        db.all(query, (err, row) => {
+            res.render('user', {data: row, headers: header});
+        });
     });
 
     app.get('/stores', (req, res) => {
@@ -73,9 +107,10 @@ async function startServer() {
             //get 방식으로 username 받아와서 사용자 검색하기
             // 127.0.0.1:3001/users?username=user1
         }
-            db.all(query, (err, row) => {
-                res.render('store', row);
-            });
+            const header = ["ID", "Name", "Type", "Address"]
+        db.all(query, (err, row) => {
+            res.render('store', {data: row, headers: header});
+        });
     });
 
     app.get('/orders', (req, res) => {
@@ -89,9 +124,10 @@ async function startServer() {
             //get 방식으로 username 받아와서 사용자 검색하기
             // 127.0.0.1:3001/users?username=user1
         }
-            db.all(query, (err, row) => {
-                res.render('order', row);
-            });
+        const header = ["ID", "OrderAt", "StoreID", "UserID"]
+        db.all(query, (err, row) => {
+            res.render('order', {data: row, headers: header});
+        });
     });
 
     app.get('/items', (req, res) => {
@@ -105,9 +141,10 @@ async function startServer() {
             //get 방식으로 username 받아와서 사용자 검색하기
             // 127.0.0.1:3001/users?username=user1
         }
-            db.all(query, (err, row) => {
-                res.render('item', row);
-            });
+        const header = ["ID", "Name", "Type", "UnitPrice"]
+        db.all(query, (err, row) => {
+            res.render('item', {data: row, headers: header});
+        });
     });
 
     app.get('/orderitems', (req, res) => {
@@ -121,9 +158,10 @@ async function startServer() {
             //get 방식으로 username 받아와서 사용자 검색하기
             // 127.0.0.1:3001/users?username=user1
         }
-            db.all(query, (err, row) => {
-                res.render('orderitem', row);
-            });
+        const header = ["ID", "OrderID", "ItemID"]
+        db.all(query, (err, row) => {
+            res.render('orderitem', {data: row, headers: header});
+        });
     });
 
     app.get("/users", (req, res) => {
