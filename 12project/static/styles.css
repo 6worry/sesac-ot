@@ -1,42 +1,49 @@
 table {
-    width: 15%;
-    border-collapse: collapse;
-    margin-bottom: 15px;
-}
-
-th, td {
-    border: 1px solid green;
-    padding: 10px;
-    text-align: left;
-    color: blue;
+    width: 100%;
 }
 
 th {
-    background-color: bisque;
+    background-color: antiquewhite;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid blue;
+}
+.page a{
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 1px solid black;
+}
+.page a.current{
+    background-color: pink;
+    border: 1px solid pink;
 }
 
 button {
-    cursor: pointer;
+cursor: pointer;
 }
 
 nav {
-    background-color: aqua;
-    overflow: hidden;
+background-color: aqua;
+overflow: hidden;
 }
 
 nav ul {
-    list-style-type: none;
-    overflow: hidden;
+list-style-type: none;
+overflow: hidden;
 }
 
 nav li {
-    float: left;
+float: left;
 }
 
 nav a {
-    display: block;
-    text-decoration: none;
-    text-align: center;
-    padding: 15px 15px;
-    color: black;
+display: block;
+text-decoration: none;
+text-align: center;
+padding: 15px 15px;
+color: black;
 }

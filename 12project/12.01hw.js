@@ -12,7 +12,7 @@ nunjucks.configure('views hw', {
 });
 
 app.set('view engine', 'html');
-app.use(express.static("view hw"));
+app.use("/", express.static("static"));
 app.use(express.json());
 app.use((req, res, next) => {
     const start = Date.now();
