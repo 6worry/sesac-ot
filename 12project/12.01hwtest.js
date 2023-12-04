@@ -14,7 +14,7 @@ nunjucks.configure('views hw', {
 });
 
 app.set('view engine', 'html');
-app.use("/", express.static("public"));
+app.use(express.static("public"));
 app.use(express.json());
 app.use((req, res, next) => {
     const start = Date.now();
@@ -164,24 +164,35 @@ async function startServer() {
         });
     });
 
-    app.get("/users", (req, res) => {
-        const itemsPerPage = 15;
-
-        page = req.query.page || 1;
-        const username = req.query.name
-        const searchdata = data.filter((d) => d.name && d.name.includes(username));
-        const totalPages = Math.ceil(data.length / itemsPerPage);
-    
-        res.render("index", {data: searchdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
-      });
-
-    app.get('/users/:id', (req, res) => {
+    app.get('/users/:ID', (req, res) => {
+        //db로부터 특정 테이블 조회 코드 작성
+        const users_id = req.params.ID;
+        // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
+        const query = `SELECT * FROM users WHERE id = ?`;
         
-        const userid = req.params.id;
-        const user = (data.find((d) => d.id == userid));
-
-        res.render("user", {data: user, headers: header, page: parseInt(page)});
+        db.get(query, [users_id], (err, row) => {
+            res.json(row);
+        });
     });
+
+    // app.get("/users", (req, res) => {
+    //     const itemsPerPage = 15;
+
+    //     page = req.query.page || 1;
+    //     const username = req.query.name
+    //     const searchdata = data.filter((d) => d.name && d.name.includes(username));
+    //     const totalPages = Math.ceil(data.length / itemsPerPage);
+    
+    //     res.render("index", {data: searchdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
+    //   });
+
+    // app.get('/users/:id', (req, res) => {
+        
+    //     const userid = req.params.id;
+    //     const user = (data.find((d) => d.id == userid));
+
+    //     res.render("user", {data: user, headers: header, page: parseInt(page)});
+    // });
 
     app.listen(port, () => {
         console.log(`${port}번 실행 완료`);

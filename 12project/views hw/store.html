@@ -4,33 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        table {
-            width: 100%;
-        }
-
-        th {
-            background-color: antiquewhite;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid blue;
-        }
-        .page a{
-            display: inline-block;
-            padding: 5px 10px;
-            text-decoration: none;
-            border: 1px solid black;
-        }
-        .page a.current{
-            background-color: pink;
-            border: 1px solid pink;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/style.css"/>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/users">사용자목록</a></li>
+            <li><a href="/stores">매장정보</a></li>
+            <li><a href="/orders">주문목록</a></li>
+            <li><a href="/items">상품목록</a></li>
+            <li><a href="/orderitems">장바구니</a></li>
+            <li><a href="#">Log in</a></li> 
+        </ul>
+    </nav>
     <h1>매장 정보</h1>
     <table>
         <input type="text" name="name">
