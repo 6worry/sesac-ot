@@ -30,7 +30,7 @@
         {% for row in data %}
         <tr class="button" type="button">
             {% for header in headers %}
-                <td><a href="/user/{{ row.id }}">{{ row[header] }}</a></td>
+                <td><a href="/orderdetail/{{ row.ID }}">{{ row[header] }}</a></td>
             {% endfor %}
         </tr>
         {% endfor %}
