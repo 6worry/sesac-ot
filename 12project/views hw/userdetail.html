@@ -49,7 +49,15 @@
         {% endfor %}
     </table>
     <h4>자주 방문한 매장 top 5</h4>
-    
+    <div id="detail">
+        {% for row in data %}
+        <li>
+            {% for firscontent in firscontents %}
+            {{ row[firstcontent] }} 방문
+            {% endfor %}
+        </li>
+        {% endfor %}
+    </div>
     <h4>자주 주문한 상품 top 5</h4>
     <a href="/">뒤로가기</a>
 </body>

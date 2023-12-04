@@ -173,10 +173,10 @@ async function startServer() {
         
         const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
         const secondheader = ["OrderID", "OrderAt", "StoreID"];
-        const firstcontent = ""
+        const firstcontent = "StoreName"
         const secondcontent = ""
         db.all(query, [users_id], (err, row) => {
-            res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
+            res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader, firstcontents: firstcontent});
         });
     });
 
@@ -200,11 +200,11 @@ async function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const items_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT * FROM items WHERE id =?`;
+        const query = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =?`;
         // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["Name", "UnitPrice"];
-        const secondheader = ["Year/Month", "Total price", "Count"];
+        const secondheader = ["YearMonth", "TotalPrice", "Count"];
         
         db.all(query, [items_id], (err, row) => {
             res.render('itemdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
