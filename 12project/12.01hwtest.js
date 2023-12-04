@@ -168,12 +168,13 @@ async function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const users_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT * FROM users WHERE id =?`;
+        const query = `SELECT o.ID AS OrderID, * FROM users u join orders o on u.ID = o.UserID WHERE u.id =?`;
         // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
         const secondheader = ["OrderID", "OrderAt", "StoreID"];
-        
+        const firstcontent = ""
+        const secondcontent = ""
         db.all(query, [users_id], (err, row) => {
             res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
         });
@@ -183,7 +184,7 @@ async function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const stores_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT * FROM stores WHERE id =?`;
+        const query = `SELECT * FROM stores s WHERE s.id =?`;
         // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["Name", "Type", "Address"];
