@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품이양</title>
-    <link rel="stylesheet" href="/static/style.css"/>
+    <title>상품정보양</title>
+    <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
     <nav>
@@ -18,19 +18,32 @@
             <li><a href="#">Log in</a></li> 
         </ul>
     </nav>
-    <h1>상품 목록</h1>
+    <h1>상품 정보</h1>
     <table>
-        <input type="text" name="name">
-        <button type="submit">검색</button>
         <tr>
-            {% for header in headers %}
-                <th>{{ header }}</th>
+            {% for firstheader in firstheaders %}
+                <th>{{ firstheader }}</th>
             {% endfor %}
         </tr>
         {% for row in data %}
         <tr class="button" type="button">
-            {% for header in headers %}
-                <td><a href="/itemdetail/{{ row.ID }}">{{ row[header] }}</a></td>
+            {% for firstheader in firstheaders %}
+                <td>{{ row[firstheader] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>월간 판매량</h2>
+    <table id="detail">
+        <tr>
+            {% for secondheader in secondheaders %}
+                <th>{{ secondheader }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr class="button" type="button">
+            {% for secondheader in secondheaders %}
+                <td>{{ row[secondheader] }}</td>
             {% endfor %}
         </tr>
         {% endfor %}

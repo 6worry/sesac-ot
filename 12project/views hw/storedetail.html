@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>고객정보양</title>
+    <title>매장정보양</title>
     <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
@@ -18,7 +18,7 @@
             <li><a href="#">Log in</a></li> 
         </ul>
     </nav>
-    <h1>고객정보</h1>
+    <h1>매장 정보</h1>
     <table>
         <tr>
             {% for firstheader in firstheaders %}
@@ -33,7 +33,7 @@
         </tr>
         {% endfor %}
     </table>
-    <h2>주문 정보</h2>
+    <h2>월간 매출액</h2>
     <table id="detail">
         <tr>
             {% for secondheader in secondheaders %}
@@ -48,9 +48,21 @@
         </tr>
         {% endfor %}
     </table>
-    <h4>자주 방문한 매장 top 5</h4>
-    
-    <h4>자주 주문한 상품 top 5</h4>
+    <h2>단골 고객</h2>
+    <table>
+        <tr>
+            {% for thirdheader in thirdheaders %}
+                <th>{{ thirdheader }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr class="button" type="button">
+            {% for thirdheader in thirdheaders %}
+                <td>{{ row[thirddheader] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
     <a href="/">뒤로가기</a>
 </body>
 </html>

@@ -169,9 +169,72 @@ async function startServer() {
         const users_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
         const query = `SELECT * FROM users WHERE id =?`;
-        const query2 = `SELECT * FROM orders WHERE id =?`;
+        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
+        
         const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
         const secondheader = ["OrderID", "OrderAt", "StoreID"];
+        
+        db.all(query, [users_id], (err, row) => {
+            res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
+        });
+    });
+
+    app.get('/storedetail/:ID', (req, res) => {
+        //db로부터 특정 테이블 조회 코드 작성
+        const stores_id = req.params.ID;
+        // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
+        const query = `SELECT * FROM stores WHERE id =?`;
+        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
+        
+        const firstheader = ["Name", "Type", "Address"];
+        const secondheader = ["Year/Month", "Total price", "Count"];
+        const thirdheader = ["UserID", "Name", "방문횟수"];
+        
+        db.all(query, [stores_id], (err, row) => {
+            res.render('storedetail', {data: row, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
+        });
+    });
+
+    app.get('/itemdetail/:ID', (req, res) => {
+        //db로부터 특정 테이블 조회 코드 작성
+        const items_id = req.params.ID;
+        // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
+        const query = `SELECT * FROM items WHERE id =?`;
+        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
+        
+        const firstheader = ["Name", "UnitPrice"];
+        const secondheader = ["Year/Month", "Total price", "Count"];
+        
+        db.all(query, [items_id], (err, row) => {
+            res.render('itemdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
+        });
+    });
+
+    app.get('/userdetail/:ID', (req, res) => {
+        //db로부터 특정 테이블 조회 코드 작성
+        const users_id = req.params.ID;
+        // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
+        const query = `SELECT * FROM users WHERE id =?`;
+        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
+        
+        const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
+        const secondheader = ["OrderID", "OrderAt", "StoreID"];
+        
+        db.all(query, [users_id], (err, row) => {
+            res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
+        });
+    });
+
+    app.get('/userdetail/:ID', (req, res) => {
+        //db로부터 특정 테이블 조회 코드 작성
+        const users_id = req.params.ID;
+        // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
+        const query = `SELECT * FROM users WHERE id =?`;
+        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
+        
+        const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
+        const secondheader = ["OrderID", "OrderAt", "StoreID"];
+        
         db.all(query, [users_id], (err, row) => {
             res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
         });
