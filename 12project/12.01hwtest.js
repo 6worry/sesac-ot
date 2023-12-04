@@ -224,18 +224,17 @@ async function startServer() {
         });
     });
 
-    app.get('/userdetail/:ID', (req, res) => {
+    app.get('/orderitemdetail/:ID', (req, res) => {
         //db로부터 특정 테이블 조회 코드 작성
-        const users_id = req.params.ID;
+        const orderitems_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT * FROM users WHERE id =?`;
+        const query = `SELECT * FROM orderitems oi join orders o on o.ID = oi.OrderID WHERE oi.id =?`;
         // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
-        const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
-        const secondheader = ["OrderID", "OrderAt", "StoreID"];
+        const firstheader = ["OrderID", "OrderAt", "StoreID", "UserID"];
         
-        db.all(query, [users_id], (err, row) => {
-            res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
+        db.all(query, [orderitems_id], (err, row) => {
+            res.render('orderitemdetail', {data: row, firstheaders: firstheader});
         });
     });
 
