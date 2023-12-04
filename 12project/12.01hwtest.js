@@ -164,14 +164,16 @@ async function startServer() {
         });
     });
 
-    app.get('/users/:ID', (req, res) => {
+    app.get('/userdetail/:ID', (req, res) => {
         //db로부터 특정 테이블 조회 코드 작성
         const users_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT * FROM users WHERE id = ?`;
-        
-        db.get(query, [users_id], (err, row) => {
-            res.json(row);
+        const query = `SELECT * FROM users WHERE id =?`;
+        const query2 = `SELECT * FROM orders WHERE id =?`;
+        const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
+        const secondheader = ["OrderID", "OrderAt", "StoreID"];
+        db.all(query, [users_id], (err, row) => {
+            res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
         });
     });
 

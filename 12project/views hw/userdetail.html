@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사용자양</title>
+    <title>고객정보양</title>
     <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
@@ -18,19 +18,32 @@
             <li><a href="#">Log in</a></li> 
         </ul>
     </nav>
-    <h1>사용자 목록</h1>
+    <h1>고객정보</h1>
     <table>
-        <input type="text" name="name">
-        <button type="submit">검색</button>
         <tr>
-            {% for header in headers %}
-                <th>{{ header }}</th>
+            {% for firstheader in firstheaders %}
+                <th>{{ firstheader }}</th>
             {% endfor %}
         </tr>
         {% for row in data %}
         <tr class="button" type="button">
-            {% for header in headers %}
-                <td><a href="/userdetail/{{ row.ID }}">{{ row[header] }}</a></td>
+            {% for firstheader in firstheaders %}
+                <td>{{ row[firstheader] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>주문 정보</h2>
+    <table>
+        <tr>
+            {% for secondheader in secondheaders %}
+                <th>{{ secondheader }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr class="button" type="button">
+            {% for secondheader in secondheaders %}
+                <td>{{ row[secondheader] }}</td>
             {% endfor %}
         </tr>
         {% endfor %}
