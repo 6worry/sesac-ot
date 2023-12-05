@@ -168,7 +168,8 @@ async function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const users_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT o.ID AS OrderID, * FROM users u join orders o on u.ID = o.UserID WHERE u.id =?`;
+        const query = `Select * from users u WHERE u.id=?`
+        const query2 = `SELECT o.ID AS OrderID, * FROM users u join orders o on u.ID = o.UserID WHERE u.id =?`;
         // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
@@ -200,9 +201,30 @@ async function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const items_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
+
         const query = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
 
         const query2 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
+
+        const query3 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-03-01' and '2023-03-31'`;
+
+        const query4 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-04-01' and '2023-04-30'`;
+
+        const query5 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-05-01' and '2023-05-31'`;
+
+        const query6 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-06-01' and '2023-06-30'`;
+
+        const query7 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-07-01' and '2023-07-31'`;
+
+        const query8 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-08-01' and '2023-08-31'`;
+
+        const query9 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-09-01' and '2023-09-30'`;
+
+        const query10 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-10-01' and '2023-10-31'`;
+
+        const query11 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-11-01' and '2023-11-30'`;
+
+        const query12 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-12-01' and '2023-12-31'`;
         // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["Name", "UnitPrice"];
@@ -217,7 +239,65 @@ async function startServer() {
                 if(err){
                     console.error(err)
                 }
-                res.render('itemdetail', {data: row1, data2: row2, firstheaders: firstheader, secondheaders: secondheader});
+
+            db.all(query3, [items_id], (err, row3) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query4, [items_id], (err, row4) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query5, [items_id], (err, row5) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query6, [items_id], (err, row6) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query7, [items_id], (err, row7) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query8, [items_id], (err, row8) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query9, [items_id], (err, row9) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query10, [items_id], (err, row10) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query11, [items_id], (err, row11) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query12, [items_id], (err, row12) => {
+                if(err){
+                    console.error(err)
+                }
+            
+            res.render('itemdetail', {data: row1, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, firstheaders: firstheader, secondheaders: secondheader});
+            
+            });});});});});
+                                });
+                            });
+                        });
+                    });
+                });
             });
         });
     });
