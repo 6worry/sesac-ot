@@ -40,25 +40,42 @@
                 <th>{{ secondheader }}</th>
             {% endfor %}
         </tr>
-        {% for row in data %}
+        {% for row in data2 %}
         <tr class="button" type="button">
             {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
+                <td><a href="/orderdetail/{{ row.ID }}">{{ row[secondheader] }}</a></td>
             {% endfor %}
         </tr>
         {% endfor %}
     </table>
     <h4>자주 방문한 매장 top 5</h4>
     <div id="detail">
-        {% for row in data %}
+        {% for row in data3 %}
         <li>
-            {% for firscontent in firscontents %}
-            {{ row[firstcontent] }} 방문
+            {% for firstcontent in firstcontents %}
+            {{ row[firstcontent] }}
+            {% endfor %}
+
+            {% for secondcontent in secondcontents %}
+            {{ row[secondcontent] }}번 방문
             {% endfor %}
         </li>
         {% endfor %}
     </div>
     <h4>자주 주문한 상품 top 5</h4>
+    <div id="detail">
+        {% for row in data4 %}
+        <li>
+            {% for thirdcontent in thirdcontents %}
+            {{ row[thirdcontent] }}
+            {% endfor %}
+            
+            {% for fourthcontent in fourthcontents %}
+            {{ row[fourthcontent] }}번 주문
+            {% endfor %}
+        </li>
+        {% endfor %}
+    </div>
     <a href="/">뒤로가기</a>
 </body>
 </html>

@@ -170,14 +170,37 @@ async function startServer() {
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
         const query = `Select * from users u WHERE u.id=?`
         const query2 = `SELECT o.ID AS OrderID, * FROM users u join orders o on u.ID = o.UserID WHERE u.id =?`;
+        const query3 = `Select s.Name, Count(s.Name) from users u join orders o on u.ID = o.UserID join stores s on s.ID = o.StoreID WHERE u.id=? group by s.Name order by Count(s.Name) desc limit 5`
+        const query4 = `Select i.Name, Count(i.Name) from users u join orders o on u.ID = o.UserID join stores s on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE u.id=? group by s.Name order by Count(i.Name) desc limit 5`
         // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
         const secondheader = ["OrderID", "OrderAt", "StoreID"];
-        const firstcontent = "StoreName"
-        const secondcontent = ""
+        const firstcontent = ["Name"];
+        const secondcontent = ["Count(s.Name)"];
+        const thirdcontent = ["Name"];
+        const fourthcontent = ["Count(i.Name)"];
         db.all(query, [users_id], (err, row) => {
-            res.render('userdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader, firstcontents: firstcontent});
+            if(err){
+                console.error(err)
+            }
+            
+        db.all(query2, [users_id], (err, row2) => {
+            if(err){
+                console.error(err)
+            }
+        db.all(query3, [users_id], (err, row3) => {
+            if(err){
+                console.error(err)
+            }
+        db.all(query4, [users_id], (err, row4) => {
+            if(err){
+                console.error(err)
+            }
+            res.render('userdetail', {data: row, data2: row2, data3: row3, data4: row4, firstheaders: firstheader, secondheaders: secondheader, firstcontents: firstcontent, secondcontents: secondcontent, thirdcontents: thirdcontent, fourthcontents: fourthcontent});
+                    });
+                });
+            });
         });
     });
 
@@ -185,15 +208,95 @@ async function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const stores_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT * FROM stores s WHERE s.id =?`;
-        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
-        
+        const query = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
+        const query2 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
+        const query3 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-03-01' and '2023-03-31'`;
+        const query4 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-04-01' and '2023-04-30'`;
+        const query5 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-05-01' and '2023-05-31'`;
+        const query6 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-06-01' and '2023-06-30'`;
+        const query7 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-07-01' and '2023-07-31'`;
+        const query8 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-08-01' and '2023-08-31'`;
+        const query9 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-09-01' and '2023-09-30'`;
+        const query10 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-10-01' and '2023-10-31'`;
+        const query11 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-11-01' and '2023-11-30'`;
+        const query12 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-12-01' and '2023-12-31'`;
+        const query13 = `Select u.ID, u.Name, Count()from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID join WHERE s.id = ?`;
         const firstheader = ["Name", "Type", "Address"];
-        const secondheader = ["Year/Month", "Total price", "Count"];
+        const secondheader = ["YearMonth", "TotalPrice", "Count"];
         const thirdheader = ["UserID", "Name", "방문횟수"];
         
-        db.all(query, [stores_id], (err, row) => {
-            res.render('storedetail', {data: row, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
+        db.all(query, [stores_id], (err, row1) => {
+            if(err){
+                console.error(err)
+            }
+            
+            db.all(query2, [stores_id], (err, row2) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query3, [stores_id], (err, row3) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query4, [stores_id], (err, row4) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query5, [stores_id], (err, row5) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query6, [stores_id], (err, row6) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query7, [stores_id], (err, row7) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query8, [stores_id], (err, row8) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query9, [stores_id], (err, row9) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query10, [stores_id], (err, row10) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query11, [stores_id], (err, row11) => {
+                if(err){
+                    console.error(err)
+                }
+
+            db.all(query12, [stores_id], (err, row12) => {
+                if(err){
+                    console.error(err)
+                }
+            db.all(query13, [stores_id], (err, row13) => {
+                if(err){
+                    console.error(err)
+                }
+            res.render('storedetail', {data: row1, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, data13: row13, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
+            
+            });});});});});});
+                                });
+                            });
+                        });
+                    });
+                });
+            });
         });
     });
 
