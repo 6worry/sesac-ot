@@ -200,14 +200,25 @@ async function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const items_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =?`;
+        const query = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
+
+        const query2 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
         // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["Name", "UnitPrice"];
         const secondheader = ["YearMonth", "TotalPrice", "Count"];
         
-        db.all(query, [items_id], (err, row) => {
-            res.render('itemdetail', {data: row, firstheaders: firstheader, secondheaders: secondheader});
+        db.all(query, [items_id], (err, row1) => {
+            if(err){
+                console.error(err)
+            }
+            
+            db.all(query2, [items_id], (err, row2) => {
+                if(err){
+                    console.error(err)
+                }
+                res.render('itemdetail', {data: row1, data2: row2, firstheaders: firstheader, secondheaders: secondheader});
+            });
         });
     });
 
