@@ -204,9 +204,19 @@ async function startServer() {
         });
     });
 
+    // app.get('/storedetail/:YearMonth', (req, res) => {
+    //     const storedetail_id = req.params.YearMonth;
+
+    //     const query = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
+    //     db.all(query, [storedetail_id], (err, row1) => {
+    //     res.render('storedetail', {data: row1,});
+    //     });
+    // })
+
     app.get('/storedetail/:ID', (req, res) => {
         //db로부터 특정 테이블 조회 코드 작성
         const stores_id = req.params.ID;
+        const storedetail_id = stores_id.YearMonth;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
         const query = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
         const query2 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
@@ -288,6 +298,7 @@ async function startServer() {
                 if(err){
                     console.error(err)
                 }
+            
             res.render('storedetail', {data: row1, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, data13: row13, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
             
             });});});});});});
