@@ -204,11 +204,11 @@ async function startServer() {
         });
     });
 
-    app.get('/storedetail/:ID/:YearMonth', (req, res) => {
+    app.get('/storedetail/:ID?=YearMonth', (req, res) => {
         //db로부터 특정 테이블 조회 코드 작성
         const stores_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
+        const query50 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
         const query2 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
         const query3 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-03-01' and '2023-03-31'`;
         const query4 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-04-01' and '2023-04-30'`;
@@ -225,7 +225,7 @@ async function startServer() {
         const secondheader = ["YearMonth", "TotalPrice", "Count"];
         const thirdheader = ["UserID", "Name", "방문횟수"];
         
-        db.all(query, [stores_id], (err, row1) => {
+        db.all(query50, [stores_id], (err, row50) => {
             if(err){
                 console.error(err)
             }
@@ -289,7 +289,7 @@ async function startServer() {
                     console.error(err)
                 }
             
-            res.render('storedetail', {data: row1, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, data13: row13, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
+            res.render('storedetail', {data50: row50, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, data13: row13, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
             
             });});});});});});
                                 });

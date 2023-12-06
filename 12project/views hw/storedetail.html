@@ -41,11 +41,13 @@
             {% endfor %}
         </tr>
         {% for row in data %}
+        {% for row in data50 %}
         <tr>
             {% for secondheader in secondheaders %}
-                <td><a href="/storedetail/{{ row.ID }}">{{ row[secondheader] }}</a></td>
+                <td><a href="?={{ row.YearMonth }}">{{ row[secondheader] }} {{ row[secondheader] }}</a></td>
             {% endfor %}
         </tr>
+        {% endfor %}
         {% endfor %}
         {% for row in data2 %}
         <tr>
