@@ -46,19 +46,6 @@ async function dbData(table) {
     });
 };
 
-// async function f1234(){
-    
-    // const itemsPerPage = 15;
-
-    // page = req.query.page || 1;
-    // const startIndex = (page -1) * itemsPerPage;
-    // const endIndex = startIndex + itemsPerPage;
-    // const { total } = await dbData()
-    // const totalPages = Math.ceil(total / itemsPerPage);
-
-    // const realdata = total.slice(startIndex, endIndex);
-// }
-
 function startServer() {
     // app.get('/', (req, res) => {
     //     const itemsPerPage = 15;
@@ -86,7 +73,7 @@ function startServer() {
         query = `SELECT * FROM users LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
     
         db.all(query, (err, row) => {
-            const totalQuery = 'SELECT COUNT(*) as count FROM users';
+            const totalQuery = `SELECT COUNT(*) as count FROM users`;
             db.get(totalQuery, (err, result) => {
                 const totalPages = Math.ceil(result.count / itemsPerPage);
                 const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"];
@@ -102,20 +89,40 @@ function startServer() {
     
 
     app.get('/users', (req, res) => {
-        const { Name } = req.query;
-        let query;
-        if (Name) {
-            query = `SELECT * FROM users WHERE Name LIKE '%${Name}%'`;
-        } else {
-            //db로부터 특정 테이블 조회 코드 작성
-            query = `SELECT * FROM users`;
-            //get 방식으로 username 받아와서 사용자 검색하기
-            // 127.0.0.1:3001/users?username=user1
-        }
-        const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"]
+        const itemsPerPage = 15;
+        page = req.query.page || 1;
+        const startIndex = (page - 1) * itemsPerPage;
+        const searchName = req.query.name || '';
+        query = `SELECT * FROM users WHERE Name LIKE '%${searchName}%' LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
+    
         db.all(query, (err, row) => {
-            res.render('user', {data: row, headers: header});
+            const totalQuery = `SELECT COUNT(*) as count FROM users WHERE Name LIKE '%${searchName}%'`;
+            db.get(totalQuery, (err, result) => {
+                const totalPages = Math.ceil(result.count / itemsPerPage);
+                const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"];
+                res.render('index', {
+                    data: row,
+                    headers: header,
+                    pagebuttons: totalPages,
+                    page: parseInt(page),
+                    searchName: searchName
+                });
+            });
         });
+        // const { Name } = req.query;
+        // let query;
+        // if (Name) {
+        //     query = `SELECT * FROM users WHERE Name LIKE '%${Name}%'`;
+        // } else {
+        //     //db로부터 특정 테이블 조회 코드 작성
+        //     query = `SELECT * FROM users`;
+        //     //get 방식으로 username 받아와서 사용자 검색하기
+        //     // 127.0.0.1:3001/users?username=user1
+        // }
+        // const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"]
+        // db.all(query, (err, row) => {
+        //     res.render('user', {data: row, headers: header});
+        // });
     });
 
     app.get('/stores', (req, res) => {
