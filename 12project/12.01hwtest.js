@@ -81,28 +81,15 @@ function startServer() {
 
     app.get('/', (req, res) => {
         const itemsPerPage = 15;
-        const page = req.query.page || 1;
+        page = req.query.page || 1;
         const startIndex = (page - 1) * itemsPerPage;
         query = `SELECT * FROM users LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
     
         db.all(query, (err, row) => {
-            if (err) {
-                // Handle the error appropriately
-                console.error(err);
-                return res.status(500).send('Internal Server Error');
-            }
-    
-            // Retrieve the total count of records for calculating totalPages
-            const totalCountQuery = 'SELECT COUNT(*) as count FROM users';
-            db.get(totalCountQuery, (err, result) => {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).send('Internal Server Error');
-                }
-    
+            const totalQuery = 'SELECT COUNT(*) as count FROM users';
+            db.get(totalQuery, (err, result) => {
                 const totalPages = Math.ceil(result.count / itemsPerPage);
                 const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"];
-                // Pass the paginated data to the template
                 res.render('index', {
                     data: row,
                     headers: header,
