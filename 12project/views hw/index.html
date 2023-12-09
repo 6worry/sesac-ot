@@ -39,15 +39,25 @@
     </table>
     <div class="page">
         {% if page !=1 %}
-        <a href ='/?page={{ page - 1 }}'class="backbutton">이전</a>
+            <a href ='/?page={{ page - 1 }}'class="backbutton">이전</a>
         {% endif %}
-        {% for num in range(1, pagebuttons +1) %}
-        <a href ='/?page={{ num }}' {% if num == page %}class="current"{% endif %}>{{ num }}</a>
+        {% if page - 5 > 0 %}
+            {% set startPage = page - 5 %}
+        {% else %}
+            {% set startPage = 1 %}
+        {% endif %}
+        {% if page + 6 < pagebuttons %}
+            {% set endPage = page + 6 %}
+        {% else %}
+            {% set endPage = pagebuttons + 1 %}
+        {% endif %}
+        {% for num in range(startPage, endPage) %}
+            <a href ='/?page={{ num }}' {% if num == page %}class="current"{% endif %}>{{ num }}</a>
         {% endfor %}
         {% if page !=pagebuttons %}
             <a href ='/?page={{ page + 1 }}' class="gobutton">다음</a>
-            {% endif %}
-        </div>
+        {% endif %}
+    </div>
 </body>
 <script>
     // var data = {{ data | dump | safe}};
