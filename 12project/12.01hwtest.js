@@ -67,14 +67,14 @@ async function startServer() {
         page = req.query.page || 1;
         const startIndex = (page -1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        const totalPages = Math.ceil(startIndex / itemsPerPage);
+        const totalPages = Math.ceil(data.length / itemsPerPage);
     
         const realdata = data.slice(startIndex, endIndex);
         const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"]
         query = 'SELECT * FROM users'
         // res.render('index', {data: realdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
         db.all(query, (err, row) => {
-            res.render('index', {data: row, headers: header});
+            res.render('index', {data: row, headers: header, pagebuttons: totalPages, page: parseInt(page)});
         });
 
     });
