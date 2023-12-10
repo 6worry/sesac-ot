@@ -33,7 +33,7 @@
         </tr>
         {% endfor %}
     </table>
-    <h2>월간 매출액</h2>
+    <h2>일간 매출액</h2>
     <table id="detail">
         <tr>
             {% for secondheader in secondheaders %}
@@ -44,7 +44,7 @@
         <tr>
             {% for secondheader in secondheaders %}
                 <!-- <td><a href="?={{ row.YearMonth }}">{{ row[secondheader] }}</a></td> -->
-                <td><a href="/storedetail/{{ row.YearMonth }}">{{ row[secondheader] }}</a></td>
+                <td><a href="/storedetail/{{row.ID}}{{ row.YearMonth }}">{{ row[secondheader] }}</a></td>
             {% endfor %}
         </tr>
         {% endfor %}

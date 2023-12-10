@@ -214,102 +214,6 @@ function startServer() {
         });
     });
 
-    app.get('/storedetail/:ID?=YearMonth', (req, res) => {
-        //db로부터 특정 테이블 조회 코드 작성
-        const stores_id = req.params.ID;
-        // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query50 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
-        const query2 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
-        const query3 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-03-01' and '2023-03-31'`;
-        const query4 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-04-01' and '2023-04-30'`;
-        const query5 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-05-01' and '2023-05-31'`;
-        const query6 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-06-01' and '2023-06-30'`;
-        const query7 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-07-01' and '2023-07-31'`;
-        const query8 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-08-01' and '2023-08-31'`;
-        const query9 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-09-01' and '2023-09-30'`;
-        const query10 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-10-01' and '2023-10-31'`;
-        const query11 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-11-01' and '2023-11-30'`;
-        const query12 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-12-01' and '2023-12-31'`;
-        const query13 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수 from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? group by u.id order by Count(u.id) desc limit 10`;
-        const firstheader = ["Name", "Type", "Address"];
-        const secondheader = ["YearMonth", "TotalPrice", "Count"];
-        const thirdheader = ["UserID", "Name", "방문횟수"];
-        
-        db.all(query50, [stores_id], (err, row50) => {
-            if(err){
-                console.error(err)
-            }
-            
-            db.all(query2, [stores_id], (err, row2) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query3, [stores_id], (err, row3) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query4, [stores_id], (err, row4) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query5, [stores_id], (err, row5) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query6, [stores_id], (err, row6) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query7, [stores_id], (err, row7) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query8, [stores_id], (err, row8) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query9, [stores_id], (err, row9) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query10, [stores_id], (err, row10) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query11, [stores_id], (err, row11) => {
-                if(err){
-                    console.error(err)
-                }
-
-            db.all(query12, [stores_id], (err, row12) => {
-                if(err){
-                    console.error(err)
-                }
-            db.all(query13, [stores_id], (err, row13) => {
-                if(err){
-                    console.error(err)
-                }
-            
-            res.render('storedetail', {data50: row50, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, data13: row13, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
-            
-            });});});});});});
-                                });
-                            });
-                        });
-                    });
-                });
-            });
-        });
-    });
     app.get('/storedetail/:ID', (req, res) => {
         //db로부터 특정 테이블 조회 코드 작성
         const stores_id = req.params.ID;
@@ -328,10 +232,101 @@ function startServer() {
         const query11 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-11-01' and '2023-11-30'`;
         const query12 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-12-01' and '2023-12-31'`;
         const query13 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수 from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? group by u.id order by Count(u.id) desc limit 10`;
+
+        const Query = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`; // 뒤에 group by YearMonth
+        const Query2 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
+        const Query3 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-03-01' and '2023-03-31'`;
+        const Query4 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-04-01' and '2023-04-30'`;
+        const Query5 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-05-01' and '2023-05-31'`;
+        const Query6 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-06-01' and '2023-06-30'`;
+        const Query7 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-07-01' and '2023-07-31'`;
+        const Query8 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-08-01' and '2023-08-31'`;
+        const Query9 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-09-01' and '2023-09-30'`;
+        const Query10 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-10-01' and '2023-10-31'`;
+        const Query11 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-11-01' and '2023-11-30'`;
+        const Query12 = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-12-01' and '2023-12-31'`;
+        const Query13 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수 from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? group by u.id order by Count(u.id) desc limit 10`; //? 뒤에 and o.OrderAt between '${yearmonth}-01' and '${yearmonth}-31' 
+
         const firstheader = ["Name", "Type", "Address"];
         const secondheader = ["YearMonth", "TotalPrice", "Count"];
         const thirdheader = ["UserID", "Name", "방문횟수"];
         
+        
+            db.all(Query, [stores_id, yearMonth], (err, row1) => {
+                if(err){
+                    console.error(err)
+                }
+                
+                db.all(Query2, [stores_id, yearMonth], (err, row2) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query3, [stores_id, yearMonth], (err, row3) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query4, [stores_id, yearMonth], (err, row4) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query5, [stores_id, yearMonth], (err, row5) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query6, [stores_id, yearMonth], (err, row6) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query7, [stores_id, yearMonth], (err, row7) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query8, [stores_id, yearMonth], (err, row8) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query9, [stores_id, yearMonth], (err, row9) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query10, [stores_id, yearMonth], (err, row10) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query11, [stores_id, yearMonth], (err, row11) => {
+                    if(err){
+                        console.error(err)
+                    }
+    
+                db.all(Query12, [stores_id, yearMonth], (err, row12) => {
+                    if(err){
+                        console.error(err)
+                    }
+                db.all(Query13, [stores_id, yearMonth], (err, row13) => {
+                    if(err){
+                        console.error(err)
+                    }
+                
+                res.render('storedetail2', {data: row1, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, data13: row13, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
+                
+                });});});});});});
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+
         db.all(query, [stores_id], (err, row1) => {
             if(err){
                 console.error(err)
@@ -406,7 +401,105 @@ function startServer() {
                 });
             });
         });
+    
     });
+
+    // app.get('/storedetail/:YearMonth', (req, res) => {
+    //     //db로부터 특정 테이블 조회 코드 작성
+    //     const stores_id = req.params.ID;
+    //     // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
+    //     const query = `SELECT Substr(o.OrderAt, 1, 10) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
+    //     const query2 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
+    //     const query3 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-03-01' and '2023-03-31'`;
+    //     const query4 = `SELECT o.OrderAt AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-04-01' and '2023-04-30'`;
+    //     const query5 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-05-01' and '2023-05-31'`;
+    //     const query6 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-06-01' and '2023-06-30'`;
+    //     const query7 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-07-01' and '2023-07-31'`;
+    //     const query8 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-08-01' and '2023-08-31'`;
+    //     const query9 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-09-01' and '2023-09-30'`;
+    //     const query10 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-10-01' and '2023-10-31'`;
+    //     const query11 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-11-01' and '2023-11-30'`;
+    //     const query12 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-12-01' and '2023-12-31'`;
+    //     const query13 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수 from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? group by u.id order by Count(u.id) desc limit 10`;
+    //     const firstheader = ["Name", "Type", "Address"];
+    //     const secondheader = ["YearMonth", "TotalPrice", "Count"];
+    //     const thirdheader = ["UserID", "Name", "방문횟수"];
+        
+    //     db.all(query, [stores_id], (err, row1) => {
+    //         if(err){
+    //             console.error(err)
+    //         }
+            
+    //         db.all(query2, [stores_id], (err, row2) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query3, [stores_id], (err, row3) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query4, [stores_id], (err, row4) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query5, [stores_id], (err, row5) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query6, [stores_id], (err, row6) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query7, [stores_id], (err, row7) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query8, [stores_id], (err, row8) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query9, [stores_id], (err, row9) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query10, [stores_id], (err, row10) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query11, [stores_id], (err, row11) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+
+    //         db.all(query12, [stores_id], (err, row12) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+    //         db.all(query13, [stores_id], (err, row13) => {
+    //             if(err){
+    //                 console.error(err)
+    //             }
+            
+    //         res.render('storedetail2', {data: row1, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, data13: row13, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
+            
+    //         });});});});});});
+    //                             });
+    //                         });
+    //                     });
+    //                 });
+    //             });
+    //         });
+    //     });
+    // });
 
     app.get('/itemdetail/:ID', (req, res) => {
         //db로부터 특정 테이블 조회 코드 작성
