@@ -25,7 +25,7 @@
                 <th>{{ firstheader }}</th>
             {% endfor %}
         </tr>
-        {% for row in data %}
+        {% for row in data3 %}
         <tr class="button" type="button">
             {% for firstheader in firstheaders %}
                 <td>{{ row[firstheader] }}</td>
@@ -44,91 +44,7 @@
         <tr>
             {% for secondheader in secondheaders %}
                 <!-- <td><a href="?={{ row.YearMonth }}">{{ row[secondheader] }}</a></td> -->
-                <td><a href="/storedetail/{{ row.YearMonth }}">{{ row[secondheader] }}</a></td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data2 %}
-        <tr>
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data3 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data4 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data5 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data6 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data7 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data8 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data9 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data10 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data11 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data12 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        {% for row in data15 %}
-        <tr class="button" type="button">
-            {% for secondheader in secondheaders %}
-                <td>{{ row[secondheader] }}</td>
+                <td><a href="/storedetail2/{{ row.ID }}/{{row.YearMonth}}">{{ row[secondheader] }}</a></td>
             {% endfor %}
         </tr>
         {% endfor %}
@@ -140,7 +56,7 @@
                 <th>{{ thirdheader }}</th>
             {% endfor %}
         </tr>
-        {% for row in data13 %}
+        {% for row in data2 %}
         <tr class="button" type="button">
             {% for thirdheader in thirdheaders %}
                 <td>{{ row[thirdheader] }}</td>
