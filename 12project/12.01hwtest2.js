@@ -189,11 +189,12 @@ function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const stores_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT strftime('%Y-%m', o.OrderAt) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address, s.ID FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? GROUP BY strftime('%m', o.OrderAt)`;
-        
-        const query2 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수, s.ID from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? group by u.id order by Count(u.id) desc limit 10`;
+        const query = `Select s.Name, s.Type, s.Address from stores s WHERE s.id=?`
 
-        const query3 = `Select s.Name, s.Type, s.Address from stores s WHERE s.id=?`
+        const query2 = `SELECT strftime('%Y-%m', o.OrderAt) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address, s.ID FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? GROUP BY strftime('%m', o.OrderAt)`;
+        
+        const query3 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수, s.ID from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? group by u.id order by Count(u.id) desc limit 10`;
+
         
         const firstheader = ["Name", "Type", "Address"];
         const secondheader = ["YearMonth", "TotalPrice", "Count"];
@@ -226,12 +227,12 @@ function startServer() {
         const stores_id = req.params.ID;
         const YearMonth = req.params.YearMonth;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `SELECT strftime('%Y-%m-%d', o.OrderAt) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and strftime('%Y-%m', o.OrderAt) = '${YearMonth}' group by strftime('%Y-%m-%d', o.OrderAt)`;
+        const query = `Select s.Name, s.Type, s.Address from stores s WHERE s.id=?`
 
-        const query2 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수 from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? and strftime('%Y-%m', o.OrderAt) = '${YearMonth}' group by strftime('%Y-%m-%d', o.OrderAt)order by COunt(u.id) desc`;
+        const query2 = `SELECT strftime('%Y-%m-%d', o.OrderAt) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and strftime('%Y-%m', o.OrderAt) = '${YearMonth}' group by strftime('%Y-%m-%d', o.OrderAt)`;
+
+        const query3 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수 from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? and strftime('%Y-%m', o.OrderAt) = '${YearMonth}' group by strftime('%Y-%m-%d', o.OrderAt)order by COunt(u.id) desc`;
         
-        const query3 = `Select s.Name, s.Type, s.Address from stores s WHERE s.id=?`
-
         const firstheader = ["Name", "Type", "Address"];
         const secondheader = ["YearMonth", "TotalPrice", "Count"];
         const thirdheader = ["UserID", "Name", "방문횟수"];
