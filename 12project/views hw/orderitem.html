@@ -20,8 +20,10 @@
     </nav>
     <h1>장바구니</h1>
     <table>
-        <input type="text" name="name">
-        <button type="submit">검색</button>
+        <form action="/orderitems" method="get">
+            <input type="text" name="name">
+            <button type="submit">검색</button>
+        </form>
         <tr>
             {% for header in headers %}
                 <th>{{ header }}</th>
@@ -35,6 +37,27 @@
         </tr>
         {% endfor %}
     </table>
+    <div class="page">
+        {% if page !=1 %}
+            <a href ='/?page={{ page - 1 }}'class="backbutton">이전</a>
+        {% endif %}
+        {% if page - 5 > 0 %}
+            {% set startPage = page - 5 %}
+        {% else %}
+            {% set startPage = 1 %}
+        {% endif %}
+        {% if page + 6 < pagebuttons %}
+            {% set endPage = page + 6 %}
+        {% else %}
+            {% set endPage = pagebuttons + 1 %}
+        {% endif %}
+        {% for num in range(startPage, endPage) %}
+            <a href ='/?page={{ num }}' {% if num == page %}class="current"{% endif %}>{{ num }}</a>
+        {% endfor %}
+        {% if page !=pagebuttons %}
+            <a href ='/?page={{ page + 1 }}' class="gobutton">다음</a>
+        {% endif %}
+    </div>
     <a href="/">뒤로가기</a>
 </body>
 </html>

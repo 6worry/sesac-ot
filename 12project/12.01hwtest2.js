@@ -78,71 +78,73 @@ function startServer() {
     });
 
     app.get('/stores', (req, res) => {
-        const { Name } = req.query;
-        let query;
-        if (Name) {
-            query = `SELECT * FROM stores WHERE Name LIKE '%${Name}%'`;
-        } else {
-            //db로부터 특정 테이블 조회 코드 작성
-            query = `SELECT * FROM stores`;
-            //get 방식으로 username 받아와서 사용자 검색하기
-            // 127.0.0.1:3001/users?username=user1
-        }
-            const header = ["ID", "Name", "Type", "Address"]
+        const itemsPerPage = 15;
+        page = req.query.page || 1;
+        const startIndex = (page - 1) * itemsPerPage;
+        const searchName = req.query.name || '';
+        query = `SELECT * FROM stores WHERE Name LIKE '%${searchName}%' LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
         db.all(query, (err, row) => {
-            res.render('store', {data: row, headers: header});
-        });
+            const totalQuery = `SELECT COUNT(*) as count FROM stores WHERE Name LIKE '%${searchName}%'`;
+            db.get(totalQuery, (err, result) => {
+                const totalPages = Math.ceil(result.count / itemsPerPage);
+            const header = ["ID", "Name", "Type", "Address"]
+            res.render('store', {
+                data: row,
+                headers: header,
+                pagebuttons: totalPages,
+                page: parseInt(page),
+                searchName: searchName});
+            
+            });});
     });
 
     app.get('/orders', (req, res) => {
-        const { OrderAt } = req.query;
-        let query;
-        if (OrderAt) {
-            query = `SELECT * FROM orders WHERE Name LIKE '%${OrderAt}%'`;
-        } else {
-            //db로부터 특정 테이블 조회 코드 작성
-            query = `SELECT * FROM orders`;
-            //get 방식으로 username 받아와서 사용자 검색하기
-            // 127.0.0.1:3001/users?username=user1
-        }
-        const header = ["ID", "OrderAt", "StoreID", "UserID"]
+        const itemsPerPage = 15;
+        page = req.query.page || 1;
+        const startIndex = (page - 1) * itemsPerPage;
+        const searchName = req.query.name || '';
+        query = `SELECT * FROM orders WHERE OrderAt LIKE '%${searchName}%' LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
         db.all(query, (err, row) => {
-            res.render('order', {data: row, headers: header});
-        });
+            const totalQuery = `SELECT COUNT(*) as count FROM orders WHERE OrderAt LIKE '%${searchName}%'`;
+            db.get(totalQuery, (err, result) => {
+                const totalPages = Math.ceil(result.count / itemsPerPage);
+        const header = ["ID", "OrderAt", "StoreID", "UserID"]
+            res.render('order', {
+                data: row,
+                headers: header,
+                pagebuttons: totalPages,
+                page: parseInt(page),
+                searchName: searchName});
+        });});
     });
 
     app.get('/items', (req, res) => {
-        const { Name } = req.query;
-        let query;
-        if (Name) {
-            query = `SELECT * FROM items WHERE Name LIKE '%${Name}%'`;
-        } else {
-            //db로부터 특정 테이블 조회 코드 작성
-            query = `SELECT * FROM items`;
-            //get 방식으로 username 받아와서 사용자 검색하기
-            // 127.0.0.1:3001/users?username=user1
-        }
+        const searchName = req.query.name || '';
+        query = `SELECT * FROM items WHERE Name LIKE '%${searchName}%'`; 
         const header = ["ID", "Name", "Type", "UnitPrice"]
         db.all(query, (err, row) => {
-            res.render('item', {data: row, headers: header});
+            res.render('item', {data: row, headers: header, searchName: searchName});
         });
     });
 
     app.get('/orderitems', (req, res) => {
-        const { ID } = req.query;
-        let query;
-        if (ID) {
-            query = `SELECT * FROM orderitems WHERE Name LIKE '%${ID}%'`;
-        } else {
-            //db로부터 특정 테이블 조회 코드 작성
-            query = `SELECT * FROM orderitems`;
-            //get 방식으로 username 받아와서 사용자 검색하기
-            // 127.0.0.1:3001/users?username=user1
-        }
-        const header = ["ID", "OrderID", "ItemID"]
+        const itemsPerPage = 15;
+        page = req.query.page || 1;
+        const startIndex = (page - 1) * itemsPerPage;
+        const searchName = req.query.name || '';
+        query = `SELECT * FROM orderitems WHERE ItemID LIKE '%${searchName}%' LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
         db.all(query, (err, row) => {
-            res.render('orderitem', {data: row, headers: header});
-        });
+            const totalQuery = `SELECT COUNT(*) as count FROM orderitems WHERE ItemID LIKE '%${searchName}%'`;
+            db.get(totalQuery, (err, result) => {
+                const totalPages = Math.ceil(result.count / itemsPerPage);
+            const header = ["ID", "OrderID", "ItemID"]
+            res.render('orderitem', {
+                data: row,
+                headers: header,
+                pagebuttons: totalPages,
+                page: parseInt(page),
+                searchName: searchName});
+        });});
     });
 
     app.get('/userdetail/:ID', (req, res) => {
