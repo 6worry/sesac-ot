@@ -28,9 +28,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// let data = []; // 읽은 데이터를 담을 곳
-// const header = [];
-
 function startServer() {
     app.get('/', (req, res) => {
         const itemsPerPage = 15;
@@ -83,19 +80,21 @@ function startServer() {
         const startIndex = (page - 1) * itemsPerPage;
         const searchName = req.query.name || '';
         query = `SELECT * FROM stores WHERE Name LIKE '%${searchName}%' LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
+
         db.all(query, (err, row) => {
             const totalQuery = `SELECT COUNT(*) as count FROM stores WHERE Name LIKE '%${searchName}%'`;
             db.get(totalQuery, (err, result) => {
                 const totalPages = Math.ceil(result.count / itemsPerPage);
-            const header = ["ID", "Name", "Type", "Address"]
-            res.render('store', {
-                data: row,
-                headers: header,
-                pagebuttons: totalPages,
-                page: parseInt(page),
-                searchName: searchName});
-            
-            });});
+                const header = ["ID", "Name", "Type", "Address"];
+                res.render('store', {
+                    data: row,
+                    headers: header,
+                    pagebuttons: totalPages,
+                    page: parseInt(page),
+                    searchName: searchName
+                });
+            });
+        });
     });
 
     app.get('/orders', (req, res) => {
@@ -104,24 +103,28 @@ function startServer() {
         const startIndex = (page - 1) * itemsPerPage;
         const searchName = req.query.name || '';
         query = `SELECT * FROM orders WHERE OrderAt LIKE '%${searchName}%' LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
+
         db.all(query, (err, row) => {
             const totalQuery = `SELECT COUNT(*) as count FROM orders WHERE OrderAt LIKE '%${searchName}%'`;
             db.get(totalQuery, (err, result) => {
                 const totalPages = Math.ceil(result.count / itemsPerPage);
-        const header = ["ID", "OrderAt", "StoreID", "UserID"]
-            res.render('order', {
-                data: row,
-                headers: header,
-                pagebuttons: totalPages,
-                page: parseInt(page),
-                searchName: searchName});
-        });});
+                const header = ["ID", "OrderAt", "StoreID", "UserID"];
+                res.render('order', {
+                    data: row,
+                    headers: header,
+                    pagebuttons: totalPages,
+                    page: parseInt(page),
+                    searchName: searchName
+                });
+            });
+        });
     });
 
     app.get('/items', (req, res) => {
         const searchName = req.query.name || '';
         query = `SELECT * FROM items WHERE Name LIKE '%${searchName}%'`; 
-        const header = ["ID", "Name", "Type", "UnitPrice"]
+        const header = ["ID", "Name", "Type", "UnitPrice"];
+
         db.all(query, (err, row) => {
             res.render('item', {data: row, headers: header, searchName: searchName});
         });
@@ -132,30 +135,32 @@ function startServer() {
         page = req.query.page || 1;
         const startIndex = (page - 1) * itemsPerPage;
         const searchName = req.query.name || '';
-        query = `SELECT * FROM orderitems WHERE ItemID LIKE '%${searchName}%' LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
+        query = `SELECT * FROM orderitems WHERE OrderID LIKE '%${searchName}%' or ItemID LIKE '%${searchName}%' LIMIT ${itemsPerPage} OFFSET ${startIndex}`;
+
         db.all(query, (err, row) => {
-            const totalQuery = `SELECT COUNT(*) as count FROM orderitems WHERE ItemID LIKE '%${searchName}%'`;
+            const totalQuery = `SELECT COUNT(*) as count FROM orderitems WHERE OrderID LIKE '%${searchName}%' or ItemID LIKE '%${searchName}%'`;
             db.get(totalQuery, (err, result) => {
                 const totalPages = Math.ceil(result.count / itemsPerPage);
-            const header = ["ID", "OrderID", "ItemID"]
-            res.render('orderitem', {
-                data: row,
-                headers: header,
-                pagebuttons: totalPages,
-                page: parseInt(page),
-                searchName: searchName});
-        });});
+                const header = ["ID", "OrderID", "ItemID"];
+                res.render('orderitem', {
+                    data: row,
+                    headers: header,
+                    pagebuttons: totalPages,
+                    page: parseInt(page),
+                    searchName: searchName
+                });
+            });
+        });
     });
 
     app.get('/userdetail/:ID', (req, res) => {
         //db로부터 특정 테이블 조회 코드 작성
         const users_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `Select * from users u WHERE u.id=?`
+        const query = `Select * from users u WHERE u.id=?`;
         const query2 = `SELECT o.ID AS OrderID, * FROM users u join orders o on u.ID = o.UserID WHERE u.id =?`;
-        const query3 = `Select s.Name, Count(s.Name) from users u join orders o on u.ID = o.UserID join stores s on s.ID = o.StoreID WHERE u.id=? group by s.Name order by Count(s.Name) desc limit 5`
-        const query4 = `Select i.Name, Count(i.Name) from users u join orders o on u.ID = o.UserID join stores s on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE u.id=? group by s.Name order by Count(i.Name) desc limit 5`
-        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
+        const query3 = `Select s.Name, Count(s.Name) from users u join orders o on u.ID = o.UserID join stores s on s.ID = o.StoreID WHERE u.id=? group by s.Name order by Count(s.Name) desc limit 5`;
+        const query4 = `Select i.Name, Count(i.Name) from users u join orders o on u.ID = o.UserID join stores s on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE u.id=? group by s.Name order by Count(i.Name) desc limit 5`;
         
         const firstheader = ["Name", "Gender", "Age", "Birthdate", "Address"];
         const secondheader = ["OrderID", "OrderAt", "StoreID"];
@@ -163,27 +168,33 @@ function startServer() {
         const secondcontent = ["Count(s.Name)"];
         const thirdcontent = ["Name"];
         const fourthcontent = ["Count(i.Name)"];
+
         db.all(query, [users_id], (err, row) => {
             if(err){
-                console.error(err)
-            }
+                console.error(err);
+            };
             
         db.all(query2, [users_id], (err, row2) => {
             if(err){
-                console.error(err)
-            }
+                console.error(err);
+            };
+
         db.all(query3, [users_id], (err, row3) => {
             if(err){
-                console.error(err)
-            }
+                console.error(err);
+            };
+
         db.all(query4, [users_id], (err, row4) => {
             if(err){
-                console.error(err)
-            }
-            res.render('userdetail', {data: row, data2: row2, data3: row3, data4: row4, firstheaders: firstheader, secondheaders: secondheader, firstcontents: firstcontent, secondcontents: secondcontent, thirdcontents: thirdcontent, fourthcontents: fourthcontent});
-                    });
-                });
+                console.error(err);
+            };
+
+            res.render('userdetail', {
+                data: row, data2: row2, data3: row3, data4: row4, firstheaders: firstheader, secondheaders: secondheader, firstcontents: firstcontent, secondcontents: secondcontent, thirdcontents: thirdcontent, fourthcontents: fourthcontent
             });
+        });
+        });
+        });
         });
     });
 
@@ -191,7 +202,7 @@ function startServer() {
         //db로부터 특정 테이블 조회 코드 작성
         const stores_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `Select s.Name, s.Type, s.Address from stores s WHERE s.id=?`
+        const query = `Select s.Name, s.Type, s.Address from stores s WHERE s.id=?`;
 
         const query2 = `SELECT strftime('%Y-%m', o.OrderAt) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address, s.ID FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? GROUP BY strftime('%m', o.OrderAt)`;
         
@@ -204,24 +215,25 @@ function startServer() {
         
         db.all(query, [stores_id], (err, row1) => {
             if(err){
-                console.error(err)
-            }
+                console.error(err);
+            };
             
-            db.all(query2, [stores_id], (err, row2) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query2, [stores_id], (err, row2) => {
+            if(err){
+                console.error(err);
+            };
             
-            db.all(query3, [stores_id], (err, row3) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query3, [stores_id], (err, row3) => {
+            if(err){
+                console.error(err);
+            };
             
-            res.render('storedetail', {data: row1, data2: row2, data3: row3, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
-        });
+            res.render('storedetail', {
+                data: row1, data2: row2, data3: row3, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader
             });
         });
-    
+        });
+        });
     });
 
     app.get('/storedetail2/:ID/:YearMonth', (req, res) => {
@@ -229,7 +241,7 @@ function startServer() {
         const stores_id = req.params.ID;
         const YearMonth = req.params.YearMonth;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
-        const query = `Select s.Name, s.Type, s.Address from stores s WHERE s.id=?`
+        const query = `Select s.Name, s.Type, s.Address from stores s WHERE s.id=?`;
 
         const query2 = `SELECT strftime('%Y-%m-%d', o.OrderAt) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and strftime('%Y-%m', o.OrderAt) = '${YearMonth}' group by strftime('%Y-%m-%d', o.OrderAt)`;
 
@@ -241,22 +253,24 @@ function startServer() {
         
         db.all(query, [stores_id], (err, row1) => {
             if(err){
-                console.error(err)
-            }
+                console.error(err);
+            };
             
-            db.all(query2, [stores_id], (err, row2) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query2, [stores_id], (err, row2) => {
+            if(err){
+                console.error(err);
+            };
             
-            db.all(query3, [stores_id], (err, row3) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query3, [stores_id], (err, row3) => {
+            if(err){
+                console.error(err);
+            };
         
-            res.render('storedetail2', {data: row1, data2: row2, data3: row3, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader});
-                });
+            res.render('storedetail2', {
+                data: row1, data2: row2, data3: row3, firstheaders: firstheader, secondheaders: secondheader, thirdheaders: thirdheader
             });
+        });
+        });
         });
     });
 
@@ -288,80 +302,86 @@ function startServer() {
         const query11 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-11-01' and '2023-11-30'`;
 
         const query12 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(i.id) AS Count, * FROM items i join orderitems oi on i.ID = oi.ItemID join orders o on o.ID = oi.OrderID WHERE i.id =? and o.OrderAt between '2023-12-01' and '2023-12-31'`;
-        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["Name", "UnitPrice"];
         const secondheader = ["YearMonth", "TotalPrice", "Count"];
         
         db.all(query, [items_id], (err, row1) => {
             if(err){
-                console.error(err)
-            }
+                console.error(err);
+            };
             
-            db.all(query2, [items_id], (err, row2) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query2, [items_id], (err, row2) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query3, [items_id], (err, row3) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query3, [items_id], (err, row3) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query4, [items_id], (err, row4) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query4, [items_id], (err, row4) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query5, [items_id], (err, row5) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query5, [items_id], (err, row5) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query6, [items_id], (err, row6) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query6, [items_id], (err, row6) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query7, [items_id], (err, row7) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query7, [items_id], (err, row7) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query8, [items_id], (err, row8) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query8, [items_id], (err, row8) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query9, [items_id], (err, row9) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query9, [items_id], (err, row9) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query10, [items_id], (err, row10) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query10, [items_id], (err, row10) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query11, [items_id], (err, row11) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query11, [items_id], (err, row11) => {
+            if(err){
+                console.error(err);
+            };
 
-            db.all(query12, [items_id], (err, row12) => {
-                if(err){
-                    console.error(err)
-                }
+        db.all(query12, [items_id], (err, row12) => {
+            if(err){
+                console.error(err);
+            };
             
-            res.render('itemdetail', {data: row1, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, firstheaders: firstheader, secondheaders: secondheader});
-            
-            });});});});});
-                                });
-                            });
-                        });
-                    });
-                });
+            res.render('itemdetail', {
+                data: row1, data2: row2, data3: row3, data4: row4, data5: row5, data6: row6, data7: row7, data8: row8, data9: row9, data10: row10, data11: row11, data12: row12, firstheaders: firstheader, secondheaders: secondheader
             });
+        });
+        });
+        });
+        });
+        });
+
+        });
+        });
+        });
+        });
+        });
+        
+        });
         });
     });
 
@@ -370,7 +390,6 @@ function startServer() {
         const orders_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
         const query = `SELECT oi.ID AS OrderitemID, i.Name AS Item, * FROM orders o join orderitems oi on o.ID = oi.OrderID join items i on i.ID = oi.ItemID WHERE o.id =?`;
-        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
     
         const firstheader = ["OrderitemID", "OrderID", "ItemID", "Item"];
         
@@ -384,7 +403,6 @@ function startServer() {
         const orderitems_id = req.params.ID;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
         const query = `SELECT * FROM orderitems oi join orders o on o.ID = oi.OrderID WHERE oi.id =?`;
-        // const query = `SELECT * FROM users u join order o on u.ID = o.UserID WHERE id =?`;
         
         const firstheader = ["OrderID", "OrderAt", "StoreID", "UserID"];
         
@@ -392,25 +410,6 @@ function startServer() {
             res.render('orderitemdetail', {data: row, firstheaders: firstheader});
         });
     });
-
-    // app.get("/users", (req, res) => {
-    //     const itemsPerPage = 15;
-
-    //     page = req.query.page || 1;
-    //     const username = req.query.name
-    //     const searchdata = data.filter((d) => d.name && d.name.includes(username));
-    //     const totalPages = Math.ceil(data.length / itemsPerPage);
-    
-    //     res.render("index", {data: searchdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
-    //   });
-
-    // app.get('/users/:id', (req, res) => {
-        
-    //     const userid = req.params.id;
-    //     const user = (data.find((d) => d.id == userid));
-
-    //     res.render("user", {data: user, headers: header, page: parseInt(page)});
-    // });
 
     app.listen(port, () => {
         console.log(`${port}번 실행 완료`);
