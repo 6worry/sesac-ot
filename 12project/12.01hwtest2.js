@@ -28,8 +28,8 @@ app.use((req, res, next) => {
     next();
 });
 
-let data = []; // 읽은 데이터를 담을 곳
-const header = [];
+// let data = []; // 읽은 데이터를 담을 곳
+// const header = [];
 
 function startServer() {
     app.get('/', (req, res) => {
@@ -231,7 +231,7 @@ function startServer() {
 
         const query2 = `SELECT strftime('%Y-%m-%d', o.OrderAt) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and strftime('%Y-%m', o.OrderAt) = '${YearMonth}' group by strftime('%Y-%m-%d', o.OrderAt)`;
 
-        const query3 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수 from stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? and strftime('%Y-%m', o.OrderAt) = '${YearMonth}' group by strftime('%Y-%m-%d', o.OrderAt)order by COunt(u.id) desc`;
+        const query3 = `Select u.ID AS UserID, u.Name, Count(u.id) AS 방문횟수 From stores s join orders o on s.ID = o.StoreID join users u on u.ID = o.UserID WHERE s.id = ? and strftime('%Y-%m', o.OrderAt) = '${YearMonth}' group by strftime('%Y-%m-%d', o.OrderAt) order by Count(u.id) desc`;
         
         const firstheader = ["Name", "Type", "Address"];
         const secondheader = ["YearMonth", "TotalPrice", "Count"];

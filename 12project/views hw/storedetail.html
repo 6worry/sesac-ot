@@ -43,7 +43,6 @@
         {% for row in data2 %}
         <tr>
             {% for secondheader in secondheaders %}
-                <!-- <td><a href="?={{ row.YearMonth }}">{{ row[secondheader] }}</a></td> -->
                 <td><a href="/storedetail2/{{ row.ID }}/{{row.YearMonth}}">{{ row[secondheader] }}</a></td>
             {% endfor %}
         </tr>
@@ -59,7 +58,7 @@
         {% for row in data3 %}
         <tr class="button" type="button">
             {% for thirdheader in thirdheaders %}
-                <td>{{ row[thirdheader] }}</td>
+                <td><a href="/userdetail/{{ row.UserID }}">{{ row[thirdheader] }}</a></td>
             {% endfor %}
         </tr>
         {% endfor %}
