@@ -15,9 +15,9 @@
 8. select count(*) from invoices where invoicedate between '2009-01-01' and '2009-12-31' or invoicedate between '2011-01-01' and '2011-12-31';
 
 9. SELECT strftime('%Y', invoicedate) as '각 연도', SUM(total)
-FROM invoices
-GROUP BY strftime('%Y', invoicedate)
-ORDER BY strftime('%Y', invoicedate);
+    FROM invoices
+    GROUP BY strftime('%Y', invoicedate)
+    ORDER BY strftime('%Y', invoicedate);
 
 10. select count(ii.invoiceid) from invoice_items ii join invoices i on ii.invoicelineid=i.invoiceid where ii.invoiceid=37;
 
