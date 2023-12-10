@@ -47,25 +47,6 @@ async function dbData(table) {
 };
 
 function startServer() {
-    // app.get('/', (req, res) => {
-    //     const itemsPerPage = 15;
-
-    //     page = req.query.page || 1;
-    //     const startIndex = (page -1) * itemsPerPage;
-    //     const endIndex = startIndex + itemsPerPage;
-    //     const totalPages = Math.ceil(data.length / itemsPerPage);
-    
-    //     const realdata = data.slice(startIndex, endIndex);
-    //     const result = {}
-    //     const header = ["ID", "Name", "Gender", "Age", "Birthdate", "Address"]
-    //     query = 'SELECT * FROM users'
-    //     // res.render('index', {data: realdata, headers: header, pagebuttons: totalPages, page: parseInt(page)});
-    //     db.all(query, (err, row) => {
-    //         res.render('index', {data: row, headers: header, pagebuttons: totalPages, page: parseInt(page)});
-    //     });
-
-    // });
-
     app.get('/', (req, res) => {
         const itemsPerPage = 15;
         page = req.query.page || 1;
@@ -332,6 +313,7 @@ function startServer() {
     app.get('/storedetail/:ID', (req, res) => {
         //db로부터 특정 테이블 조회 코드 작성
         const stores_id = req.params.ID;
+        const yearMonth = req.query.YearMonth;
         // const query = `SELECT * FROM ${db_table} WHERE id = ${table_id}`;
         const query = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-01-01' and '2023-01-31'`;
         const query2 = `SELECT Substr(o.OrderAt, 1, 7) AS YearMonth, Sum(i.UnitPrice) AS TotalPrice, Count(s.id) AS Count, s.Name, s.Type, s.Address FROM stores s join orders o on s.ID = o.StoreID join orderitems oi on o.ID = oi.OrderID join items i on oi.ItemID = i.ID WHERE s.id =? and o.OrderAt between '2023-02-01' and '2023-02-28'`;
