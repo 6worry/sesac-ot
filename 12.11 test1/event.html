@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <style>
+        #myDiv {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv"><span id="displayText">Hover Me</span></div>
+    <button id="changeColorBtn">색바꾸기</button>
+    <script>
+        $(document).ready(function() {
+            var myDiv = $('#myDiv');
+            var displayText = $('#displayText');
+
+            $('#changeColorBtn').click(function() {
+                var randomcolor = getRandomColor();
+                $('#myDiv').css('background-color', randomcolor);
+            });
+
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+
+                for(var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                };
+                return color;
+            };
+
+            myDiv.hover(
+                function() {
+                    var currentColor = myDiv.css('background-color');
+                    displayText.text('Current Color: ' + currentColor);
+                },
+                function(){
+                    displayText.text('Hover me');
+                    displayText.css('color', 'black');
+                
+            });
+        });
+    </script>
+</body>
+</html>

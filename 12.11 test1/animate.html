@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <style>
+        .myDiv {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            background-color: aqua;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1" class="myDiv" style="background-color: aqua;"></div>
+    <div id="box2" class="myDiv" style="background-color: yellow;"></div>
+    <div id="box3" class="myDiv" style="background-color: yellowgreen;"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#box1').click(function() {
+                $(this).fadeOut().fadeIn();
+            });
+
+            $('#box2').click(function() {
+                $(this).slideUp().slideDown();
+            });
+
+            $('#box3').click(function() {
+                $(this).animate({
+                    opacity: 0.6,
+                    width: '50%'
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
