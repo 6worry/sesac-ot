@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jjjqueerryy</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <h1>Shopping List</h1>
+    <ul id="ShoppingList">
+        <li>빵</li>
+        <li>우유</li>
+        <li>계란</li>
+    </ul>
+    <input text="text" id="newItem" placeholder="상품추가해"/>
+    <button id="addItemBtn">상품 추가</button>
+    <script>
+        $(document).ready(function() {
+            $('#addItemBtn').click(function() {
+                var newItem = $('#newItem').val();
+
+                if(newItem !== '') {
+                    $('#ShoppingList').append('<li>' + newItem + '</li>');
+                };
+
+                $('#newItem').val('');
+            });
+        });
+
+
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     var addItemBtn = document.getElementById('addItemBtn');
+        //     addItemBtn.addEventListener('click', function() {
+        //         var newItemInput = document.getElementById('newItem');
+        //         var newItemValue = newItemInput.value;
+
+        //         if(newItemValue.trim() !== '') {
+        //             var ShoppingList = document.getElementById('Shopping List');
+        //             var newItemElement = document.createElement('li');
+        //             newItemElement.textContent = newItemValue;
+
+        //             ShoppingList.appendChild(newItemElement);
+
+        //             newItemElement.value = '';
+        //         };
+        //     });
+        // });
+    </script>
+</body>
+</html>
