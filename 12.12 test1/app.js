@@ -1,10 +1,15 @@
 const express = require('express');
 const session = require('express-session');
 const flash = require('express-flash');
+const nunjucks = require('nunjucks');
 
 const app = express();
 const port = 3009;
 
+nunjucks.configure('view', {
+    express: app
+});
+app.set('view engine', 'html');
 app.use(session({
     secret: 'qwer',
     resave: false,
@@ -20,7 +25,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/message', (req, res) => {
-    res.send(req.flash('info'));
+    // res.send(req.flash('info'));
+    res.render('message', { messages: req.flash() });
 });
 
 app.listen(port, () => {
