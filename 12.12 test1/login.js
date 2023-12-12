@@ -29,21 +29,27 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    const successMessage = req.flash('success');
-    const errorMessage = req.flash('error');
-    res.render('login', { successMessage, errorMessage})
-})
+    res.render('login');
+});
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
     if (username === 'user' && password === 'pass') {
-        req.flash('success', '로그인 성공');
+        req.flash('message', [
+            { type: 'success', text: '로그인 성공'},
+            { type: 'info', text: '새 버전 출시! 지금 당장 업데이트!'},
+            { type: 'warning', text: '곧 이 계정은 만료됩니다.'},
+        ]);
     } else {
         req.flash('error', '로그인 실패! 다시 정확히 입력해라.')
     }
 
-    res.redirect('/');
+    const successMessage = req.flash('message');
+    const errorMessage = req.flash('error');
+
+    // res.redirect('/');
+    res.render('login', { successMessage, errorMessage });
 });
 
 app.listen(port, () => {
