@@ -21,10 +21,8 @@
             x: 50,
             y: 50,
             radius: 20,
-            dx: 2,
-            dy: 0, // 초기 속도
-            gravity: 0.3, // 가속도
-            bounce: 0.9,
+            dx: 5,
+            dy: 10, // 초기 속도
         };
 
         function drawBall() {
@@ -35,22 +33,20 @@
             context.fill();
             context.closePath();
 
-            // 중력 적용
-            ball.dy += ball.gravity;
-
             // 공 이동
             ball.x += ball.dx;
             ball.y += ball.dy;
 
-            // 캔버스 경계 도달시 튕기는 효과
+            // 벽에 부딛치면 반대로 가기
+
+            // 가로벽에 부딛쳤을때
             if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
                 ball.dx = -ball.dx;
-            };
-
-            if (ball.y + ball.radius > canvas.height) {
-                ball.y = canvas.height - ball.radius;
-                ball.dy = -ball.dy * ball.bounce;
-            };
+            }
+            // 세로벽에 부딛쳤을때
+            if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+                ball.dy = -ball.dy;
+            }
 
             requestAnimationFrame(drawBall);
         };
