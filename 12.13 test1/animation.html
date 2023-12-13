@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas 3</title>
+    <style>
+        canvas {
+            border: 1px solid aqua;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="textCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('textCanvas');
+        const context = canvas.getContext('2d');
+
+        // 애니메이션 = 반복적으로 변경된 좌표에 내용을 출력
+        let x = 50;
+        let y = 50;
+
+        function draw() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = '#00FF00'
+            context.fillRect(x, y, 50, 50);
+            x += 5;
+            y += 5;
+            if (x > canvas.width) {
+                x = 0;
+            }
+
+            if (y > canvas.height) {
+                y = 0;
+            }
+
+            if (x <= canvas.width - 50) {
+                requestAnimationFrame(draw);
+            }
+        };
+        draw();
+    </script>
+</body>
+</html>
