@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <canvas id="textCanvas" width="400" height="200"></canvas>
+    <canvas id="textCanvas" width="400" height="400"></canvas>
 
     <script>
         const canvas = document.getElementById('textCanvas');
@@ -28,6 +28,18 @@
         context.font = 'italic 25px Times New Roman';
         context.fillStyle = 'blue';
         context.fillText('Blue Italic', 200, 150);
+
+        // 함수화
+        function drawText(font, style, text, x, y) {
+            context.font = font;
+            context.fillStyle = style;
+            context.fillText(text, x, y);
+        };
+
+        // 다양한 속성의 스타일을 적용한 text 그리기
+        drawText('30px Arial', '#09FD87', 'Arial Regular', 20, 200);
+        drawText('italic 30px Goudy Stout', '#FF0000', 'Goudy', 120, 220);
+        drawText('bold 20px Time New Roman', '#00FF00', '10:50', 60, 245);
 
     </script>
 </body>
