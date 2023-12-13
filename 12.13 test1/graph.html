@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas 9</title>
+    <style>
+        canvas {
+            border: 1px solid aqua;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="textCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('textCanvas');
+        const context = canvas.getContext('2d');
+
+        //샘플 데이터
+        const graphData = {
+            A: 10,
+            B: 20,
+            C: 30,
+            D: 40,
+            E: 50,
+        };
+
+        // 바 그래프 그리기
+        drawBarGraph(graphData);
+        drawLineGraph(graphData);
+
+        function drawBarGraph(data) {
+            //fillRect 사용하여 데이터 그리기
+            const barWidth = 30;
+            let startX = 20;
+
+            for (const key in data) {
+                const barHeight = data[key];
+
+                context.fillStyle = 'brown';
+                context.fillRect(startX, 200 - barHeight, barWidth, barHeight); // 랜더링 수행
+
+                context.fillStyle = 'red';
+                context.fillText(key, startX + barWidth / 2, 200 + 10); // 랜더링 수행
+
+                startX += 50; // 간격 조절
+            };   
+        };
+
+        context.beginPath();
+
+        function drawLineGraph(data) {
+            context.strokeStyle = '#FF00FF';
+            context.lineWidth = 3;
+
+            const key = Object.keys(data);
+            const startX = 20;
+            const startY = 200 - data[keys[0]];
+
+            context.moveTo(startX, startY);
+
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                const x = startX + i * 50;
+                const y = 200 - data[key];
+                context.lineTo(x, y);
+                context.fillStyle = 'blue';
+                context.fillText(key, x - 10, 200);
+            };
+
+            context.stroke(); // 화면 랜더링
+        };
+        
+        context.closePath();
+
+    </script>
+</body>
+</html>
