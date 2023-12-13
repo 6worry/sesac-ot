@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas 6</title>
+    <style>
+        canvas {
+            border: 1px solid aqua;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="textCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('textCanvas');
+        const context = canvas.getContext('2d');
+
+        // 그라데이션
+        // const gradation = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+        const gradation = context.createRadialGradient(300, 10, 50, 200, 100, 200);
+        gradation.addColorStop(0, 'red')
+        gradation.addColorStop(0.3, 'green')
+        gradation.addColorStop(0.6, 'yellow')
+        gradation.addColorStop(1, 'blue')
+        context.fillStyle = gradation;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 글자 추가
+        context.font = '40px Arial';
+        context.fillStyle = '#FF00FF';
+        context.fillText('Hi YO', 50 ,100);
+    </script>
+</body>
+</html>

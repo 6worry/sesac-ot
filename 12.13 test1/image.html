@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas 7</title>
+    <style>
+        canvas {
+            border: 1px solid aqua;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="textCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('textCanvas');
+        const context = canvas.getContext('2d');
+
+        const image = new Image();
+        image.src = 'instagram.png';
+        image.onload = function() {
+            context.drawImage(image, canvas.width - 400, canvas.height - 50, 50, 50);
+        };
+    </script>
+</body>
+</html>
