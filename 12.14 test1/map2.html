@@ -29,34 +29,17 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        // 63빌딩 좌표
-        var marker = L.marker([37.5193778, 126.9402111]).addTo(map);
-        var circle = L.circle([37.519378, 126.9402111], {
-            color: 'red',
-            fillColor: '#F03',
-            fillOpacity: 0.3,
-            radius: 100,
-        }).addTo(map);
-        var polygon = L.polygon([
-            [37.5193778, 126.9402111],
-            [37.5635, 126.977],
-            [37.5515, 126.988]
-        ]).addTo(map);
-        var marker = L.marker([37.5635, 126.977]).addTo(map);
+        // 서울 관광지 목록 추가
+        var tourlist = [
+            { name: '경복궁', location: [35.578, 126.977] },
+            { name: 'SESAC 성동CAM', location: [37.560315, 127.064542] },
+            { name: '우리집', location: [37.448369, 126.898527] },
+            { name: '63빌딩', location: [37.519, 126.940] },
+        ];
 
-        var marker = L.marker([37.5515, 126.988]).addTo(map);
-
-        var popup = L.popup();
-
-        function onMapClick(e) {
-        popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-        }
-
-map.on('click', onMapClick);
+        tourlistSpots.forEach(function(spot) {
+            L.marker(spot.location).addTo(map).bindPopup(spot.name);
+        });
     </script>
-
 </body>
 </html>
