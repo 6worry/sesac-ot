@@ -50,12 +50,24 @@
             fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + startInput)
             .then(response => response.json())
             .then((data) => {
-                console.log(data);
+                startCoord = [data[0].lat, data[0].lon];
+                console.log(startCoord);
+
+                return fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + endInput);
             })
-            
-            // 경로 표시
-            var route = L.polyline([startCoord, endCoord], {color: 'blue'}).addTo(map);
-            map.fitBounds(route.getBounds())
+            .then(response => response.json())
+            .then((data) => {
+                endCoord = [data[0].lat, data[0].lon];
+                console.log(endCoord);
+
+                // 마커 추가
+                L.marker(startCoord).addTo(map).bindPopup('출발지:' + startInput).openPopup();
+                L.marker(endCoord).addTo(map).bindPopup('도착지:' + endInput).openPopup();
+
+                // 경로 표시
+                var route = L.polyline([startCoord, endCoord], {color: 'blue'}).addTo(map);
+                map.fitBounds(route.getBounds());
+            });
         };
 
     </script>
