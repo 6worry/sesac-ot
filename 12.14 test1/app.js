@@ -39,10 +39,13 @@ app.get('/', (req, res) => {
 
         } else {
             console.log(rows);
+            const labels = JSON.stringify(rows.map((row) => row.YearMonth));
+            const revenues = JSON.stringify(rows.map((row) => row.MonthlyRevenue));
+            console.log(labels, revenues);
+            res.render('monthly_revenue', { labels: labels, revenues: revenues, rows: rows});
         };
     });
     // monthly reveue 쿼리로 테이블 그리기
-    res.render('monthly_revenue', {rows: rows});
     // 3. db 접속 종료
     db.close();
 });
