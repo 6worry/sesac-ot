@@ -49,11 +49,11 @@ app.get('/sign', (req, res) => {
     '<p>인증코드 발송되었음</p>' +
     '<p>인증코드: <input type="text" name="" id=""> ' +
     '<button type="submit">인증코드 확인</button></p>')
-})
+});
 
 app.listen(port, () => {
-    console.log('출력완료')
-})
+    console.log('출력완료');
+});
 
 
 
