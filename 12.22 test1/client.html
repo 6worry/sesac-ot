@@ -1,30 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웹소켓이양</title>
-</head>
-<body>
-    <div id="messageContainer"></div>
-    <input type="text" id="inputMessage" />
-    <button id="sendButton">전송</button>
+<html>
+    <head>
+        <title>Websocket</title>
+    </head>
+    <body>
+        <div id="messageContainer"></div>
+        <input type="text" id="inputMessage" />
+        <button id="sendButton">전송</button>
 
-    <script>
-        const socket = new WebSocket('ws://127.0.0.1:8080'); // http://127.0.0.1 = http://localhost
+        <script>
+            const socket = new WebSocket('ws://127.0.0.1:8080');
+            // const socket = new WebSocket('ws://192.168.100.123:8080');
+            
+            socket.addEventListener('open', (event) => {
+                console.log('서버 연결') // 서버와 소켓 연결
+            });
 
-        socket.addEventListener('open', (event) => {
-            console.log('서버 연결 성공');
-        });
+            socket.addEventListener('message', (event) => { // 서버로부터 메세지 전달 받음
+                const message = event.data;
+                console.log(message);
+                displayMessage(message);
+            })
 
-        document.getElementById('sendButton').addEventListener('click', () => {
-            const message = document.getElementById('inputMessage');
-            sendMessage(message);
-        });
+            document.getElementById('sendButton').addEventListener('click', () => { // 서버로 메세지 보냄
+                const message = document.getElementById('inputMessage').value;
+                sendMessage(message)
+            })
 
-        function sendMessage(message) { // 메세지 전송
-            socket.send(message);
-        };
-    </script>
-</body>
+            function sendMessage(message) { // 메세지 전송 함수
+                socket.send(message);
+            }
+
+            function displayMessage(message) { // 메세지 출력 함수
+                const messageContainer = document.getElementById('messageContainer')
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                messageContainer.appendChild(messageElement);
+            }
+        </script>
+    </body>
 </html>

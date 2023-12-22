@@ -13,7 +13,13 @@ wss.on('connection', (ws, req) => {
     console.log('클라이언트 접속함', clientIp); // 소켓 연결 요청온 것에 대하여 처리함
         
     ws.on('message', (message) => {
-        console.log(message); // 연결된 이후 내부 메세지 처리하는 부분 
+        console.log(message.toString()); // 연결된 이후 내부 메세지 처리하는 부분 
+
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) { // 모든 클라이언트에게 메세지 전송
+                client.send(message.toString());
+            };
+        });
     });
         
         
