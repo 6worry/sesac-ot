@@ -42,7 +42,7 @@
         <button id="sendButton">전송</button>
 
         <script>
-            const socket = new WebSocket('ws://127.0.0.1:8080');
+            const socket = new WebSocket('ws://127.0.0.1:3001/chat');
             
             socket.addEventListener('open', (event) => { // 서버와 소켓 연결
                 console.log('서버 연결')
