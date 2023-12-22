@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹소켓이양</title>
+</head>
+<body>
+    <div id="messageContainer"></div>
+    <input type="text" id="inputMessage" />
+    <button id="sendButton">전송</button>
+
+    <script>
+        const socket = new WebSocket('ws://127.0.0.1:8080'); // http://127.0.0.1 = http://localhost
+
+        socket.addEventListener('open', (event) => {
+            console.log('서버 연결 성공');
+        });
+
+        document.getElementById('sendButton').addEventListener('click', () => {
+            const message = document.getElementById('inputMessage');
+            sendMessage(message);
+        });
+
+        function sendMessage(message) {
+            socket.send(message);
+        };
+    </script>
+</body>
+</html>
