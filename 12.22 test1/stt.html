@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stt얌</title>
+</head>
+<body>
+    <button id="startButton">음성 입력 시작</button>
+    <p id="result">음성 결과</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const startButton = document.getElementById('startButton');
+            const resultElement = document.getElementById('result');
+        
+            // Web Speech API 지원하는지 확인
+            if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+
+                // 음성 인식 시작
+                startButton.addEventListener('click' , () => {
+                    recognition.start();
+                    resultElement.textContent = '음성 입력 중';
+                });
+
+                // 음성 인식 결과
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    resultElement.textContent = `음성결과: ${transcript}`;
+                };
+
+                // 인식 종료 이벤트
+                recognition.onend = () => {
+                    resultElement.textContent += '\n음성인식 종료';
+                };
+
+            } else {
+                resultElement.textContent = '이 브라우저는 음성 인식 지원 X'
+            };
+        });
+    </script>
+    
+</body>
+</html>
