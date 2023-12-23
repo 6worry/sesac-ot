@@ -51,7 +51,7 @@
                 username = prompt('이름 입력해라'); // 사용자 이름을 받아서 서버에 전달
                 let message =`${username}님이 들어왔습니다.`
                 socket.send(JSON.stringify({ type: 'session', username: username, message: message }));
-                // welcomeMessage(message)
+                welcomeMessage(message)
             });
 
             socket.addEventListener('message', (event) => { // 서버로부터 메세지 전달 받음
