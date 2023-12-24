@@ -6,7 +6,7 @@
 
 4. SELECT FirstName||" "||LastName AS fullname FROM employees WHERE Title LIKE 'Sales%';
 
-5.
+5. SELECT DISTINCT BillingCountry from invoices;
 
 6. select count(employees.FirstName||' '||employees.LastName) AS fullname from employees join customers on employees.Employeeid=customers.SupportRepid join invoices on invoices.customerid=customers.customerid;
 
