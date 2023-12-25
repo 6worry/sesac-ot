@@ -35,7 +35,7 @@
 
 17. select * from invoices i, invoice_items ii where i.invoiceid=ii.invoiceid limit 2;
 
-18.
+18. select c.FirstName||' '||c.LastName AS fullname, SUM(i.Total) from customers c join invoices i on c.CustomerId = i.CustomerId group by fullname;
 
 19.
 
