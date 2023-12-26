@@ -37,7 +37,7 @@
 
 18. select c.FirstName||' '||c.LastName AS fullname, SUM(i.Total) from customers c join invoices i on c.CustomerId = i.CustomerId group by fullname;
 
-19.
+19. select e.FirstName||' '||e.LastName AS fullname, SUM(i.Total) from employees e join customers c on e.EmployeeId = c.SupportRepId join invoices i on c.CustomerId = i.CustomerId where i.InvoiceDate like '%2009%' group by fullname order by fullname desc limit 1;
 
 20.
 
