@@ -41,7 +41,7 @@
 
 20. select c.FirstName||' '||c.LastName AS fullname, SUM(i.Total) from customers c join invoices i on c.CustomerId = i.CustomerId group by fullname order by SUM(i.Total) desc limit 1;
 
-21.
+21. select c.FirstName||' '||c.LastName AS fullname, COUNT(c.customerid) from customers c;
 
 22.
 
