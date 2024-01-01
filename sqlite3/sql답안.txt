@@ -43,7 +43,7 @@
 
 21. select c.FirstName||' '||c.LastName AS fullname, c.SupportRepId from customers c join employees e on c.SupportRepId = e. EmployeeId;
 
-22.
+22. SELECT c.Country, SUM(i.Total) FROM Customers c JOIN invoices i ON c.CustomerId = i.CustomerId GROUP BY c.Country ORDER BY SUM(i.Total) desc;
 
 23. SELECT billingcountry, MAX(Totalprice) FROM (SELECT billingcountry , SUM(total) as Totalprice FROM invoices GROUP BY billingcountry);
 
