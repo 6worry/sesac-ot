@@ -22,6 +22,10 @@ function draw() {
         context.fillStyle = '#FOF';
         context.font = '40px Arial';
         context.fillText('게임오버', 100, canvasSize / 2);
+        // 재시작 여부 확인
+        context.font = '25px Arial';
+        context.fillText('다시해봐ㅋ 재시작: r', 80, canvasSize /2 +40)
+
         return;
     };
 
@@ -143,8 +147,21 @@ function moveSnake() {
 document.addEventListener('keydown', handleKeyPress);
 let lastKeyPressTime = 0; // 최종키 입력시간
 
+function resetGame() {
+    snake = [{ x: 0, y:0 }];
+    direction = 'right';
+    food = generateFood();
+    gameover = false;
+};
+
 function handleKeyPress(event) {
     console.log(event.key)
+
+    if (gameover) {
+        if (event.key.toLowerCase() === 'r') {
+            resetGame();
+        };
+    };
 
     // 키 입력시 이번 입력과 다음 입력을 200ms 안에 한번만 받게 함
     // const now = Date.now();
