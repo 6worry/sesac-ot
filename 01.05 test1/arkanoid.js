@@ -30,6 +30,8 @@ const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 
+let brickCount = brickRowCount * brickColumnCount;
+
 // 브릭 충돌감지
 const bricks =[];
 for (let c = 0; c < brickColumnCount; c++) {
@@ -84,6 +86,12 @@ function gameOver() {
     context.fillText('게임오버', canvas.width / 2 - 80, canvas.height / 2);
 };
 
+function gameClear() {
+    context.fillStyle = '#FOF';
+    context.font = '30px Arial';
+    context.fillText('게임 클리어', canvas.width / 2 - 80, canvas.height / 2);
+};
+
 function moveBall() {
 
     //좌표값 변경
@@ -98,16 +106,20 @@ function moveBall() {
     // 천장에 닿았을 때 아래로 이동
     if (y < ballRadius) {
         dy = -dy;
-    };   
-
-    // 패들에 닿았을 때 위로 이동
-    if (y > canvas.height - ballRadius) {
+    } else if (y > canvas.height - ballRadius) { // 패들에 닿았을 때 위로 이동
         if (x > paddleX && x < paddleX + paddleWidth) {
             if ((y > canvas.height - paddleHeight) && (y < canvas.height)) {
                 dy = -dy;
+                brickCount -= 1
+                console.log(brickCount)
             };
         } else {
-            gameOver();
+            if (brickCount === 0) {
+                gameClear();
+            } else {
+                gameOver();
+            };  
+            return;
         };
     };
 };
@@ -115,9 +127,7 @@ function moveBall() {
 function movePaddle() {
     if (rightPressed && paddleX < canvas.width - paddleWidth) {
         paddleX += paddleSpeed;
-    }
-    
-    if (leftPressed && paddleX > 0) {
+    } else if (leftPressed && paddleX > 0) {
         paddleX -= paddleSpeed;
     };
 };
@@ -158,14 +168,23 @@ function draw() {
 
 // 키보드 입출력 정의
 document.addEventListener('keydown', keyDownHandler);
+document.addEventListener('keyup', keyUpHandler);
 
-function keyDownHandler(e) {
+function keyDownHandler(e) { // 키를 눌렀을 때 호출
     if (e.key === 'ArrowRight') {
         rightPressed = true;
     } else if (e.key === 'ArrowLeft') {
         leftPressed = true;
     };
 };
+
+function keyUpHandler(e) { // 키를 뗐을 때 호출
+    if (e.key === 'ArrowRight') {
+        rightPressed = false;
+    } else if (e.key === 'ArrowLeft') {
+        leftPressed = false;
+    }
+}
 
 // 메인 함수 호출
 draw();
