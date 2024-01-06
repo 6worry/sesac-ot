@@ -110,15 +110,9 @@ function moveBall() {
         if (x > paddleX && x < paddleX + paddleWidth) {
             if ((y > canvas.height - paddleHeight) && (y < canvas.height)) {
                 dy = -dy;
-                brickCount -= 1
-                console.log(brickCount)
             };
         } else {
-            if (brickCount === 0) {
-                gameClear();
-            } else {
-                gameOver();
-            };  
+            gameOver(); 
             return;
         };
     };
@@ -142,8 +136,13 @@ function collectionDetection() {
                 if (x > b.x && x < b.x + brickWidth &&
                     y > b.y && y < b.y + brickHeight  
                 ) {  
-                   b.status = 0;
-                   dy = -dy;
+                    b.status = 0;
+                    dy = -dy;
+                    brickCount -= 1
+                    if (brickCount === 0) {
+                        gameClear();
+                        return;
+                    };
                 };
             };
         };
