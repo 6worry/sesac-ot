@@ -49,7 +49,7 @@
 
 24. select t.name, count(ii.quantity) from tracks t join invoice_items ii on t.trackid=ii.trackid join invoices i on i.invoiceid=ii.invoiceid where i.invoicedate between '2013-01-01' and '2013-12-31' group by t.name order by count(ii.quantity);
 
-25.
+25. SELECT t.Name, count(t.Name) FROM tracks t JOIN invoice_items ii ON ii.TrackId =t.Trackid GROUP BY t.Name ORDER BY count(t.Name) DESC LIMIT 5;
 
 26.
 
