@@ -51,6 +51,6 @@
 
 25. SELECT t.Name, count(t.Name) FROM tracks t JOIN invoice_items ii ON ii.TrackId =t.Trackid GROUP BY t.Name ORDER BY count(t.Name) DESC LIMIT 5;
 
-26.
+26. SELECT Name, Totalprice FROM (SELECT ar.Name AS Name, SUM(t.UnitPrice) AS Totalprice FROM tracks t JOIN albums a ON t.AlbumId = a.AlbumId JOIN artists ar ON a.ArtistId = ar.ArtistId GROUP BY ar.Name) ORDER BY Totalprice DESC LIMIT 3;
 
 27.
