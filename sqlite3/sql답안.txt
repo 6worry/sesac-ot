@@ -1,56 +1,83 @@
+# 1. non_usa_customers.sql: 미국에 거주하지 않는 고객(전체 이름, 고객 ID 및 국가)을 표시하는 쿼리를 제공합니다.
 1. SELECT FirstName||' '||LastName AS fullname, CustomerId, Country FROM customers WHERE country != 'USA';
 
+# 2. brazil_customers.sql: 브라질 고객만 표시하는 쿼리를 제공합니다.
 2. SELECT FirstName||' '||LastName AS fullname FROM customers WHERE country = 'Brazil';
 
+# 3. brazil_customers_invoices.sql: 브라질 고객의 송장을 보여주는 쿼리를 제공합니다. 결과 테이블에는 고객의 전체 이름, 송장 ID, 송장 날짜 및 청구 국가가 표시되어야 합니다.
 3. SELECT c.FirstName||' '||c.LastName AS fullname, i.InvoiceId, i.InvoiceDate, i.BillingCountry FROM customers c JOIN invoices i ON i.CustomerId = c.CustomerId WHERE c.Country = 'Brazil';
 
+# 4. sales_agents.sql: 판매 대리인인 직원만 표시하는 쿼리를 제공하십시오.
 4. SELECT FirstName||" "||LastName AS fullname FROM employees WHERE Title LIKE 'Sales%';
 
+# 5. unique_invoice_countries.sql: 송장 테이블에서 청구 국가의 고유(unique)/고유(distinct) 목록을 표시하는 쿼리를 제공합니다.
 5. SELECT DISTINCT BillingCountry from invoices;
 
+# 6. sales_agent_invoices.sql: 각 판매 에이전트와 연결된 송장을 표시하는 쿼리를 제공합니다. 결과 테이블에는 영업 에이전트의 전체 이름이 포함되어야 합니다.
 6. select count(employees.FirstName||' '||employees.LastName) AS fullname from employees join customers on employees.Employeeid=customers.SupportRepid join invoices on invoices.customerid=customers.customerid;
 
+# 7. invoice_totals.sql: 모든 송장 및 고객에 대한 송장 합계, 고객 이름, 국가 및 판매 대리점 이름을 표시하는 쿼리를 제공합니다.
 7. SELECT i.Total, c.FirstName||' '||c.LastName AS fullname, i.BillingCountry, e.FirstName||" "||e.LastName as fullname2 FROM Invoices i JOIN Customers c ON c.CustomerId = i.CustomerId JOIN Employees e ON e.EmployeeId = c.SupportRepId;
 
+# 8. total_invoices_{year}.sql: 2009년과 2011년에 몇 개의 인보이스가 있었습니까?
 8. select count(*) from invoices where invoicedate between '2009-01-01' and '2009-12-31' or invoicedate between '2011-01-01' and '2011-12-31';
 
+# 9. total_sales_{year}.sql: 각 연도의 총 매출은 얼마입니까?
 9. SELECT strftime('%Y', invoicedate) as '각 연도', SUM(total)
     FROM invoices
     GROUP BY strftime('%Y', invoicedate)
     ORDER BY strftime('%Y', invoicedate);
 
+# 10. invoice_37_line_item_count.sql: InvoiceLine 테이블을 보고 Invoice ID 37에 대한 라인 항목 수를 계산하는 쿼리를 제공합니다.
 10. select count(ii.invoiceid) from invoice_items ii join invoices i on ii.invoicelineid=i.invoiceid where ii.invoiceid=37;
 
+# 11. line_items_per_invoice.sql: InvoiceLine 테이블을 보고 각 Invoice에 대한 라인 항목 수를 계산하는 쿼리를 제공합니다.
 11. select ii.invoiceid, count(ii.invoiceid) from invoice_items ii join invoices i on ii.invoicelineid=i.invoiceid group by ii.invoiceid;
 
+# 12. line_item_track.sql: 각 송장 라인 항목에 구매한 트랙 이름을 포함하는 쿼리를 제공합니다.
 12. select ii.*, t.name from tracks t join invoice_items ii on t.trackid = ii.invoicelineid limit 3;
 
+# 13. line_item_track_artist.sql: 구매한 트랙 이름과 아티스트 이름을 포함하는 쿼리를 각 송장 라인 항목과 함께 제공합니다.
 13. select ii.*, t.name, ar.name from tracks t join invoice_items ii on t.trackid = ii.invoicelineid join albums al on t.albumid=al.albumid join artists ar on al.artistid=ar.artistid limit 3;
 
+# 14. country_invoices.sql: 국가별 송장 수를 표시하는 쿼리를 제공합니다.
 14. select i.billingcountry, ii.quantity from invoices i join invoice_items ii on i.invoiceid =ii.invoiceid group by billingcountry;
 
+# 15. playlists_track_count.sql: 각 재생 목록의 총 트랙 수를 표시하는 쿼리를 제공합니다. 재생 목록 이름은 결과 테이블에 포함되어야 합니다.
 15. select p.name, count(t.trackid) from tracks t join playlist_track pt on t.trackid=pt.trackid join playlists p on pt.playlistid= p.playlistid group by p.name;
 
+# 16. Tracks_no_id.sql: 모든 트랙을 표시하지만 ID는 표시하지 않는 쿼리를 제공합니다. 결과에는 앨범 이름, 미디어 유형 및 장르가 포함되어야 합니다.
 16. select t.name, al.title, m.name from tracks t join albums al on t.albumid=al.albumid join media_types m on t.mediatypeid=m.mediatypeid where t.trackid limit 4;
 
+# 17. invoices_line_item_count.sql: 모든 송장을 표시하지만 송장 라인 항목의 수를 포함하는 쿼리를 제공합니다.
 17. select * from invoices i, invoice_items ii where i.invoiceid=ii.invoiceid limit 2;
 
+# 18. sales_agent_total_sales.sql: 판매 대리점별 총 매출을 조회하는 쿼리를 제공한다.
 18. select c.FirstName||' '||c.LastName AS fullname, SUM(i.Total) from customers c join invoices i on c.CustomerId = i.CustomerId group by fullname;
 
+# 19. top_2009_agent.sql: 2009년 가장 많은 매출을 올린 판매원은?
 19. select e.FirstName||' '||e.LastName AS fullname, SUM(i.Total) from employees e join customers c on e.EmployeeId = c.SupportRepId join invoices i on c.CustomerId = i.CustomerId where i.InvoiceDate like '%2009%' group by fullname order by fullname desc limit 1;
 
+# 20. top_agent.sql: 전체 판매 실적이 가장 많은 판매 대리점은?
 20. select c.FirstName||' '||c.LastName AS fullname, SUM(i.Total) from customers c join invoices i on c.CustomerId = i.CustomerId group by fullname order by SUM(i.Total) desc limit 1;
 
+# 21. sales_agent_customer_count.sql: 각 판매 대리점에 할당된 고객 수를 보여주는 쿼리를 제공한다.
 21. select c.FirstName||' '||c.LastName AS fullname, c.SupportRepId from customers c join employees e on c.SupportRepId = e. EmployeeId;
 
+# 22. sales_per_country.sql: 국가별 총 매출을 보여주는 쿼리를 제공한다.
 22. SELECT c.Country, SUM(i.Total) FROM Customers c JOIN invoices i ON c.CustomerId = i.CustomerId GROUP BY c.Country ORDER BY SUM(i.Total) desc;
 
+# 23. top_country.sql: 고객이 가장 많이 지출한 국가는 어디입니까?
 23. SELECT billingcountry, MAX(Totalprice) FROM (SELECT billingcountry , SUM(total) as Totalprice FROM invoices GROUP BY billingcountry);
 
+# 24. top_2013_track.sql: 2013년 가장 많이 구매한 트랙을 보여주는 쿼리를 제공합니다.
 24. select t.name, count(ii.quantity) from tracks t join invoice_items ii on t.trackid=ii.trackid join invoices i on i.invoiceid=ii.invoiceid where i.invoicedate between '2013-01-01' and '2013-12-31' group by t.name order by count(ii.quantity);
 
+# 25. top_5_tracks.sql: 가장 많이 구매한 상위 5곡을 보여주는 쿼리를 제공합니다.
 25. SELECT t.Name, count(t.Name) FROM tracks t JOIN invoice_items ii ON ii.TrackId =t.Trackid GROUP BY t.Name ORDER BY count(t.Name) DESC LIMIT 5;
 
+# 26. top_3_artists.sql: 가장 많이 팔린 3명의 아티스트를 보여주는 쿼리를 제공합니다.
 26. SELECT Name, Totalprice FROM (SELECT ar.Name AS Name, SUM(t.UnitPrice) AS Totalprice FROM tracks t JOIN albums a ON t.AlbumId = a.AlbumId JOIN artists ar ON a.ArtistId = ar.ArtistId GROUP BY ar.Name) ORDER BY Totalprice DESC LIMIT 3;
 
+# 27. top_media_type.sql: 가장 많이 구매한 Media Type을 보여주는 쿼리를 제공한다.
 27.
