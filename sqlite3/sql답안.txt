@@ -80,4 +80,4 @@
 26. SELECT Name, Totalprice FROM (SELECT ar.Name AS Name, SUM(t.UnitPrice) AS Totalprice FROM tracks t JOIN albums a ON t.AlbumId = a.AlbumId JOIN artists ar ON a.ArtistId = ar.ArtistId GROUP BY ar.Name) ORDER BY Totalprice DESC LIMIT 3;
 
 # 27. top_media_type.sql: 가장 많이 구매한 Media Type을 보여주는 쿼리를 제공한다.
-27.
+27. SELECT m.Name, count(m.Name) FROM tracks t JOIN invoice_items ii ON ii.TrackId =t.Trackid JOIN media_types m ON t.MediaTypeId = m.MediaTypeId GROUP BY m.Name ORDER BY count(m.Name) DESC LIMIT 1;
