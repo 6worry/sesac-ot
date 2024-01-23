@@ -46,9 +46,15 @@ app.get('/', (req, res) => {
 
 app.get('/decode', (req, res) => {
     const token = req.cookies.jwt;
-    jwt.decode(token, {complete: true}, (decordedToken) => {
+    const decordedToken = jwt.decode(token, {complete: true});
+    if (!decordedToken) {
+        return res.status(401).json({message: '승인 거부'});
+    };
+    // jwt.decode(token, {complete: true}, (decordedToken) => {
+    //     res.send(decordedToken);
+    // });
+    // res.json();
         res.send(decordedToken);
-    });
 });
 
 app.listen(port, () => {
