@@ -32,13 +32,13 @@ app.post('/login', (req, res) => {
     const {username, password} = req.body;
     const query = `SELECT * FROM users WHERE username = ? AND password = ?`;
 
-    db.get(query, [username, password], (err, row) => {
+    db.get(query, (err, row) => {
         if (err) {
             console.error('db오류');
         };
 
         if (row) {
-            res.send(`${row.username}로그인 성공`)
+            res.send(`${row.username}로그인 성공`);
         } else {
             res.status(401).send(`로그인 실패: ${username}`);
         };
